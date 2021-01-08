@@ -1,0 +1,48 @@
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+**/target/
+**/resources/logback.xml
+**/javasource/businesssr/main/resources/logback.xml
+### VS Code ###
+.vscode/
+.mvn/
+
+**/.DS_Store
+mvnw.cmd
+HELP.md
+mvnw
+.DS_Store
+
+#不添加生产环境配置到git
+/business/src/main/resources/application-master.properties
+/**/src/main/resources/application-master.properties
+

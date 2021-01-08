@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.twj.spirngbasics.server.user.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.twj.spirngbasics.server.user.entity.User">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="created_by" jdbcType="VARCHAR" property="createdBy"/>
+        <result column="created_time" jdbcType="TIMESTAMP" property="createdTime"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="dele" jdbcType="VARCHAR" property="dele"/>
+        <result column="remake" jdbcType="VARCHAR" property="remake"/>
+        <result column="spare1" jdbcType="VARCHAR" property="spare1"/>
+        <result column="spare2" jdbcType="VARCHAR" property="spare2"/>
+        <result column="spare3" jdbcType="VARCHAR" property="spare3"/>
+        <result column="spare4" jdbcType="VARCHAR" property="spare4"/>
+        <result column="spare5" jdbcType="VARCHAR" property="spare5"/>
+        <result column="spare6" jdbcType="VARCHAR" property="spare6"/>
+        <result column="spare7" jdbcType="VARCHAR" property="spare7"/>
+        <result column="spare8" jdbcType="VARCHAR" property="spare8"/>
+        <result column="spare9" jdbcType="VARCHAR" property="spare9"/>
+        <result column="company_id" jdbcType="VARCHAR" property="companyId"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="role_id" jdbcType="VARCHAR" property="roleId"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        id
+        , revision, created_by, created_time, update_by, update_time, dele, remake, spare1,
+    spare2, spare3, spare4, spare5, spare6, spare7, spare8, spare9, company_id, phone, 
+    `password`, email, `name`, `status`, role_id
+    </sql>
+    <select id="selectByExample" parameterType="com.twj.spirngbasics.server.user.entity.UserExample"
+            resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from sys_user
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_user
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete
+        from sys_user
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.twj.spirngbasics.server.user.entity.UserExample">
+        delete from sys_user
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.twj.spirngbasics.server.user.entity.User">
+        insert into sys_user (id, revision, created_by,
+                              created_time, update_by, update_time,
+                              dele, remake, spare1,
+                              spare2, spare3, spare4,
+                              spare5, spare6, spare7,
+                              spare8, spare9, company_id,
+                              phone, `password`, email,
+                              `name`, `status`, role_id)
+        values (#{id,jdbcType=VARCHAR}, #{revision,jdbcType=INTEGER}, #{createdBy,jdbcType=VARCHAR},
+                #{createdTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP},
+                #{dele,jdbcType=VARCHAR}, #{remake,jdbcType=VARCHAR}, #{spare1,jdbcType=VARCHAR},
+                #{spare2,jdbcType=VARCHAR}, #{spare3,jdbcType=VARCHAR}, #{spare4,jdbcType=VARCHAR},
+                #{spare5,jdbcType=VARCHAR}, #{spare6,jdbcType=VARCHAR}, #{spare7,jdbcType=VARCHAR},
+                #{spare8,jdbcType=VARCHAR}, #{spare9,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR},
+                #{phone,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
+                #{name,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{roleId,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.twj.spirngbasics.server.user.entity.User">
+        insert into sys_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="revision != null">
+                revision,
+            </if>
+            <if test="createdBy != null">
+                created_by,
+            </if>
+            <if test="createdTime != null">
+                created_time,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="dele != null">
+                dele,
+            </if>
+            <if test="remake != null">
+                remake,
+            </if>
+            <if test="spare1 != null">
+                spare1,
+            </if>
+            <if test="spare2 != null">
+                spare2,
+            </if>
+            <if test="spare3 != null">
+                spare3,
+            </if>
+            <if test="spare4 != null">
+                spare4,
+            </if>
+            <if test="spare5 != null">
+                spare5,
+            </if>
+            <if test="spare6 != null">
+                spare6,
+            </if>
+            <if test="spare7 != null">
+                spare7,
+            </if>
+            <if test="spare8 != null">
+                spare8,
+            </if>
+            <if test="spare9 != null">
+                spare9,
+            </if>
+            <if test="companyId != null">
+                company_id,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="password != null">
+                `password`,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="status != null">
+                `status`,
+            </if>
+            <if test="role != null">
+                role_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="revision != null">
+                #{revision,jdbcType=INTEGER},
+            </if>
+            <if test="createdBy != null">
+                #{createdBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createdTime != null">
+                #{createdTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="dele != null">
+                #{dele,jdbcType=VARCHAR},
+            </if>
+            <if test="remake != null">
+                #{remake,jdbcType=VARCHAR},
+            </if>
+            <if test="spare1 != null">
+                #{spare1,jdbcType=VARCHAR},
+            </if>
+            <if test="spare2 != null">
+                #{spare2,jdbcType=VARCHAR},
+            </if>
+            <if test="spare3 != null">
+                #{spare3,jdbcType=VARCHAR},
+            </if>
+            <if test="spare4 != null">
+                #{spare4,jdbcType=VARCHAR},
+            </if>
+            <if test="spare5 != null">
+                #{spare5,jdbcType=VARCHAR},
+            </if>
+            <if test="spare6 != null">
+                #{spare6,jdbcType=VARCHAR},
+            </if>
+            <if test="spare7 != null">
+                #{spare7,jdbcType=VARCHAR},
+            </if>
+            <if test="spare8 != null">
+                #{spare8,jdbcType=VARCHAR},
+            </if>
+            <if test="spare9 != null">
+                #{spare9,jdbcType=VARCHAR},
+            </if>
+            <if test="companyId != null">
+                #{companyId,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="role != null">
+                #{roleId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.twj.spirngbasics.server.user.entity.UserExample"
+            resultType="java.lang.Long">
+        select count(*) from sys_user
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+
+    <!-- 一个用户可以属于多个角色，配置的资源可能重复，所以用distinct去重 -->
+    <select id="findResources" resultType="com.twj.spirngbasics.server.user.dto.UserResourceDto">
+        select distinct r.id, r.`name`, r.page, r.request, r.parent
+        from user_role_user ru,
+             user_role_resource rr,
+             user_resource r
+        where ru.user_id = #{userId}
+          and ru.role_id = rr.role_id
+          and rr.resource_id = r.id
+        order by r.id asc
+    </select>
+    <select id="selectRole" resultType="com.twj.spirngbasics.server.user.entity.UserRole">
+        SELECT id,
+               `name`,
+               `desc`,
+               company_id
+        FROM user_role
+        WHERE id =
+              (SELECT role_id
+               FROM user_role_user
+               WHERE user_id = #{id})
+    </select>
+    <select id="selectListAndRoleId" resultType="hashmap">
+        SELECT sys_user.id,
+               sys_user.phone,
+               sys_user.email,
+               sys_user.`name`,
+               sys_user.`status`,
+               user_role_user.role_id
+        FROM sys_user,
+             user_role_user
+        WHERE sys_user.id = user_role_user.user_id
+          AND sys_user.company_id = #{cid}
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update sys_user
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=VARCHAR},
+            </if>
+            <if test="record.revision != null">
+                revision = #{record.revision,jdbcType=INTEGER},
+            </if>
+            <if test="record.createdBy != null">
+                created_by = #{record.createdBy,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createdTime != null">
+                created_time = #{record.createdTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.updateBy != null">
+                update_by = #{record.updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="record.updateTime != null">
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.dele != null">
+                dele = #{record.dele,jdbcType=VARCHAR},
+            </if>
+            <if test="record.remake != null">
+                remake = #{record.remake,jdbcType=VARCHAR},
+            </if>
+            <if test="record.spare1 != null">
+                spare1 = #{record.spare1,jdbcType=VARCHAR},
+            </if>
+            <if test="record.spare2 != null">
+                spare2 = #{record.spare2,jdbcType=VARCHAR},
+            </if>
+            <if test="record.spare3 != null">
+                spare3 = #{record.spare3,jdbcType=VARCHAR},
+            </if>
+            <if test="record.spare4 != null">
+                spare4 = #{record.spare4,jdbcType=VARCHAR},
+            </if>
+            <if test="record.spare5 != null">
+                spare5 = #{record.spare5,jdbcType=VARCHAR},
+            </if>
+            <if test="record.spare6 != null">
+                spare6 = #{record.spare6,jdbcType=VARCHAR},
+            </if>
+            <if test="record.spare7 != null">
+                spare7 = #{record.spare7,jdbcType=VARCHAR},
+            </if>
+            <if test="record.spare8 != null">
+                spare8 = #{record.spare8,jdbcType=VARCHAR},
+            </if>
+            <if test="record.spare9 != null">
+                spare9 = #{record.spare9,jdbcType=VARCHAR},
+            </if>
+            <if test="record.companyId != null">
+                company_id = #{record.companyId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.phone != null">
+                phone = #{record.phone,jdbcType=VARCHAR},
+            </if>
+            <if test="record.password != null">
+                `password` = #{record.password,jdbcType=VARCHAR},
+            </if>
+            <if test="record.email != null">
+                email = #{record.email,jdbcType=VARCHAR},
+            </if>
+            <if test="record.name != null">
+                `name` = #{record.name,jdbcType=VARCHAR},
+            </if>
+            <if test="record.status != null">
+                `status` = #{record.status,jdbcType=CHAR},
+            </if>
+            <if test="record.role != null">
+                role_id = #{record.roleId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update sys_user
+        set id = #{record.id,jdbcType=VARCHAR},
+        revision = #{record.revision,jdbcType=INTEGER},
+        created_by = #{record.createdBy,jdbcType=VARCHAR},
+        created_time = #{record.createdTime,jdbcType=TIMESTAMP},
+        update_by = #{record.updateBy,jdbcType=VARCHAR},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        dele = #{record.dele,jdbcType=VARCHAR},
+        remake = #{record.remake,jdbcType=VARCHAR},
+        spare1 = #{record.spare1,jdbcType=VARCHAR},
+        spare2 = #{record.spare2,jdbcType=VARCHAR},
+        spare3 = #{record.spare3,jdbcType=VARCHAR},
+        spare4 = #{record.spare4,jdbcType=VARCHAR},
+        spare5 = #{record.spare5,jdbcType=VARCHAR},
+        spare6 = #{record.spare6,jdbcType=VARCHAR},
+        spare7 = #{record.spare7,jdbcType=VARCHAR},
+        spare8 = #{record.spare8,jdbcType=VARCHAR},
+        spare9 = #{record.spare9,jdbcType=VARCHAR},
+        company_id = #{record.companyId,jdbcType=VARCHAR},
+        phone = #{record.phone,jdbcType=VARCHAR},
+        `password` = #{record.password,jdbcType=VARCHAR},
+        email = #{record.email,jdbcType=VARCHAR},
+        `name` = #{record.name,jdbcType=VARCHAR},
+        `status` = #{record.status,jdbcType=CHAR},
+        role_id = #{record.roleId,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.twj.spirngbasics.server.user.entity.User">
+        update sys_user
+        <set>
+            <if test="revision != null">
+                revision = #{revision,jdbcType=INTEGER},
+            </if>
+            <if test="createdBy != null">
+                created_by = #{createdBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createdTime != null">
+                created_time = #{createdTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="dele != null">
+                dele = #{dele,jdbcType=VARCHAR},
+            </if>
+            <if test="remake != null">
+                remake = #{remake,jdbcType=VARCHAR},
+            </if>
+            <if test="spare1 != null">
+                spare1 = #{spare1,jdbcType=VARCHAR},
+            </if>
+            <if test="spare2 != null">
+                spare2 = #{spare2,jdbcType=VARCHAR},
+            </if>
+            <if test="spare3 != null">
+                spare3 = #{spare3,jdbcType=VARCHAR},
+            </if>
+            <if test="spare4 != null">
+                spare4 = #{spare4,jdbcType=VARCHAR},
+            </if>
+            <if test="spare5 != null">
+                spare5 = #{spare5,jdbcType=VARCHAR},
+            </if>
+            <if test="spare6 != null">
+                spare6 = #{spare6,jdbcType=VARCHAR},
+            </if>
+            <if test="spare7 != null">
+                spare7 = #{spare7,jdbcType=VARCHAR},
+            </if>
+            <if test="spare8 != null">
+                spare8 = #{spare8,jdbcType=VARCHAR},
+            </if>
+            <if test="spare9 != null">
+                spare9 = #{spare9,jdbcType=VARCHAR},
+            </if>
+            <if test="companyId != null">
+                company_id = #{companyId,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                `password` = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                `name` = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                `status` = #{status,jdbcType=CHAR},
+            </if>
+            <if test="role != null">
+                role_id = #{roleId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.twj.spirngbasics.server.user.entity.User">
+        update sys_user
+        set revision     = #{revision,jdbcType=INTEGER},
+            created_by   = #{createdBy,jdbcType=VARCHAR},
+            created_time = #{createdTime,jdbcType=TIMESTAMP},
+            update_by    = #{updateBy,jdbcType=VARCHAR},
+            update_time  = #{updateTime,jdbcType=TIMESTAMP},
+            dele         = #{dele,jdbcType=VARCHAR},
+            remake       = #{remake,jdbcType=VARCHAR},
+            spare1       = #{spare1,jdbcType=VARCHAR},
+            spare2       = #{spare2,jdbcType=VARCHAR},
+            spare3       = #{spare3,jdbcType=VARCHAR},
+            spare4       = #{spare4,jdbcType=VARCHAR},
+            spare5       = #{spare5,jdbcType=VARCHAR},
+            spare6       = #{spare6,jdbcType=VARCHAR},
+            spare7       = #{spare7,jdbcType=VARCHAR},
+            spare8       = #{spare8,jdbcType=VARCHAR},
+            spare9       = #{spare9,jdbcType=VARCHAR},
+            company_id   = #{companyId,jdbcType=VARCHAR},
+            phone        = #{phone,jdbcType=VARCHAR},
+            `password`   = #{password,jdbcType=VARCHAR},
+            email        = #{email,jdbcType=VARCHAR},
+            `name`       = #{name,jdbcType=VARCHAR},
+            `status`     = #{status,jdbcType=CHAR},
+            role_id      = #{roleId,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+</mapper>
