@@ -64,34 +64,34 @@
         </dependency>
 
         <!-- 导入腾讯对象存储 -->
-<!--        <dependency>-->
-<!--            <groupId>com.qcloud</groupId>-->
-<!--            <artifactId>cos_api</artifactId>-->
-<!--            <version>5.6.24</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>com.twj.tossfile</groupId>-->
-<!--            <artifactId>tencentOssFile</artifactId>-->
-<!--            <version>0.0.1-SNAPSHOT</version>-->
-<!--            <scope>system</scope>-->
-<!--            <systemPath>${project.basedir}/../tencentOssFile/target/tencentOssFile-0.0.1-SNAPSHOT.jar</systemPath>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.qcloud</groupId>-->
+        <!--            <artifactId>cos_api</artifactId>-->
+        <!--            <version>5.6.24</version>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.twj.tossfile</groupId>-->
+        <!--            <artifactId>tencentOssFile</artifactId>-->
+        <!--            <version>0.0.1-SNAPSHOT</version>-->
+        <!--            <scope>system</scope>-->
+        <!--            <systemPath>${project.basedir}/../tencentOssFile/target/tencentOssFile-0.0.1-SNAPSHOT.jar</systemPath>-->
+        <!--        </dependency>-->
         <!-- END -->
 
         <!-- 打包发布时用 -->
-        <!--        <dependency>-->
-        <!--            <groupId>com.twj.pets</groupId>-->
-        <!--            <artifactId>server</artifactId>-->
-        <!--            <version>0.0.1-SNAPSHOT</version>-->
-        <!--            <scope>system</scope>-->
-        <!--            <systemPath>${project.basedir}/../server/target/server-0.0.1-SNAPSHOT.jar</systemPath>-->
-        <!--        </dependency>-->
+        <dependency>
+            <groupId>com.twj.pets</groupId>
+            <artifactId>server</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/../server/target/server-0.0.1-SNAPSHOT.jar</systemPath>
+        </dependency>
 
         <!-- 调试时使用 -->
-        <dependency>
-            <groupId>com.twj.spirngbasics</groupId>
-            <artifactId>server</artifactId>
-        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>com.twj.spirngbasics</groupId>-->
+        <!--            <artifactId>server</artifactId>-->
+        <!--        </dependency>-->
 
 
     </dependencies>
@@ -128,10 +128,4 @@
         </resources>
     </build>
 
-    <repositories>
-        <repository>
-            <id>spring-milestone</id>
-            <url>http://repo.spring.io/libs-release</url>
-        </repository>
-    </repositories>
 </project>
