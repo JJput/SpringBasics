@@ -3,6 +3,7 @@ package com.twj.spirngbasics.business;
 import com.twj.spirngbasics.server.exception.BusinessException;
 import com.twj.spirngbasics.server.manage.UserManage;
 import com.twj.spirngbasics.server.util.UserUtils;
+import org.springframework.http.HttpStatus;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -12,32 +13,29 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.HashSet;
 import java.util.Set;
 
+import static com.twj.spirngbasics.business.InterceptorConfig.*;
+
 public class InterceptorBusiness extends HandlerInterceptorAdapter {
 
-
-    private static final String[] PATH = {
-            "/test/test",
-    };
-    private static Set<String> ePath = null;
-    private static final String TOKEN = "token";
+    public static Set<String> notTokenSetPath = null;
 
     /**
      * Controller之前执行该方法
      */
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
-        String token = httpServletRequest.getHeader(TOKEN);
+        String token = httpServletRequest.getHeader(TOKEN_FLAG);
         String path = httpServletRequest.getServletPath();
         if (!StringUtils.isEmpty(token)) {
             try {
                 UserManage.setUser(token);
             } catch (BusinessException e) {
                 //token解析失败时判断路径是否放行
-                return isRelease(path);
+                return isRelease(httpServletResponse, path);
             }
             return true;
         }
-        return isRelease(path);
+        return isRelease(httpServletResponse, path);
     }
 
     /**
@@ -47,16 +45,18 @@ public class InterceptorBusiness extends HandlerInterceptorAdapter {
      * @param path 请求路径
      * @return true放行 false拦截
      */
-    private boolean isRelease(String path) {
-        if (this.ePath == null) {
-            this.ePath = new HashSet<>();
-            for (String c : PATH) {
-                this.ePath.add(c);
+    private boolean isRelease(HttpServletResponse httpServletResponse, String path) {
+        if (this.notTokenSetPath == null) {
+            this.notTokenSetPath = new HashSet<>();
+            for (String c : NOT_TOKEN_RELEASE_PATH) {
+                this.notTokenSetPath.add(c);
             }
         }
-        if (ePath.contains(path)) {
+        if (notTokenSetPath.contains(path)) {
             return true;
         }
+        //被拦截的话将HTTP Status改为403
+        httpServletResponse.setStatus(HttpStatus.FORBIDDEN.value());
         return false;
     }
 

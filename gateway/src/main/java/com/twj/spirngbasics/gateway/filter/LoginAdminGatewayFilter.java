@@ -6,12 +6,12 @@ import com.alibaba.fastjson.JSONObject;
 import com.twj.spirngbasics.gateway.config.RabbitMqConfig;
 import com.twj.spirngbasics.gateway.config.RabbitProducer;
 import com.twj.spirngbasics.gateway.log.SysLog;
+import com.twj.spirngbasics.gateway.util.RedisUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.core.Ordered;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -24,19 +24,26 @@ import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 @Component
 public class LoginAdminGatewayFilter implements GatewayFilter, Ordered {
 
     private static final Logger LOG = LoggerFactory.getLogger(LoginAdminGatewayFilter.class);
 
+    /**
+     * 是否开启测试
+     */
+    private static final boolean IS_TEST = true;
+    /**
+     * 测试Token值
+     */
+    private static final String TEST_TOKEN = "123";
+
     private static final String[] PATH = {
             "/business/test/test",
     };
     private static Set<String> ePath = null;
-
-    @Resource
-    private RedisTemplate redisTemplate;
 
     @Resource
     private RabbitProducer rabbitProducer;
@@ -47,7 +54,6 @@ public class LoginAdminGatewayFilter implements GatewayFilter, Ordered {
 
         String path = exchange.getRequest().getURI().getPath();
         LOG.info("请求:" + path);
-        logCreate(null, path, true);
         // 不需要拦截
         if (isRelease(path)) {
             LOG.info("不拦截");
@@ -55,7 +61,7 @@ public class LoginAdminGatewayFilter implements GatewayFilter, Ordered {
         }
         //获取header的token参数
         String token = exchange.getRequest().getHeaders().getFirst("token");
-        LOG.info("GateWay登录验证开始，token：{}", token);
+        LOG.info("GateWay token校验 ：{}", token);
         //没有token说明没登录
         if (token == null || token.isEmpty()) {
             LOG.info("token为空，请求被拦截");
@@ -63,7 +69,19 @@ public class LoginAdminGatewayFilter implements GatewayFilter, Ordered {
             byte[] bytes = "无token".getBytes(StandardCharsets.UTF_8);
             return exchange.getResponse().writeWith(Flux.just(exchange.getResponse().bufferFactory().wrap(bytes)));
         }
-        Object userObject = redisTemplate.opsForValue().get(token);
+        //测试token直接放行
+        if (IS_TEST) {
+            if (token.equals(TEST_TOKEN)) {
+                //判断redis是否缓存testtoken
+                Object testtoken = RedisUtils.get(TEST_TOKEN);
+                if (testtoken == null) {
+                    RedisUtils.set(TEST_TOKEN, "{\"id\":\"TEST_TOEKN\"}", 10, TimeUnit.MINUTES);
+                }
+                LOG.info("test token放行");
+                return chain.filter(exchange);
+            }
+        }
+        Object userObject = RedisUtils.get(token);
 
         //token获取对应对象不存在,说明token过期等..
         if (userObject == null) {
@@ -75,16 +93,14 @@ public class LoginAdminGatewayFilter implements GatewayFilter, Ordered {
         } else {
             String strUser = userObject.toString();
             LOG.info("GateWay登录验证成功");
-            // 增加权限校验，gateway里没有LoginUserDto，所以全部用JSON操作
-            LOG.info("接口权限校验，请求地址：{}", path);
+            // todo 权限验证
+//            LOG.info("接口权限校验，请求地址：{}", path);
             boolean exist = false;
             JSONObject jsonUser = JSON.parseObject(strUser);
 
-            //todo 记录浏览信息
-
             //日志记录
             this.logCreate(jsonUser.getString("id"), path + exchange.getRequest().getURI().getQuery(), false);
-            // todo test token123先放行
+
             if (!StringUtils.isEmpty(token))
                 return chain.filter(exchange);
 
@@ -144,7 +160,7 @@ public class LoginAdminGatewayFilter implements GatewayFilter, Ordered {
         sysLog.setIntercept(isIntercept);
 
         rabbitProducer.sendMsg(RabbitMqConfig.EXCHANGE_LOG,
-                RabbitMqConfig.ROUTINGKEY_LOG + RabbitMqConfig.QUETYPE_LOG
+                RabbitMqConfig.ROUTINGKEY_LOG
                 , JSON.toJSONString(sysLog));
     }
 

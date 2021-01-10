@@ -7,7 +7,6 @@ import java.util.Date;
 
 @Data
 public class SysLog {
-    private Integer id;
 
     /**
      * 用户id

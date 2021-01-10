@@ -5,14 +5,31 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistration
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.util.Set;
+
 @Configuration
 public class InterceptorConfig implements WebMvcConfigurer {
 
-    //设置不拦截接口  !!!!!!!!!!不拦截接口尽量不要使用**作为规则!!!!!!!!!!
+    //设置不拦截接口
+    //!!!!!!!!!!不拦截接口尽量不要使用**作为规则!!!!!!!!!!
     private static final String[] EXCLUDE_PATH = {
-            "/test/test",
-            "/oss/createPushKey"
+            "/test/list",
+
+            //Swagger-ui
+            "/swagger-ui.html",
+            "/webjars/springfox-swagger-ui/**",
+            "/swagger-resources/**",
     };
+
+    /**
+     * 部分拦截接口，但无token的情况下也允许访问
+     */
+    public static final String[] NOT_TOKEN_RELEASE_PATH = {
+
+    };
+
+
+    public static final String TOKEN_FLAG = "token";
 
     /**
      * 注册自定义拦截器
