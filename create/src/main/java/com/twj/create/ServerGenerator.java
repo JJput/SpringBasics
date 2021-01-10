@@ -1,15 +1,16 @@
 package com.twj.create;
 
 
+import cn.hutool.core.date.DateUtil;
 import com.twj.create.util.DbUtil;
 import com.twj.create.util.Field;
 import com.twj.create.util.FreemarkerUtil;
-import com.twj.spirngbasics.server.util.DateUtils;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.*;
 
 /**
@@ -156,7 +157,7 @@ public class ServerGenerator {
         map.put("PACKAGE_UTILS", PACKAGE_UTILS);
         map.put("PACKAGE_MAPPER", PACKAGE_MAPPER);
         map.put("PACKAGE_EXCEPTION", PACKAGE_EXCEPTION);
-        map.put("TIME", DateUtils.getDateYmdHms());
+        map.put("TIME", DateUtil.now());
         map.put("AUTHOR", AUTHOR);
     }
 

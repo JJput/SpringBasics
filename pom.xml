@@ -73,6 +73,13 @@
                 <version>2.1.1</version>
             </dependency>
 
+            <!-- 工具类hutool -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>5.5.7</version>
+            </dependency>
+
             <!-- jackson https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
 <!--            <dependency>-->
 <!--                <groupId>com.fasterxml.jackson.core</groupId>-->
@@ -126,8 +133,6 @@
                 <artifactId>server</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
-
-
 
 
         </dependencies>

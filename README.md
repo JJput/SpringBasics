@@ -6,7 +6,7 @@
 | 技术                 | 说明                | 官网                                           | 参考                                                         | 备注   |
 | -------------------- | ------------------- | ---------------------------------------------- | ------------------------------------------------------------ | ------ |
 | Lombok               | 简化对象封装工具    | https://github.com/rzwitserloot/lombok         |                                                              | 已整合 |
-| Hutool               | Java工具类库        | https://github.com/looly/hutool                |                                                              | 待整合 |
+| Hutool               | Java工具类库        | https://github.com/looly/hutool                | [官方教程](https://www.hutool.cn/docs/#/)                    | 已整合 |
 | PageHelper           | MyBatis物理分页插件 | http://git.oschina.net/free/Mybatis_PageHelper |                                                              | 已整合 |
 | Swagger-UI           | 文档生成工具        | https://github.com/swagger-api/swagger-ui      | [SpringBoot整合教程](https://developer.ibm.com/zh/languages/spring/articles/j-using-swagger-in-a-spring-boot-project/) | 已整合 |
 | Hibernator-Validator | 验证框架            | http://hibernate.org/validator                 |                                                              | 待整合 |
