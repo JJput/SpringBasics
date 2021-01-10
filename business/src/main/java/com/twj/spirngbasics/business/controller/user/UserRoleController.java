@@ -7,6 +7,8 @@ import com.twj.spirngbasics.server.exception.ValidatorException;
 import com.twj.spirngbasics.server.user.dto.UserRoleDto;
 import com.twj.spirngbasics.server.user.entity.UserRole;
 import com.twj.spirngbasics.server.user.service.UserRoleService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +24,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("${request.path.userRole}")
+@Api(tags = "角色")
 public class UserRoleController {
 
     private static final Logger LOG = LoggerFactory.getLogger(UserRoleController.class);
@@ -31,9 +34,8 @@ public class UserRoleController {
     private UserRoleService userRoleService;
 
 
-    /**
-     * 列表查询
-     */
+
+    @ApiOperation("列表查询")
     @PostMapping("/list")
     public ResponseDto list(@RequestBody PageDto pageDto) {
         try {
@@ -46,6 +48,7 @@ public class UserRoleController {
         }
     }
 
+    @ApiOperation("获取基础角色列表")
     @GetMapping("/basicRole")
     public ResponseDto basicRole() {
         ResponseDto responseDto = ResponseDto.createBySuccess();
@@ -53,9 +56,7 @@ public class UserRoleController {
         return responseDto;
     }
 
-    /**
-     * 保存，id有值时更新，无值时新增
-     */
+    @ApiOperation("保存，id有值时更新，无值时新增")
     @PostMapping("/save")
     public ResponseDto save(@RequestBody UserRole userRole) {
         try {
@@ -68,9 +69,7 @@ public class UserRoleController {
         }
     }
 
-    /**
-     * 删除
-     */
+    @ApiOperation("删除")
     @DeleteMapping("/delete/{id}")
     public ResponseDto delete(@PathVariable String id) {
         try {
@@ -83,11 +82,7 @@ public class UserRoleController {
         }
     }
 
-    /**
-     * 保存资源
-     *
-     * @param roleDto
-     */
+    @ApiOperation("保存资源")
     @PostMapping("/save-resource")
     public ResponseDto saveResource(@RequestBody UserRoleDto roleDto) {
         LOG.info("保存角色资源关联开始");
@@ -97,9 +92,7 @@ public class UserRoleController {
         return responseDto;
     }
 
-    /**
-     * 加载该角色的资源树
-     */
+    @ApiOperation("加载该角色的资源树")
     @GetMapping("/list-resource/{roleId}")
     public ResponseDto listResource(@PathVariable String roleId) {
         LOG.info("加载资源开始");

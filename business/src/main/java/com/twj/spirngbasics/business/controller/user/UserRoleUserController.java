@@ -6,6 +6,8 @@ import com.twj.spirngbasics.server.exception.BusinessException;
 import com.twj.spirngbasics.server.exception.ValidatorException;
 import com.twj.spirngbasics.server.user.entity.UserRoleUser;
 import com.twj.spirngbasics.server.user.service.UserRoleUserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +22,7 @@ import javax.annotation.Resource;
  */
 @RestController
 @RequestMapping("${request.path.userRoleUser}")
+@Api(tags = "角色用户关联")
 public class UserRoleUserController {
 
     private static final Logger LOG = LoggerFactory.getLogger(UserRoleUserController.class);
@@ -28,9 +31,8 @@ public class UserRoleUserController {
     @Resource
     private UserRoleUserService userRoleUserService;
 
-    /**
-     * 列表查询
-     */
+
+    @ApiOperation("列表查询")
     @PostMapping("/list")
     public ResponseDto list(@RequestBody PageDto pageDto) {
         try {
@@ -43,9 +45,7 @@ public class UserRoleUserController {
         }
     }
 
-    /**
-     * 保存，id有值时更新，无值时新增
-     */
+    @ApiOperation("保存，id有值时更新，无值时新增")
     @PostMapping("/save")
     public ResponseDto save(@RequestBody UserRoleUser userRoleUser) {
         try {
@@ -58,9 +58,7 @@ public class UserRoleUserController {
         }
     }
 
-    /**
-     * 删除
-     */
+    @ApiOperation("删除")
     @DeleteMapping("/delete/{id}")
     public ResponseDto delete(@PathVariable String id) {
         try {

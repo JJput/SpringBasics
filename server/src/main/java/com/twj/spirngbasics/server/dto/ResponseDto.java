@@ -4,35 +4,31 @@ package com.twj.spirngbasics.server.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.twj.spirngbasics.server.exception.BaseException;
 import com.twj.spirngbasics.server.util.Constant;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 
 @Data
 public class ResponseDto<T> {
 
-    /**
-     * 业务上的成功或失败
-     */
+
+    @ApiModelProperty("业务上的成功或失败")
     private boolean success = true;
 
-    /**
-     * 返回码
-     */
+    @ApiModelProperty("返回码")
     private String code;
 
-    /**
-     * 返回信息
-     */
+    @ApiModelProperty("返回信息，多用于错误情况")
     private String message;
 
-    /**
-     * 返回泛型数据，自定义类型
-     */
+    @ApiModelProperty("返回对象，如果有")
     private T content;
 
+    @ApiModelProperty("token，如果有")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private String token;
 
+    @ApiModelProperty("长期token，如果有")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private String longToken;
 
@@ -80,6 +76,7 @@ public class ResponseDto<T> {
     public static ResponseDto createByFail(Object o, ResponseCode response) {
         return createByFail(o, response.getCode() + "", response.getMessage());
     }
+
     public static ResponseDto createByFail(Object o, String code, String message) {
         ResponseDto resourceDto = new ResponseDto();
         resourceDto.setSuccess(false);

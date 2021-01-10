@@ -2,6 +2,7 @@ package com.twj.spirngbasics.server.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.util.Date;
@@ -16,72 +17,28 @@ import java.util.Date;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SysDictDto {
 
-
-    /**
-    * 创建人
-    */
-    private String createdBy;
-
-    /**
-    * 创建时间
-    */
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    private Date createdTime;
-
-    /**
-    * 更新人
-    */
-    private String updateBy;
-
-    /**
-    * 更新时间
-    */
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    private Date updateTime;
-
-    /**
-    * 删除
-    */
-    private String dele;
-
-    /**
-    * 备注
-    */
+    @ApiModelProperty("备注")
     private String remake;
 
-    /**
-    * 备用1
-    */
+    @ApiModelProperty("备用1")
     private String spare1;
 
-    /**
-    * 编号
-    */
     private String id;
 
-    /**
-    * 数据值
-    */
+    @ApiModelProperty("数据值")
     private String value;
 
-    /**
-    * 标签名
-    */
+    @ApiModelProperty("标签名")
     private String label;
 
-    /**
-    * 类型
-    */
+    @ApiModelProperty("类型")
     private String type;
 
-    /**
-    * 描述
-    */
+    @ApiModelProperty("描述")
     private String description;
 
-    /**
-    * 排序（升序）
-    */
+
+    @ApiModelProperty("排序（升序）")
     private String sort;
 
 }

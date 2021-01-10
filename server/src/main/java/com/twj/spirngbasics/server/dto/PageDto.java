@@ -1,5 +1,7 @@
 package com.twj.spirngbasics.server.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.util.List;
@@ -7,21 +9,17 @@ import java.util.List;
 @Data
 public class PageDto<T> {
 
-    /**
-     * 当前页码
-     */
+
+    @ApiModelProperty("当前页码")
     protected int page;
 
-    /**
-     * 每页条数
-     */
+    @ApiModelProperty("每页条数")
     protected int size;
 
-    /**
-     * 总条数
-     */
+    @ApiModelProperty("总条数")
     protected long total;
 
+    @ApiModelProperty("分页查询后返回的列表")
     protected List<T> list;
 
     protected T data;

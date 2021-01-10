@@ -1,6 +1,7 @@
 package com.twj.spirngbasics.business.controller.user;
 
 import com.twj.spirngbasics.server.user.service.UserService;
+import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,10 +11,10 @@ import javax.annotation.Resource;
 
 @RestController
 @RequestMapping("${request.path.user}")
+@Api(tags = "用户相关")
 public class UserController {
 
     private static final Logger LOG = LoggerFactory.getLogger(UserController.class);
-    public static final String BUSINESS_NAME = "账号 ";
 
     @Resource
     private UserService userService;

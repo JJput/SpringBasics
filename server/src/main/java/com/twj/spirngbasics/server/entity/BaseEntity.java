@@ -3,6 +3,7 @@ package com.twj.spirngbasics.server.entity;
 import com.twj.spirngbasics.server.manage.UserManage;
 import com.twj.spirngbasics.server.util.Constant;
 import com.twj.spirngbasics.server.util.UuidUtils;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.util.Date;
@@ -23,14 +24,19 @@ public class BaseEntity {
 
     protected String id;
 
+    @ApiModelProperty("创建对象")
     protected String createdBy;
 
+    @ApiModelProperty("创建时间")
     protected Date createdTime;
 
+    @ApiModelProperty("更新对象")
     protected String updateBy;
 
+    @ApiModelProperty("更新时间")
     protected Date updateTime;
 
+    @ApiModelProperty("是否删除")
     protected String dele;
 
     public void insert(String userId) {

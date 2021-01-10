@@ -28,7 +28,7 @@ public class ServerGenerator {
      * 创建文件前，路径相关配置
      */
     //包名
-    public final static String PATH_PACKAGE = "com/twj/finance/" + "server";
+    public final static String PATH_PACKAGE = "com/twj/spirngbasics/" + "server";
     //entity生成路径
     public final static String PATH_ENTITY = "server/src/main/java/" + PATH_PACKAGE + "/entity/";
     //dto生成路径

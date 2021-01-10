@@ -21,6 +21,7 @@ public class BusinessApplication {
         SpringApplication app = new SpringApplication(BusinessApplication.class);
         Environment env = app.run(args).getEnvironment();
         LOG.info("启动成功!");
-        LOG.info("system地址:\thttp://127.0.0.1:{}", env.getProperty("server.port"));
+        LOG.info("Swagger地址:http://localhost:{}/{}/swagger-ui.html", env.getProperty("server.port"),env.getProperty("spring.application.name"));
+        LOG.info("Druid地址:http://localhost:{}/{}/druid", env.getProperty("server.port"), env.getProperty("spring.application.name"));
     }
 }

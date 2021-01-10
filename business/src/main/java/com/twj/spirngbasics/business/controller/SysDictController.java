@@ -7,6 +7,8 @@ import com.twj.spirngbasics.server.exception.BusinessException;
 import com.twj.spirngbasics.server.exception.ValidatorException;
 import com.twj.spirngbasics.server.service.SysDictService;
 import com.twj.spirngbasics.server.util.CopyUtils;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
@@ -21,15 +23,16 @@ import javax.annotation.Resource;
  */
 @RestController
 @RequestMapping("${request.path.sysDict}")
+@Api(tags = "字典")
 public class SysDictController {
 
     private static final Logger LOG = LoggerFactory.getLogger(SysDictController.class);
-    public static final String BUSINESS_NAME = "字典表 ";
 
     @Resource
     private SysDictService sysDictService;
 
     @GetMapping("/findId")
+    @ApiOperation("根据id获取详细信息")
     public ResponseDto findById(String id) {
         try {
             return ResponseDto.createBySuccess(
@@ -53,6 +56,7 @@ public class SysDictController {
      * 	}
      * }
      */
+    @ApiOperation("根据type获取字典列表")
     @PostMapping("/list")
     public ResponseDto list(@RequestBody PageDto<SysDictDto> pageDto) {
         try {

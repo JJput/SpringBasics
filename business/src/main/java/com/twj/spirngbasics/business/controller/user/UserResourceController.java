@@ -6,6 +6,8 @@ import com.twj.spirngbasics.server.exception.BusinessException;
 import com.twj.spirngbasics.server.exception.ValidatorException;
 import com.twj.spirngbasics.server.user.dto.UserResourceDto;
 import com.twj.spirngbasics.server.user.service.UserResourceService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +23,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("${request.path.userResource}")
+@Api(tags = "资源",description = "资源树，所有请求路径")
 public class UserResourceController {
 
     private static final Logger LOG = LoggerFactory.getLogger(UserResourceController.class);
@@ -29,9 +32,7 @@ public class UserResourceController {
     @Resource
     private UserResourceService userResourceService;
 
-    /**
-     * 列表查询
-     */
+    @ApiOperation("列表查询")
     @PostMapping("/list")
     public ResponseDto list(@RequestBody PageDto pageDto) {
         try {
@@ -44,9 +45,7 @@ public class UserResourceController {
         }
     }
 
-    /**
-     * 保存，id有值时更新，无值时新增
-     */
+    @ApiOperation("保存，id有值时更新，无值时新增")
     @PostMapping("/save")
     public ResponseDto save(@RequestBody List<UserResourceDto> userResourceDtoList) {
         try {
@@ -62,6 +61,7 @@ public class UserResourceController {
     /**
      * 删除
      */
+    @ApiOperation("删除")
     @DeleteMapping("/delete/{id}")
     public ResponseDto delete(@PathVariable String id) {
         try {
@@ -74,9 +74,7 @@ public class UserResourceController {
         }
     }
 
-    /**
-     * 资源树查询
-     */
+    @ApiOperation("资源树查询")
     @GetMapping("/load-tree")
     public ResponseDto loadTree() {
         try {
