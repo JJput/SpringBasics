@@ -3,7 +3,6 @@ package com.twj.spirngbasics.business.controller;
 
 import com.twj.spirngbasics.server.dto.PageDto;
 import com.twj.spirngbasics.server.dto.ResponseDto;
-import com.twj.spirngbasics.server.dto.SysDictDto;
 import com.twj.spirngbasics.server.entity.SysLog;
 import com.twj.spirngbasics.server.exception.BusinessException;
 import com.twj.spirngbasics.server.exception.ValidatorException;

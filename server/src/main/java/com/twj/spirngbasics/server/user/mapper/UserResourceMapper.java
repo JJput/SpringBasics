@@ -2,8 +2,9 @@ package com.twj.spirngbasics.server.user.mapper;
 
 import com.twj.spirngbasics.server.user.entity.UserResource;
 import com.twj.spirngbasics.server.user.entity.UserResourceExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface UserResourceMapper {
     long countByExample(UserResourceExample example);

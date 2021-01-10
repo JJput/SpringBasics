@@ -11,6 +11,8 @@ import ${PACKAGE_EXCEPTION}.ValidatorException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 import javax.annotation.Resource;
 
@@ -22,14 +24,16 @@ import javax.annotation.Resource;
  */
 @RestController
 @RequestMapping("${'$'}{request.path.${domain}}")
+@Api(tags = "${tableNameCn}")
 public class ${Domain}Controller {
 
     private static final Logger LOG = LoggerFactory.getLogger(${Domain}Controller.class);
-    public static final String BUSINESS_NAME = "${tableNameCn}";
+<#--    public static final String BUSINESS_NAME = "${tableNameCn}";-->
 
     @Resource
     private ${Domain}Service ${domain}Service;
 
+    @ApiOperation("根据id查找对象")
     @GetMapping("/findId")
     public ResponseDto findById(String id) {
         try {
@@ -42,9 +46,7 @@ public class ${Domain}Controller {
         }
     }
 
-    /**
-     * 列表查询
-     */
+    @ApiOperation("列表查询")
     @PostMapping("/list")
     public ResponseDto list(@RequestBody PageDto pageDto) {
         try {
@@ -57,9 +59,7 @@ public class ${Domain}Controller {
         }
     }
 
-    /**
-     * 保存，id有值时更新，无值时新增
-     */
+    @ApiOperation("保存，id有值时更新，无值时新增")
     @PostMapping("/save")
     public ResponseDto save(@RequestBody ${Domain} ${domain}) {
         try {
@@ -72,9 +72,7 @@ public class ${Domain}Controller {
         }
     }
 
-    /**
-     * 删除
-     */
+    @ApiOperation("删除")
     @DeleteMapping("/delete/{id}")
     public ResponseDto delete(@PathVariable String id) {
         try {

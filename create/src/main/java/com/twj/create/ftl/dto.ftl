@@ -1,17 +1,20 @@
 package ${PACKAGE_DTO};
 
-import lombok.Data;
+
 <#list typeSet as type>
 <#if type=='Date'>
 import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import ${PACKAGE_ENTITY}.BaseEntity;
 </#if>
 <#if type=='BigDecimal'>
 import java.math.BigDecimal;
 </#if>
 </#list>
+import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import ${PACKAGE_ENTITY}.BaseEntity;
+import io.swagger.annotations.ApiModelProperty;
+
 
 /**
  * @作者: ${AUTHOR}
@@ -24,26 +27,21 @@ import java.math.BigDecimal;
 public class ${Domain}Dto {
 
     <#list fieldList as field>
-
-    /**
-    * ${field.comment}
-    */
+    @ApiModelProperty("${field.comment}")
         <#if field.javaType=='Date'>
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
         </#if>
     private ${field.javaType} ${field.nameHump};
+
     </#list>
 <#--    <#list fieldList as field>-->
-
 <#--    public ${field.javaType} get${field.nameBigHump}() {-->
 <#--        return ${field.nameHump};-->
 <#--    }-->
-
 <#--    public void set${field.nameBigHump}(${field.javaType} ${field.nameHump}) {-->
 <#--        this.${field.nameHump} = ${field.nameHump};-->
 <#--    }-->
 <#--    </#list>-->
-
 <#--    @Override-->
 <#--    public String toString() {-->
 <#--        StringBuilder sb = new StringBuilder();-->
@@ -56,5 +54,4 @@ public class ${Domain}Dto {
 <#--        sb.append("]");-->
 <#--        return sb.toString();-->
 <#--    }-->
-
 }

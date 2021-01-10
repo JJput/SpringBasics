@@ -36,7 +36,7 @@ public class ServerGenerator {
     //service生成路径
     public final static String PATH_SERVICE = "server/src/main/java/" + PATH_PACKAGE + "/service/";
     //controller生成路径
-    public final static String PATH_CONTROLLER = "business/src/main/java/com/twj/finance/business/controller/";
+    public final static String PATH_CONTROLLER = "business/src/main/java/com/twj/spirngbasics/business/controller/";
 
     /**
      * 创建文件时，文件内部包路径等参数配置
