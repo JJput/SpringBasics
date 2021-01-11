@@ -86,6 +86,12 @@
             <artifactId>hutool-all</artifactId>
         </dependency>
 
+        <!-- 实体类校验工具 -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

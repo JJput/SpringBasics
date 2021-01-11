@@ -1,11 +1,8 @@
 package com.twj.spirngbasics.server.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-
-import java.util.Date;
 
 /**
  * @作者: Jun
@@ -36,7 +33,6 @@ public class SysDictDto {
 
     @ApiModelProperty("描述")
     private String description;
-
 
     @ApiModelProperty("排序（升序）")
     private String sort;

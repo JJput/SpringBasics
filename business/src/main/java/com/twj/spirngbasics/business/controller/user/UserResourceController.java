@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -34,7 +35,7 @@ public class UserResourceController {
 
     @ApiOperation("列表查询")
     @PostMapping("/list")
-    public ResponseDto list(@RequestBody PageDto pageDto) {
+    public ResponseDto list(@RequestBody @Valid PageDto pageDto) {
         try {
             userResourceService.list(pageDto);
             return ResponseDto.createBySuccess(pageDto);

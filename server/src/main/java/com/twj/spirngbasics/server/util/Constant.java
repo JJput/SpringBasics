@@ -60,8 +60,7 @@ public class Constant {
             TOKEN_IS_NULL(901, "token为空"),
             TOKEN_ERROR(902, "token异常:解析用户数据错误"),
             //1000-2000     通用错误
-            OBJECT_IS_NULL(1000, ""),
-            LENGTH_OVERRUN(1001, ""),
+            VIOLATION_EXCEPTION(1000, "校验错误"),
             OBJECT_NULL(1002, "对象为空"),
             VALUE_ERROR(1003, "值有误"),
             PICTURE_NULL(1004, "图片为空"),

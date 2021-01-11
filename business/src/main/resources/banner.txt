@@ -20,4 +20,5 @@ ${AnsiColor.WHITE}
       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
                         MODEL(${spring.application.name})
             佛祖保佑       永不宕机     永无BUG
+            玄学框架 /(ㄒoㄒ)/~~
            spring-boot-version: ${spring-boot.formatted-version}

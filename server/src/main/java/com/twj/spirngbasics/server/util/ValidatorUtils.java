@@ -19,7 +19,7 @@ public class ValidatorUtils {
      */
     public static void require(Object str, String fieldName) {
         if (StringUtils.isEmpty(str)) {
-            throw new ValidatorException(OBJECT_IS_NULL, fieldName);
+            throw new ValidatorException(VIOLATION_EXCEPTION, fieldName);
         }
     }
 
@@ -41,7 +41,7 @@ public class ValidatorUtils {
             length = str.length();
         }
         if (length > max) {
-            throw new ValidatorException(LENGTH_OVERRUN, fieldName);
+            throw new ValidatorException(VIOLATION_EXCEPTION, fieldName);
         }
     }
     /**
@@ -53,7 +53,7 @@ public class ValidatorUtils {
             length = str.length();
         }
         if (length > max) {
-            throw new ValidatorException(LENGTH_OVERRUN, fieldName);
+            throw new ValidatorException(VIOLATION_EXCEPTION, fieldName);
         }
     }
     /**

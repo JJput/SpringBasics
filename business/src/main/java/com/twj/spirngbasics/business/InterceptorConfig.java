@@ -5,15 +5,13 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistration
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import java.util.Set;
-
 @Configuration
 public class InterceptorConfig implements WebMvcConfigurer {
 
     //设置不拦截接口
     //!!!!!!!!!!不拦截接口尽量不要使用**作为规则!!!!!!!!!!
     private static final String[] EXCLUDE_PATH = {
-            "/test/list",
+            "/test/**",
 
             //Swagger-ui
             "/swagger-ui.html",

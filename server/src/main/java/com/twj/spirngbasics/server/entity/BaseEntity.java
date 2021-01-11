@@ -24,24 +24,24 @@ public class BaseEntity {
 
     protected String id;
 
-    @ApiModelProperty("创建对象")
+    @ApiModelProperty(value = "创建对象")
     protected String createdBy;
 
-    @ApiModelProperty("创建时间")
+    @ApiModelProperty(value = "创建时间")
     protected Date createdTime;
 
-    @ApiModelProperty("更新对象")
+    @ApiModelProperty(value = "更新对象")
     protected String updateBy;
 
-    @ApiModelProperty("更新时间")
+    @ApiModelProperty(value = "更新时间")
     protected Date updateTime;
 
-    @ApiModelProperty("是否删除")
+    @ApiModelProperty(value = "是否删除")
     protected String dele;
 
     public void insert(String userId) {
         Date date = new Date();
-        this.id= UuidUtils.getUuid32();
+        this.id = UuidUtils.getUuid32();
         this.createdBy = userId;
         this.createdTime = date;
         this.updateBy = userId;
@@ -51,7 +51,7 @@ public class BaseEntity {
 
     public void insert() {
         Date date = new Date();
-        this.id= UuidUtils.getUuid32();
+        this.id = UuidUtils.getUuid32();
         this.createdBy = UserManage.getUserId();
         this.createdTime = date;
         this.updateBy = UserManage.getUserId();
@@ -61,7 +61,7 @@ public class BaseEntity {
 
     public void insertSystem() {
         Date date = new Date();
-        this.id= UuidUtils.getUuid32();
+        this.id = UuidUtils.getUuid32();
         this.createdBy = Constant.SYSTEM_USER;
         this.createdTime = date;
         this.updateBy = Constant.SYSTEM_USER;
@@ -69,8 +69,8 @@ public class BaseEntity {
         this.dele = DELE_USE;
     }
 
-    public void insert(String id,Date date) {
-        this.id= id;
+    public void insert(String id, Date date) {
+        this.id = id;
         this.createdBy = UserManage.getUserId();
         this.createdTime = date;
         this.updateBy = UserManage.getUserId();
@@ -82,13 +82,13 @@ public class BaseEntity {
         this.dele = DELE_YES;
     }
 
-    public void update(){
-        this.updateBy =  UserManage.getUserId();
+    public void update() {
+        this.updateBy = UserManage.getUserId();
         this.updateTime = new Date();
     }
 
-    public void update(String userId){
-        this.updateBy =  userId;
+    public void update(String userId) {
+        this.updateBy = userId;
         this.updateTime = new Date();
     }
 }

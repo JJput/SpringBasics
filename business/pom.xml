@@ -85,6 +85,12 @@
             <artifactId>hutool-all</artifactId>
         </dependency>
 
+        <!-- 实体类校验工具 -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+        </dependency>
+
         <!-- 导入腾讯对象存储 -->
         <!--        <dependency>-->
         <!--            <groupId>com.qcloud</groupId>-->

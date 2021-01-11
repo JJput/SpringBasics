@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 
 import javax.annotation.Resource;
@@ -45,7 +44,7 @@ public class ${Domain}Service {
     /**
      * 列表查询
      */
-    public void list(PageDto pageDto)  throws Exception{
+    public void list(PageDto pageDto) {
         PageHelper.startPage(pageDto.getPage(), pageDto.getSize());
         ${Domain}Example ${domain}Example = new ${Domain}Example();
         <#list fieldList as field>
@@ -60,32 +59,31 @@ public class ${Domain}Service {
         pageDto.setList(${domain}DtoList);
     }
 
-    /**
-     * 保存，id有值时更新，无值时新增
-     */
-    public void save(${Domain} ${domain}) throws Exception{
-        // 保存校验
-        <#list fieldList as field>
-            <#if field.name!="id" && field.nameHump!="createdBy" && field.nameHump!="updatedBy" && field.nameHump!="createdTime" && field.nameHump!="updateTime" && field.nameHump!="dele">
-                <#if !field.nullAble>
-        ValidatorUtils.require(${domain}.get${field.nameBigHump}(), "${field.nameCn}");
-                </#if>
-                <#if (field.length > 0)>
-        ValidatorUtils.length(${domain}.get${field.nameBigHump}(), "${field.nameCn}:Length overrun", ${field.length?c});
-                </#if>
-            </#if>
-        </#list>
-        if (StringUtils.isEmpty(${domain}.getId())) {
-            this.insert(${domain});
-        } else {
-            this.update(${domain});
-        }
-    }
-
+<#--    /**-->
+<#--     * 保存，id有值时更新，无值时新增-->
+<#--     */-->
+<#--    public void save(${Domain} ${domain}) throws Exception{-->
+<#--        // 保存校验-->
+<#--        <#list fieldList as field>-->
+<#--            <#if field.name!="id" && field.nameHump!="createdBy" && field.nameHump!="updatedBy" && field.nameHump!="createdTime" && field.nameHump!="updateTime" && field.nameHump!="dele">-->
+<#--                <#if !field.nullAble>-->
+<#--        ValidatorUtils.require(${domain}.get${field.nameBigHump}(), "${field.nameCn}");-->
+<#--                </#if>-->
+<#--                <#if (field.length > 0)>-->
+<#--        ValidatorUtils.length(${domain}.get${field.nameBigHump}(), "${field.nameCn}:Length overrun", ${field.length?c});-->
+<#--                </#if>-->
+<#--            </#if>-->
+<#--        </#list>-->
+<#--        if (StringUtils.isEmpty(${domain}.getId())) {-->
+<#--            this.insert(${domain});-->
+<#--        } else {-->
+<#--            this.update(${domain});-->
+<#--        }-->
+<#--    }-->
     /**
      * 新增
      */
-    private void insert(${Domain} ${domain}) {
+    public void insert(${Domain} ${domain}) {
         ${domain}.insert();
         ${domain}Mapper.insert(${domain});
     }
@@ -93,12 +91,7 @@ public class ${Domain}Service {
     /**
      * 更新
      */
-    private void update(${Domain} ${domain}) {
-        <#list fieldList as field>
-            <#if field.nameHump=='updatedTime'>
-        ${domain}.setUpdatedTime(new Date());
-            </#if>
-        </#list>
+    public void update(${Domain} ${domain}) {
         ${domain}.update();
         ${domain}Mapper.updateByPrimaryKeySelective(${domain});
     }

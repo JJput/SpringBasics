@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
+import javax.validation.Valid;
 import javax.annotation.Resource;
 
 /**
@@ -36,52 +37,35 @@ public class ${Domain}Controller {
     @ApiOperation("根据id查找对象")
     @GetMapping("/findId")
     public ResponseDto findById(String id) {
-        try {
-            return ResponseDto.createBySuccess(
-                CopyUtils.copy(${domain}Service.findById(id), ${Domain}Dto.class));
-        } catch (BusinessException | ValidatorException e) {
-            return ResponseDto.createByFail(e);
-        } catch (Exception e) {
-            return ResponseDto.createByFail(e.getMessage());
-        }
+        return ResponseDto.createBySuccess(
+            CopyUtils.copy(${domain}Service.findById(id), ${Domain}Dto.class));
     }
 
     @ApiOperation("列表查询")
     @PostMapping("/list")
     public ResponseDto list(@RequestBody PageDto pageDto) {
-        try {
-            ${domain}Service.list(pageDto);
-            return ResponseDto.createBySuccess(pageDto);
-        } catch (BusinessException | ValidatorException e) {
-            return ResponseDto.createByFail(e);
-        } catch (Exception e) {
-            return ResponseDto.createByFail(e.getMessage());
-        }
+        ${domain}Service.list(pageDto);
+        return ResponseDto.createBySuccess(pageDto);
     }
 
-    @ApiOperation("保存，id有值时更新，无值时新增")
-    @PostMapping("/save")
-    public ResponseDto save(@RequestBody ${Domain} ${domain}) {
-        try {
-            ${domain}Service.save(${domain});
-            return ResponseDto.createBySuccess(${domain});
-        } catch (BusinessException | ValidatorException e) {
-            return ResponseDto.createByFail(e);
-        } catch (Exception e) {
-            return ResponseDto.createByFail(e.getMessage());
-        }
+    @ApiOperation("新增")
+    @PostMapping("/insert")
+    public ResponseDto create(@RequestBody @Valid ${Domain} ${domain}) {
+        ${domain}Service.insert(${domain});
+        return ResponseDto.createBySuccess(${domain});
+    }
+
+    @ApiOperation("更新")
+    @PostMapping("/update")
+    public ResponseDto update(@RequestBody ${Domain} ${domain}) {
+        ${domain}Service.update(${domain});
+        return ResponseDto.createBySuccess();
     }
 
     @ApiOperation("删除")
     @DeleteMapping("/delete/{id}")
     public ResponseDto delete(@PathVariable String id) {
-        try {
-            ${domain}Service.delete(id);
-            return ResponseDto.createBySuccess();
-        } catch (BusinessException | ValidatorException e) {
-            return ResponseDto.createByFail(e);
-        } catch (Exception e) {
-            return ResponseDto.createByFail(e.getMessage());
-        }
+        ${domain}Service.delete(id);
+        return ResponseDto.createBySuccess();
     }
 }

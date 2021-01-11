@@ -13,6 +13,9 @@ import java.math.BigDecimal;
 import lombok.Data;
 import ${PACKAGE_ENTITY}.BaseEntity;
 import io.swagger.annotations.ApiModelProperty;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.NotEmpty;
 
 /**
  * @作者: ${AUTHOR}
@@ -32,10 +35,16 @@ public class ${Domain} extends BaseEntity {
     <#elseif field.nameHump=='updateTime'>
     <#elseif field.nameHump=='dele'>
     <#else>
-    @ApiModelProperty("${field.comment}")
+    @ApiModelProperty(value = "${field.comment}"<#if field.nullAble == false>, required = true</#if>)
         <#if field.javaType=='Date'>
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
         </#if>
+    <#if field.nullAble == false >
+    @NotEmpty(message = "${field.nameHump}不能为空")
+    </#if>
+    <#if field.javaType=='String'>
+    @Length(min = 0, max = ${field.length?c}, message = "${field.nameHump}长度异常,取值范围0~${field.length?c}")
+    </#if>
     private ${field.javaType} ${field.nameHump};
 
     </#if>

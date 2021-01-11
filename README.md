@@ -1,16 +1,16 @@
 
 
-
+## 项目介绍
 
 ### 工具库
 | 技术                 | 说明                | 官网                                           | 参考                                                         | 备注   |
 | -------------------- | ------------------- | ---------------------------------------------- | ------------------------------------------------------------ | ------ |
-| Lombok               | 简化对象封装工具    | https://github.com/rzwitserloot/lombok         |                                                              | 已整合 |
+| Lombok               | 简化对象封装工具    | https://github.com/rzwitserloot/lombok         | [简单介绍](https://www.jianshu.com/p/49a642bdb99a)           | 已整合 |
 | Hutool               | Java工具类库        | https://github.com/looly/hutool                | [官方教程](https://www.hutool.cn/docs/#/)                    | 已整合 |
 | PageHelper           | MyBatis物理分页插件 | http://git.oschina.net/free/Mybatis_PageHelper |                                                              | 已整合 |
-| Swagger-UI           | 文档生成工具        | https://github.com/swagger-api/swagger-ui      | [SpringBoot整合教程](https://developer.ibm.com/zh/languages/spring/articles/j-using-swagger-in-a-spring-boot-project/) | 已整合 |
-| Hibernator-Validator | 验证框架            | http://hibernate.org/validator                 |                                                              | 待整合 |
-| fastjson             | JSON工具            | https://github.com/alibaba/fastjson/           |                                                              | 已整合 |
+| Swagger-UI           | 文档生成工具        | https://github.com/swagger-api/swagger-ui      | [SpringBoot整合教程](https://developer.ibm.com/zh/languages/spring/articles/j-using-swagger-in-a-spring-boot-project/) [官方文档](https://swagger.io/docs/) | 已整合 |
+| Hibernator-Validator | 验证框架            | http://hibernate.org/validator                 | [SpringBoot整合教程](https://blog.csdn.net/java_collect/article/details/85534054) | 待整合 |
+| fastjson             | JSON工具            | https://github.com/alibaba/fastjson            |                                                              | 已整合 |
 
 ### 数据库
 
@@ -27,7 +27,7 @@
 | 技术     | 说明               | 官网                                  | 参考                                                         | 备注   |
 | -------- | ------------------ | ------------------------------------- | ------------------------------------------------------------ | ------ |
 | RabbitMQ | 消息队列           | https://www.rabbitmq.com/             | [Docker安装](https://michael728.github.io/2019/06/07/docker-rabbitmq-env/) [入门知识](https://www.cnblogs.com/sgh1023/p/11217017.html) SpringBoot整合[[1]](https://blog.csdn.net/qq_38455201/article/details/80308771)[[2]](https://blog.csdn.net/qq_35387940/article/details/100514134) | 已整合 |
-| OSS      | 对象存储           | https://cloud.tencent.com/product/cos |                                                              | 已整合 |
+| OSS      | 对象存储           | https://cloud.tencent.com/product/cos | [官方文档](https://cloud.tencent.com/document/product/436/35215) | 已整合 |
 | Jenkins  | 自动化部署工具     | https://github.com/jenkinsci/jenkins  |                                                              | 待整合 |
 | Kibina   | 日志可视化查看工具 | https://github.com/elastic/kibana     |                                                              | 待整合 |
 
