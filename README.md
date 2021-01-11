@@ -2,36 +2,11 @@
 
 ## 项目介绍
 
-### 工具库
-| 技术                 | 说明                | 官网                                           | 参考                                                         | 备注   |
-| -------------------- | ------------------- | ---------------------------------------------- | ------------------------------------------------------------ | ------ |
-| Lombok               | 简化对象封装工具    | https://github.com/rzwitserloot/lombok         | [简单介绍](https://www.jianshu.com/p/49a642bdb99a)           | 已整合 |
-| Hutool               | Java工具类库        | https://github.com/looly/hutool                | [官方教程](https://www.hutool.cn/docs/#/)                    | 已整合 |
-| PageHelper           | MyBatis物理分页插件 | http://git.oschina.net/free/Mybatis_PageHelper |                                                              | 已整合 |
-| Swagger-UI           | 文档生成工具        | https://github.com/swagger-api/swagger-ui      | [SpringBoot整合教程](https://developer.ibm.com/zh/languages/spring/articles/j-using-swagger-in-a-spring-boot-project/) [官方文档](https://swagger.io/docs/) | 已整合 |
-| Hibernator-Validator | 验证框架            | http://hibernate.org/validator                 | [SpringBoot整合教程](https://blog.csdn.net/java_collect/article/details/85534054) | 待整合 |
-| fastjson             | JSON工具            | https://github.com/alibaba/fastjson            |                                                              | 已整合 |
+框架主要针对SpringBoot、SpringGateWay进行封装，开发一个新业务时，能够快速的根据数据库模型生成业务基础代码，从而实现敏捷开发。（Controller、service、entity、dto、mapper）
 
-### 数据库
+<img src="https://i.loli.net/2021/01/11/wCYxgnkSzJXHMBN.png" alt="image-20210111145251553" style="zoom:50%;" />
 
-| 技术             | 说明           | 官网                                                | 备注   |
-| ---------------- | -------------- | --------------------------------------------------- | ------ |
-| MyBatis          | ORM框架        | http://www.mybatis.org/mybatis-3/zh/index.html      | 已整合 |
-| MyBatisGenerator | 数据层代码生成 | http://www.mybatis.org/generator/index.html         | 已整合 |
-| Redis            | 分布式缓存     | https://redis.io/                                   | 已整合 |
-| MongoDB          | NoSql数据库    | [https://www.mongodb.com](https://www.mongodb.com/) | 已整合 |
-| Druid            | 数据库连接池   | https://github.com/alibaba/druid                    | 已整合 |
-
-
-### 其他技术
-| 技术     | 说明               | 官网                                  | 参考                                                         | 备注   |
-| -------- | ------------------ | ------------------------------------- | ------------------------------------------------------------ | ------ |
-| RabbitMQ | 消息队列           | https://www.rabbitmq.com/             | [Docker安装](https://michael728.github.io/2019/06/07/docker-rabbitmq-env/) [入门知识](https://www.cnblogs.com/sgh1023/p/11217017.html) SpringBoot整合[[1]](https://blog.csdn.net/qq_38455201/article/details/80308771)[[2]](https://blog.csdn.net/qq_35387940/article/details/100514134) | 已整合 |
-| OSS      | 对象存储           | https://cloud.tencent.com/product/cos | [官方文档](https://cloud.tencent.com/document/product/436/35215) | 已整合 |
-| Jenkins  | 自动化部署工具     | https://github.com/jenkinsci/jenkins  |                                                              | 待整合 |
-| Kibina   | 日志可视化查看工具 | https://github.com/elastic/kibana     |                                                              | 待整合 |
-
-### 组织结构
+### 项目结构
 
 ```
 spirngbasics
@@ -43,6 +18,39 @@ spirngbasics
 ├── tencentOssFile 	-- Spring Boot，腾讯对象存储服务，可直接单独运行，也可以作为包添加（pom中添加即可，跟server模块一样）
 
 ```
+
+### 引用库说明
+
+#### 工具库
+
+| 技术                 | 说明             | 版本号      | 参考                                                         | 备注   |
+| -------------------- | ---------------- | ----------- | ------------------------------------------------------------ | ------ |
+| Lombok               | 简化对象封装工具 | 1.18.12     | [简单介绍](https://www.jianshu.com/p/49a642bdb99a)           | 已整合 |
+| Hutool               | Java工具类库     | 5.5.7       | [官方教程](https://www.hutool.cn/docs/#/)                    | 已整合 |
+| Swagger2&UI          | 文档生成工具     | 2.9.2       | [SpringBoot整合教程](https://developer.ibm.com/zh/languages/spring/articles/j-using-swagger-in-a-spring-boot-project/) [官方文档](https://swagger.io/docs/) | 已整合 |
+| Hibernator-Validator | 验证框架         | 6.0.9.Final | [SpringBoot整合教程](https://blog.csdn.net/java_collect/article/details/85534054) | 待整合 |
+| fastjson             | JSON工具         | 1.2.60      |                                                              | 已整合 |
+
+#### 数据库相关
+
+| 技术             | 说明                | 版本号        | 参考 | 备注   |
+| ---------------- | ------------------- | ------------- | ---- | ------ |
+| MyBatis          | ORM框架             | 1.3.2         |      | 已整合 |
+| MyBatisGenerator | 数据层代码生成      | 1.3.7         |      | 已整合 |
+| PageHelper       | MyBatis物理分页插件 | 1.2.10        |      | 已整合 |
+| Redis            | 分布式缓存          | 2.2.8.RELEASE |      | 已整合 |
+| MongoDB          | NoSql数据库         | 2.0.0.RELEASE |      | 已整合 |
+| Druid            | 数据库连接池        | 1.1.20        |      | 已整合 |
+
+#### 其他技术
+
+| 技术     | 说明               | 版本号                               | 参考                                                         | 备注   |
+| -------- | ------------------ | ------------------------------------ | ------------------------------------------------------------ | ------ |
+| RabbitMQ | 消息队列           | 2.1.3.RELEASE                        | [Docker安装](https://michael728.github.io/2019/06/07/docker-rabbitmq-env/) [入门知识](https://www.cnblogs.com/sgh1023/p/11217017.html) SpringBoot整合[[1]](https://blog.csdn.net/qq_38455201/article/details/80308771)[[2]](https://blog.csdn.net/qq_35387940/article/details/100514134) | 已整合 |
+| OSS      | 腾讯对象存储       | 5.6.24                               | [官方文档](https://cloud.tencent.com/document/product/436/35215) | 已整合 |
+| Jenkins  | 自动化部署工具     | https://github.com/jenkinsci/jenkins |                                                              | 待整合 |
+| Kibina   | 日志可视化查看工具 | https://github.com/elastic/kibana    |                                                              | 待整合 |
+
 
 ### 开发工具
 
