@@ -28,7 +28,7 @@ spirngbasics
 | Lombok               | 简化对象封装工具 | 1.18.12     | [简单介绍](https://www.jianshu.com/p/49a642bdb99a)           | 已整合 |
 | Hutool               | Java工具类库     | 5.5.7       | [官方教程](https://www.hutool.cn/docs/#/)                    | 已整合 |
 | Swagger2&UI          | 文档生成工具     | 2.9.2       | [SpringBoot整合教程](https://developer.ibm.com/zh/languages/spring/articles/j-using-swagger-in-a-spring-boot-project/) [官方文档](https://swagger.io/docs/) | 已整合 |
-| Hibernator-Validator | 验证框架         | 6.0.9.Final | [SpringBoot整合教程](https://blog.csdn.net/java_collect/article/details/85534054) | 待整合 |
+| Hibernator-Validator | 验证框架         | 6.0.9.Final | [SpringBoot整合教程](https://blog.csdn.net/java_collect/article/details/85534054) | 已整合 |
 | fastjson             | JSON工具         | 1.2.60      |                                                              | 已整合 |
 
 #### 数据库相关
