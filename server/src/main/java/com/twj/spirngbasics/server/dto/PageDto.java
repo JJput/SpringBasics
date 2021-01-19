@@ -1,5 +1,6 @@
 package com.twj.spirngbasics.server.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.hibernate.validator.constraints.Range;
@@ -8,6 +9,7 @@ import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class PageDto<T> {
 
 

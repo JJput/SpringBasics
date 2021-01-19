@@ -68,6 +68,11 @@ public class ServerGenerator {
     public static String mysqlUser;
     public static String mysqlPwd;
 
+    private static boolean generatorController = true;
+    private static boolean generatorService = true;
+    private static boolean generatorEntity = true;
+    private static boolean generatorDto = true;
+
     public static void main(String[] args) throws Exception {
 
         // 只生成配置文件中的第一个table节点
@@ -114,21 +119,29 @@ public class ServerGenerator {
         setMap(map);
 
         // 生成entity
-        FreemarkerUtil.initConfig("entity.ftl");
-        FreemarkerUtil.generator(PATH_ENTITY + Domain + ".java", map);
+        if (generatorEntity) {
+            FreemarkerUtil.initConfig("entity.ftl");
+            FreemarkerUtil.generator(PATH_ENTITY + Domain + ".java", map);
+        }
 
         // 生成dto
-        FreemarkerUtil.initConfig("dto.ftl");
-        FreemarkerUtil.generator(PATH_DTO + Domain + "Dto.java", map);
+        if (generatorDto) {
+            FreemarkerUtil.initConfig("dto.ftl");
+            FreemarkerUtil.generator(PATH_DTO + Domain + "Dto.java", map);
+        }
 
         // 生成service
-        FreemarkerUtil.initConfig("service.ftl");
-        FreemarkerUtil.generator(PATH_SERVICE + Domain + "Service.java", map);
+        if (generatorService) {
+            FreemarkerUtil.initConfig("service.ftl");
+            FreemarkerUtil.generator(PATH_SERVICE + Domain + "Service.java", map);
+        }
 
         // 生成controller
-        FreemarkerUtil.initConfig("controller.ftl");
-        FreemarkerUtil.generator(PATH_CONTROLLER + Domain + "Controller.java", map);
-        addProperties(map);
+        if (generatorController) {
+            FreemarkerUtil.initConfig("controller.ftl");
+            FreemarkerUtil.generator(PATH_CONTROLLER + Domain + "Controller.java", map);
+            addProperties(map);
+        }
     }
 
     /**

@@ -34,11 +34,10 @@ public class ${Domain}Controller {
     @Resource
     private ${Domain}Service ${domain}Service;
 
-    @ApiOperation("根据id查找对象")
+    @ApiOperation("查找对象")
     @GetMapping("/findId")
     public ResponseDto findById(String id) {
-        return ResponseDto.createBySuccess(
-            CopyUtils.copy(${domain}Service.findById(id), ${Domain}Dto.class));
+        return ResponseDto.createBySuccess(${domain}Service.findById(id));
     }
 
     @ApiOperation("列表查询")

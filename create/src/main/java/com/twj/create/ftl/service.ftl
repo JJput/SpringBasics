@@ -1,10 +1,10 @@
 package ${PACKAGE_SERVICE};
 
 import ${PACKAGE_ENTITY}.${Domain};
-import ${PACKAGE_ENTITY}.${Domain}Example;
 import ${PACKAGE_DTO}.${Domain}Dto;
 import ${PACKAGE_DTO}.PageDto;
 import ${PACKAGE_MAPPER}.${Domain}Mapper;
+import ${PACKAGE_MAPPER}.${Domain}DynamicSqlSupport;
 import ${PACKAGE_UTILS}.CopyUtils;
 import ${PACKAGE_UTILS}.ValidatorUtils;
 import org.slf4j.Logger;
@@ -12,15 +12,21 @@ import org.slf4j.LoggerFactory;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
+import org.mybatis.dynamic.sql.SqlBuilder;
+import org.mybatis.dynamic.sql.render.RenderingStrategies;
+import org.mybatis.dynamic.sql.select.render.SelectStatementProvider;
+<#list typeSet as type>
+    <#if type=='Date'>
+        import java.util.Date;
+    </#if>
+</#list>
 
 
 import javax.annotation.Resource;
 import java.util.List;
-<#list typeSet as type>
-    <#if type=='Date'>
-import java.util.Date;
-    </#if>
-</#list>
+
+
+import static org.mybatis.dynamic.sql.SqlBuilder.*;
 
 /**
  * @作者: ${AUTHOR}
@@ -36,9 +42,9 @@ public class ${Domain}Service {
     @Resource
     private ${Domain}Mapper ${domain}Mapper;
 
-    public ${Domain} findById(String id) {
+    public ${Domain}Dto findById(String id) {
         ValidatorUtils.require(id, "参数不能为空");
-        return ${domain}Mapper.selectByPrimaryKey(id);
+        return CopyUtils.copy(${domain}Mapper.selectByPrimaryKey(id),${Domain}Dto.class);
     }
 
     /**
@@ -46,17 +52,18 @@ public class ${Domain}Service {
      */
     public void list(PageDto pageDto) {
         PageHelper.startPage(pageDto.getPage(), pageDto.getSize());
-        ${Domain}Example ${domain}Example = new ${Domain}Example();
-        <#list fieldList as field>
-            <#if field.nameHump=='sort'>
-        ${domain}Example.setOrderByClause("sort asc");
-            </#if>
-        </#list>
-        List<${Domain}> ${domain}List = ${domain}Mapper.selectByExample(${domain}Example);
-        PageInfo<${Domain}> pageInfo = new PageInfo<>(${domain}List);
-        pageDto.setTotal(pageInfo.getTotal());
-        List<${Domain}Dto> ${domain}DtoList = CopyUtils.copyList(${domain}List, ${Domain}Dto.class);
-        pageDto.setList(${domain}DtoList);
+        SelectStatementProvider selectStatement = SqlBuilder.select(testMapper.selectList)
+                .from(TestDynamicSqlSupport.test)
+    <#list fieldList as field>
+        <#if field.nameHump=='sort'>
+                .orderBy(TestDynamicSqlSupport.sort)
+        </#if>
+    </#list>
+                .build()
+                .render(RenderingStrategies.MYBATIS3);
+        List<TestDto> testDtoList = CopyUtils.copyList(testMapper.selectMany(selectStatement), TestDto.class);
+        pageDto.setTotal(testDtoList.size());
+        pageDto.setList(testDtoList);
     }
 
 <#--    /**-->

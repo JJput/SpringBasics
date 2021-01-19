@@ -4,14 +4,17 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
-    <context id="Mysql" targetRuntime="MyBatis3" defaultModelType="flat">
+    <context id="Mysql" targetRuntime="MyBatis3DynamicSql" defaultModelType="flat">
 
         <property name="autoDelimitKeywords" value="true"/>
+        <property name="javaFileEncoding" value="UTF-8"/>
         <property name="beginningDelimiter" value="`"/>
         <property name="endingDelimiter" value="`"/>
 
+        <!-- 为模型生成序列化方法-->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
         <!--覆盖生成XML文件 默认为覆盖-->
-        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
+<!--        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>-->
         <!-- 生成的实体类添加toString()方法 -->
         <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
 
@@ -28,15 +31,15 @@
         </jdbcConnection>
 
         <!-- domain类的位置 -->
-        <javaModelGenerator targetProject="src/main/java"
+        <javaModelGenerator targetProject="server/src/main/java"
                             targetPackage="com.twj.spirngbasics.server.entity"/>
 
         <!-- mapper xml的位置 -->
-        <sqlMapGenerator targetProject="src/main/resources"
+        <sqlMapGenerator targetProject="server/src/main/resources"
                          targetPackage="mapper"/>
 
         <!-- mapper类的位置 -->
-        <javaClientGenerator targetProject="src/main/java"
+        <javaClientGenerator targetProject="server/src/main/java"
                              targetPackage="com.twj.spirngbasics.server.mapper"
                              type="XMLMAPPER"/>
 

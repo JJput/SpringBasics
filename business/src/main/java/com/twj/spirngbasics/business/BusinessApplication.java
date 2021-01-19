@@ -21,7 +21,7 @@ public class BusinessApplication {
         SpringApplication app = new SpringApplication(BusinessApplication.class);
         Environment env = app.run(args).getEnvironment();
         LOG.info("启动成功!");
-        LOG.info("Swagger地址:http://localhost:{}/{}/swagger-ui.html", env.getProperty("server.port"),env.getProperty("spring.application.name"));
-        LOG.info("Druid地址:http://localhost:{}/{}/druid", env.getProperty("server.port"), env.getProperty("spring.application.name"));
+        LOG.info("API接口文档:http://localhost:{}/{}/doc.html 使用Swagger2+swagger-bootstarp-ui开源地址:https://gitee.com/xiaoym/swagger-bootstrap-ui-demo", env.getProperty("server.port"),env.getProperty("spring.application.name"));
+        LOG.info("数据库资源监视:http://localhost:{}/{}/druid 使用Druid", env.getProperty("server.port"), env.getProperty("spring.application.name"));
     }
 }

@@ -1,8 +1,11 @@
 package com.twj.spirngbasics.business;
 
+import com.twj.spirngbasics.business.controller.SysDictController;
 import com.twj.spirngbasics.server.exception.BusinessException;
 import com.twj.spirngbasics.server.manage.UserManage;
 import com.twj.spirngbasics.server.util.UserUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,7 +19,7 @@ import java.util.Set;
 import static com.twj.spirngbasics.business.InterceptorConfig.*;
 
 public class InterceptorBusiness extends HandlerInterceptorAdapter {
-
+    private static final Logger LOG = LoggerFactory.getLogger(InterceptorBusiness.class);
     public static Set<String> notTokenSetPath = null;
 
     /**
@@ -26,6 +29,7 @@ public class InterceptorBusiness extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         String token = httpServletRequest.getHeader(TOKEN_FLAG);
         String path = httpServletRequest.getServletPath();
+        LOG.info("path=" + path);
         if (!StringUtils.isEmpty(token)) {
             try {
                 UserManage.setUser(token);

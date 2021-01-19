@@ -1,7 +1,9 @@
 package com.twj.spirngbasics.server.config;
 
+import com.google.common.base.Predicates;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.ParameterBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -43,7 +45,7 @@ public class SwaggerConfig {
                 .select()
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
-//                .paths(Predicates.not(PathSelectors.regex("/error.*")))// 错误路径不监控
+                .paths(Predicates.not(PathSelectors.regex("/error.*")))// 错误路径不监控
                 .build()
                 .apiInfo(apiInfo())
                 .useDefaultResponseMessages(false)
@@ -53,14 +55,12 @@ public class SwaggerConfig {
     }
 
     private ApiInfo apiInfo() {
-        return new ApiInfo(
-                "API文档",
-                "HTTP状态401，未登录\n" +
-                        "HTTP状态403，无权限",
-                "V1.0",
-                "",
-                new Contact("", "", ""),
-                "Apache", "http://www.apache.org/", Collections.emptyList());
-
+        return new ApiInfoBuilder()
+                .title("API文档")
+                .description("HTTP状态401，未登录\n" +
+                        "HTTP状态403，无权限")
+                .version("1.0")
+                .contact(new Contact("JJput",null,null))
+                .build();
     }
 }

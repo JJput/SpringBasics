@@ -6,6 +6,7 @@ import com.twj.spirngbasics.server.util.UuidUtils;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import javax.annotation.Generated;
 import java.util.Date;
 
 /**
@@ -22,21 +23,27 @@ public class BaseEntity {
     //删除
     public static final String DELE_YES = "0";
 
+    @Generated("org.mybatis.generator.api.MyBatisGenerator")
     protected String id;
 
     @ApiModelProperty(value = "创建对象")
+    @Generated("org.mybatis.generator.api.MyBatisGenerator")
     protected String createdBy;
 
     @ApiModelProperty(value = "创建时间")
+    @Generated("org.mybatis.generator.api.MyBatisGenerator")
     protected Date createdTime;
 
     @ApiModelProperty(value = "更新对象")
+    @Generated("org.mybatis.generator.api.MyBatisGenerator")
     protected String updateBy;
 
     @ApiModelProperty(value = "更新时间")
+    @Generated("org.mybatis.generator.api.MyBatisGenerator")
     protected Date updateTime;
 
     @ApiModelProperty(value = "是否删除")
+    @Generated("org.mybatis.generator.api.MyBatisGenerator")
     protected String dele;
 
     public void insert(String userId) {

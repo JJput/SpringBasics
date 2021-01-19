@@ -14,7 +14,9 @@ import lombok.Data;
 import ${PACKAGE_ENTITY}.BaseEntity;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.Length;
+import java.io.Serializable;
 
+import javax.annotation.Generated;
 import javax.validation.constraints.NotEmpty;
 
 /**
@@ -24,7 +26,7 @@ import javax.validation.constraints.NotEmpty;
  * @描述: ${tableNameCn}
  */
 @Data
-public class ${Domain} extends BaseEntity {
+public class ${Domain} extends BaseEntity implements Serializable {
 
     <#list fieldList as field>
     <#if field.nameHump=='id'>
@@ -45,6 +47,7 @@ public class ${Domain} extends BaseEntity {
     <#if field.javaType=='String'>
     @Length(min = 0, max = ${field.length?c}, message = "${field.nameHump}长度异常,取值范围0~${field.length?c}")
     </#if>
+    @Generated("org.mybatis.generator.api.MyBatisGenerator")
     private ${field.javaType} ${field.nameHump};
 
     </#if>
