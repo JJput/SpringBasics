@@ -50,18 +50,18 @@ public class ${Domain}Service {
      */
     public void list(PageDto pageDto) {
         PageHelper.startPage(pageDto.getPage(), pageDto.getSize());
-        SelectStatementProvider selectStatement = SqlBuilder.select(testMapper.selectList)
-                .from(TestDynamicSqlSupport.test)
+        SelectStatementProvider selectStatement = SqlBuilder.select(${domain}Mapper.selectList)
+                .from(${Domain}DynamicSqlSupport.${domain})
     <#list fieldList as field>
         <#if field.nameHump=='sort'>
-                .orderBy(TestDynamicSqlSupport.sort)
+                .orderBy(${Domain}DynamicSqlSupport.sort)
         </#if>
     </#list>
                 .build()
                 .render(RenderingStrategies.MYBATIS3);
-        List<TestDto> testDtoList = CopyUtils.copyList(testMapper.selectMany(selectStatement), TestDto.class);
-        pageDto.setTotal(testDtoList.size());
-        pageDto.setList(testDtoList);
+        List<${Domain}Dto> ${domain}DtoList = CopyUtils.copyList(${domain}Mapper.selectMany(selectStatement), ${Domain}Dto.class);
+        pageDto.setTotal(${domain}DtoList.size());
+        pageDto.setList(${domain}DtoList);
     }
 
 <#--    /**-->

@@ -37,7 +37,7 @@ spirngbasics
 | 技术             | 说明                | 版本号        | 参考                                                         | 备注   |
 | ---------------- | ------------------- | ------------- | ------------------------------------------------------------ | ------ |
 | MyBatis          | ORM框架             | 1.3.2         |                                                              | 已整合 |
-| MyBatisGenerator | 数据层代码生成      | 1.3.7         | 采用DynamicSql风格生成代码[教程](https://mp.weixin.qq.com/s/6skQR5Nq-LZm0AeWc5-xqg) | 已整合 |
+| MyBatisGenerator | 数据层代码生成      | 1.3.7         | 采用DynamicSql风格生成代码[教程](https://mp.weixin.qq.com/s/6skQR5Nq-LZm0AeWc5-xqg) [官方文档](https://mybatis.org/mybatis-dynamic-sql/docs/introduction.html) | 已整合 |
 | PageHelper       | MyBatis物理分页插件 | 1.2.10        |                                                              | 已整合 |
 | Redis            | 分布式缓存          | 2.2.8.RELEASE |                                                              | 已整合 |
 | MongoDB          | NoSql数据库         | 2.0.0.RELEASE |                                                              | 已整合 |

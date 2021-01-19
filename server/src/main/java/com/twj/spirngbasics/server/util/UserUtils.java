@@ -1,7 +1,7 @@
 package com.twj.spirngbasics.server.util;
 
 
-import com.twj.spirngbasics.server.user.entity.User;
+import com.twj.spirngbasics.server.entity.User;
 import org.springframework.stereotype.Component;
 
 /**

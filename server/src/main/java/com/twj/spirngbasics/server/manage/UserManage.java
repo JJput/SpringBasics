@@ -4,7 +4,7 @@ package com.twj.spirngbasics.server.manage;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.twj.spirngbasics.server.exception.BusinessException;
-import com.twj.spirngbasics.server.user.entity.User;
+import com.twj.spirngbasics.server.entity.User;
 import com.twj.spirngbasics.server.util.Constant;
 import com.twj.spirngbasics.server.util.EncryptUtils;
 import com.twj.spirngbasics.server.util.UserUtils;

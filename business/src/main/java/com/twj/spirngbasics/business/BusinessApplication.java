@@ -11,8 +11,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication(scanBasePackages = "com.twj.spirngbasics")
 @EnableEurekaClient
-@EnableScheduling
-@MapperScan("com.twj.spirngbasics.server")
+@EnableScheduling   //开启定时计划
+@MapperScan("com.twj.spirngbasics")
 @ServletComponentScan // 注意要加上@ServletComponentScan注解，否则Servlet无法生效
 @Slf4j
 public class BusinessApplication {

@@ -10,6 +10,7 @@
         <module>create</module>
         <module>tencentOssFile</module>
         <module>business</module>
+        <module>user</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -152,7 +153,14 @@
                 <version>2.1.3.RELEASE</version>
             </dependency>
 
-            <!-- 本地module -->
+            <!-- 本地module user -->
+            <dependency>
+                <groupId>com.twj.spirngbasics</groupId>
+                <artifactId>user</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+
+            <!-- 本地module server -->
             <dependency>
                 <groupId>com.twj.spirngbasics</groupId>
                 <artifactId>server</artifactId>

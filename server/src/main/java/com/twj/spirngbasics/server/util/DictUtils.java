@@ -3,9 +3,12 @@ package com.twj.spirngbasics.server.util;
 
 import com.twj.spirngbasics.server.dto.SysDictDto;
 import com.twj.spirngbasics.server.entity.SysDict;
-import com.twj.spirngbasics.server.entity.SysDictExample;
+import com.twj.spirngbasics.server.mapper.SysDictDynamicSqlSupport;
 import com.twj.spirngbasics.server.mapper.SysDictMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.mybatis.dynamic.sql.SqlBuilder;
+import org.mybatis.dynamic.sql.render.RenderingStrategies;
+import org.mybatis.dynamic.sql.select.render.SelectStatementProvider;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -32,8 +35,6 @@ public class DictUtils {
 
     private static Map<String, List<SysDict>> map = new HashMap<>();
 
-    private static int count = 0;
-
     @PostConstruct
     public void init() {
         new Thread(new Runnable() {
@@ -41,9 +42,12 @@ public class DictUtils {
             public void run() {
                 long time1 = System.currentTimeMillis();
                 log.info("------开始缓存数据-字典------");
-                SysDictExample sysDictExample = new SysDictExample();
-                sysDictExample.setOrderByClause("sort asc");
-                List<SysDict> sysDictList = sysDictMapper.selectByExample(sysDictExample);
+                SelectStatementProvider selectStatement = SqlBuilder.select(sysDictMapper.selectList)
+                        .from(SysDictDynamicSqlSupport.sysDict)
+                        .orderBy(SysDictDynamicSqlSupport.sort)
+                        .build()
+                        .render(RenderingStrategies.MYBATIS3);
+                List<SysDict> sysDictList =sysDictMapper.selectMany(selectStatement);
                 for (SysDict sysDict : sysDictList) {
                     if (map.containsKey(sysDict.getType())) {
                         map.get(sysDict.getType()).add(sysDict);
