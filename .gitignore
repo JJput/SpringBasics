@@ -37,6 +37,7 @@ build/
 .mvn/
 
 **/.DS_Store
+/zlogs/
 mvnw.cmd
 HELP.md
 mvnw

@@ -5,8 +5,7 @@ import com.twj.spirngbasics.server.dto.SysDictDto;
 import com.twj.spirngbasics.server.entity.SysDict;
 import com.twj.spirngbasics.server.entity.SysDictExample;
 import com.twj.spirngbasics.server.mapper.SysDictMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -25,8 +24,8 @@ import java.util.Map;
  * @描述: 字典缓存
  */
 @Component
+@Slf4j
 public class DictUtils {
-    private static final Logger LOG = LoggerFactory.getLogger(DictUtils.class);
 
     @Resource
     private SysDictMapper sysDictMapper;
@@ -41,7 +40,7 @@ public class DictUtils {
             @Override
             public void run() {
                 long time1 = System.currentTimeMillis();
-                LOG.info("------开始缓存数据-字典------");
+                log.info("------开始缓存数据-字典------");
                 SysDictExample sysDictExample = new SysDictExample();
                 sysDictExample.setOrderByClause("sort asc");
                 List<SysDict> sysDictList = sysDictMapper.selectByExample(sysDictExample);
@@ -56,7 +55,7 @@ public class DictUtils {
                 }
 
                 long time2 = System.currentTimeMillis();
-                LOG.info("------数据缓存完毕------" + (time2 - time1) + "ms");
+                log.info("------数据缓存完毕------" + (time2 - time1) + "ms");
             }
         }).start();
     }

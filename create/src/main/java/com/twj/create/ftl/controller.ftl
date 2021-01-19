@@ -1,5 +1,6 @@
 package ${PACKAGE_CONTROLLER};
 
+import lombok.extern.slf4j.Slf4j;
 import ${PACKAGE_ENTITY}.${Domain};
 import ${PACKAGE_DTO}.${Domain}Dto;
 import ${PACKAGE_DTO}.PageDto;
@@ -8,8 +9,6 @@ import ${PACKAGE_SERVICE}.${Domain}Service;
 import ${PACKAGE_UTILS}.CopyUtils;
 import ${PACKAGE_EXCEPTION}.BusinessException;
 import ${PACKAGE_EXCEPTION}.ValidatorException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,9 +25,9 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("${'$'}{request.path.${domain}}")
 @Api(tags = "${tableNameCn}")
+@Slf4j
 public class ${Domain}Controller {
 
-    private static final Logger LOG = LoggerFactory.getLogger(${Domain}Controller.class);
 <#--    public static final String BUSINESS_NAME = "${tableNameCn}";-->
 
     @Resource

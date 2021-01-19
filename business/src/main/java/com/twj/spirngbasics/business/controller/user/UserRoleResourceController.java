@@ -8,8 +8,7 @@ import com.twj.spirngbasics.server.user.entity.UserRoleResource;
 import com.twj.spirngbasics.server.user.service.UserRoleResourceService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -23,10 +22,8 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("${request.path.userRoleResource}")
 @Api(tags = "角色资源关联")
+@Slf4j
 public class UserRoleResourceController {
-
-    private static final Logger LOG = LoggerFactory.getLogger(UserRoleResourceController.class);
-    public static final String BUSINESS_NAME = "角色资源关联";
 
     @Resource
     private UserRoleResourceService userRoleResourceService;

@@ -20,8 +20,7 @@ import com.twj.spirngbasics.server.util.CopyUtils;
 import com.twj.spirngbasics.server.util.EncryptUtils;
 import com.twj.spirngbasics.server.util.PhoneCodeCache;
 import com.twj.spirngbasics.server.util.UuidUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
@@ -36,9 +35,8 @@ import java.util.Random;
 import static com.twj.spirngbasics.server.util.Constant.Http.ERROR.*;
 
 @Service
+@Slf4j
 public class UserService {
-
-    private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
 
     @Resource
     private UserMapper userMapper;
@@ -115,8 +113,8 @@ public class UserService {
         userDto.setToken(token);
         userDto.setRequests(getUserRequestList(userDto.getId()));
         String newToken = EncryptUtils.encryptMD5ToString(token);
-        LOG.info("token:" + token);
-        LOG.info("newToken:" + newToken);
+        log.info("token:" + token);
+        log.info("newToken:" + newToken);
         RedisManage.setUserToken(newToken, JSON.toJSONString(userDto));
         userDto.setRequests(null);
         return userDto;

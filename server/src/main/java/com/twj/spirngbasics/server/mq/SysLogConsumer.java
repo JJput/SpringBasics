@@ -2,8 +2,6 @@ package com.twj.spirngbasics.server.mq;
 
 import com.twj.spirngbasics.server.config.RabbitMqConfig;
 import com.twj.spirngbasics.server.service.SysLogService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.ExchangeTypes;
 import org.springframework.amqp.rabbit.annotation.Exchange;
 import org.springframework.amqp.rabbit.annotation.Queue;
@@ -18,8 +16,6 @@ import javax.annotation.Resource;
  */
 @Component
 public class SysLogConsumer {
-
-    private static final Logger LOG = LoggerFactory.getLogger(SysLogConsumer.class);
 
     @Resource
     private SysLogService logService;

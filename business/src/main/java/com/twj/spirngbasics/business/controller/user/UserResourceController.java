@@ -8,6 +8,7 @@ import com.twj.spirngbasics.server.user.dto.UserResourceDto;
 import com.twj.spirngbasics.server.user.service.UserResourceService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
@@ -25,9 +26,9 @@ import java.util.List;
 @RestController
 @RequestMapping("${request.path.userResource}")
 @Api(tags = "资源",description = "资源树，所有请求路径")
+@Slf4j
 public class UserResourceController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(UserResourceController.class);
     public static final String BUSINESS_NAME = "资源";
 
     @Resource

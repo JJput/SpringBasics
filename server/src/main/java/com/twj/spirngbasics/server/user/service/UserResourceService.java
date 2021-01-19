@@ -9,8 +9,7 @@ import com.twj.spirngbasics.server.user.entity.UserResourceExample;
 import com.twj.spirngbasics.server.user.mapper.UserResourceMapper;
 import com.twj.spirngbasics.server.util.CopyUtils;
 import com.twj.spirngbasics.server.util.ValidatorUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -27,9 +26,8 @@ import java.util.List;
  * @描述: 资源
  */
 @Service
+@Slf4j
 public class UserResourceService {
-
-    private static final Logger LOG = LoggerFactory.getLogger(UserResourceService.class);
 
     @Resource
     private UserResourceMapper userResourceMapper;
@@ -101,7 +99,7 @@ public class UserResourceService {
                 add(list, d);
             }
         }
-        LOG.info("共{}条", list.size());
+        log.info("共{}条", list.size());
 
         userResourceMapper.deleteByExample(null);
         for (int i = 0; i < list.size(); i++) {

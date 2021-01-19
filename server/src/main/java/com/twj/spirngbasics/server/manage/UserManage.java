@@ -8,8 +8,7 @@ import com.twj.spirngbasics.server.user.entity.User;
 import com.twj.spirngbasics.server.util.Constant;
 import com.twj.spirngbasics.server.util.EncryptUtils;
 import com.twj.spirngbasics.server.util.UserUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @作者: JJ
@@ -17,8 +16,8 @@ import org.slf4j.LoggerFactory;
  * @Version 1.0
  * @描述:
  */
+@Slf4j
 public class UserManage {
-    private static final Logger LOG = LoggerFactory.getLogger(UserManage.class);
 
     private static final String MD5_TOKEN_END = "com.twj.spirngbasics";
 
@@ -46,7 +45,7 @@ public class UserManage {
      */
     private static User anayJson(Object object) {
         if (object == null) {
-            LOG.info("token is null");
+            log.info("token is null");
         }
         User user = new User();
         try {
@@ -69,7 +68,7 @@ public class UserManage {
      */
     public static String tokenEncryption(String token) {
         String newToken = EncryptUtils.encryptMD5ToString(token + MD5_TOKEN_END).substring(6, 30);
-        LOG.info("token = " + token + "   newToken = " + newToken);
+        log.info("token = " + token + "   newToken = " + newToken);
         return newToken;
     }
 

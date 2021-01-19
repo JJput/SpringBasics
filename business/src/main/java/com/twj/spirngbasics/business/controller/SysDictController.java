@@ -9,6 +9,7 @@ import com.twj.spirngbasics.server.service.SysDictService;
 import com.twj.spirngbasics.server.util.CopyUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
@@ -24,9 +25,8 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("${request.path.sysDict}")
 @Api(tags = "字典")
+@Slf4j
 public class SysDictController {
-
-    private static final Logger LOG = LoggerFactory.getLogger(SysDictController.class);
 
     @Resource
     private SysDictService sysDictService;

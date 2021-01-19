@@ -9,8 +9,7 @@ import com.twj.spirngbasics.server.user.entity.UserRole;
 import com.twj.spirngbasics.server.user.service.UserRoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -26,10 +25,8 @@ import java.util.List;
 @RestController
 @RequestMapping("${request.path.userRole}")
 @Api(tags = "角色")
+@Slf4j
 public class UserRoleController {
-
-    private static final Logger LOG = LoggerFactory.getLogger(UserRoleController.class);
-    public static final String BUSINESS_NAME = "角色";
 
     @Resource
     private UserRoleService userRoleService;
@@ -85,7 +82,7 @@ public class UserRoleController {
     @ApiOperation("保存资源")
     @PostMapping("/save-resource")
     public ResponseDto saveResource(@RequestBody UserRoleDto roleDto) {
-        LOG.info("保存角色资源关联开始");
+        log.info("保存角色资源关联开始");
         ResponseDto<UserRoleDto> responseDto = ResponseDto.createBySuccess();
         userRoleService.saveResource(roleDto);
         responseDto.setContent(roleDto);
@@ -95,7 +92,7 @@ public class UserRoleController {
     @ApiOperation("加载该角色的资源树")
     @GetMapping("/list-resource/{roleId}")
     public ResponseDto listResource(@PathVariable String roleId) {
-        LOG.info("加载资源开始");
+        log.info("加载资源开始");
         ResponseDto responseDto = ResponseDto.createBySuccess();
         List<String> resourceIdList = userRoleService.listResource(roleId);
         responseDto.setContent(resourceIdList);

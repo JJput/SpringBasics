@@ -1,5 +1,6 @@
 package ${PACKAGE_SERVICE};
 
+import lombok.extern.slf4j.Slf4j;
 import ${PACKAGE_ENTITY}.${Domain};
 import ${PACKAGE_DTO}.${Domain}Dto;
 import ${PACKAGE_DTO}.PageDto;
@@ -7,8 +8,6 @@ import ${PACKAGE_MAPPER}.${Domain}Mapper;
 import ${PACKAGE_MAPPER}.${Domain}DynamicSqlSupport;
 import ${PACKAGE_UTILS}.CopyUtils;
 import ${PACKAGE_UTILS}.ValidatorUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
@@ -35,9 +34,8 @@ import static org.mybatis.dynamic.sql.SqlBuilder.*;
  * @描述: ${tableNameCn}
  */
 @Service
+@Slf4j
 public class ${Domain}Service {
-
-    private static final Logger LOG = LoggerFactory.getLogger(${Domain}Service.class);
 
     @Resource
     private ${Domain}Mapper ${domain}Mapper;

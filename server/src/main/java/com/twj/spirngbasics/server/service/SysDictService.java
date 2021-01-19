@@ -9,8 +9,7 @@ import com.twj.spirngbasics.server.entity.SysDictExample;
 import com.twj.spirngbasics.server.mapper.SysDictMapper;
 import com.twj.spirngbasics.server.util.CopyUtils;
 import com.twj.spirngbasics.server.util.ValidatorUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -24,9 +23,8 @@ import java.util.List;
  * @描述: 字典表
  */
 @Service
+@Slf4j
 public class SysDictService {
-
-    private static final Logger LOG = LoggerFactory.getLogger(SysDictService.class);
 
     @Resource
     private SysDictMapper sysDictMapper;

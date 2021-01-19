@@ -30,6 +30,7 @@ spirngbasics
 | Swagger2 & swagger-bootstrap-ui | 文档生成工具     | 2.9.2       | [SpringBoot整合教程](https://developer.ibm.com/zh/languages/spring/articles/j-using-swagger-in-a-spring-boot-project/) [官方文档](https://swagger.io/docs/) | 已整合 |
 | Hibernator-Validator            | 验证框架         | 6.0.9.Final | [SpringBoot整合教程](https://blog.csdn.net/java_collect/article/details/85534054) | 已整合 |
 | fastjson                        | JSON工具         | 1.2.60      |                                                              | 已整合 |
+| log4j2                          | 日志管理         | 2.12.1      | [SpringBoot整合教程](https://www.cnblogs.com/keeya/p/10101547.html#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E7%94%A8log4j2) | 已整合 |
 
 #### 数据库相关
 

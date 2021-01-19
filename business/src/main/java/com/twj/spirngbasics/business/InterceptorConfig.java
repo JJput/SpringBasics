@@ -18,6 +18,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
             "/swagger-resources/**",
             "/favicon.ico",
             "/webjars/**",
+            "/error",
+
             //字典
             "/sysDict/**",
     };
