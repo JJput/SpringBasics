@@ -37,7 +37,7 @@ spirngbasics
 | 技术             | 说明                | 版本号        | 参考                                                         | 备注   |
 | ---------------- | ------------------- | ------------- | ------------------------------------------------------------ | ------ |
 | MyBatis          | ORM框架             | 1.3.2         |                                                              | 已整合 |
-| MyBatisGenerator | 数据层代码生成      | 1.3.7         | 采用DynamicSql风格生成代码[教程](https://mp.weixin.qq.com/s/6skQR5Nq-LZm0AeWc5-xqg) [官方文档](https://mybatis.org/mybatis-dynamic-sql/docs/introduction.html) | 已整合 |
+| MyBatisGenerator | 数据层代码生成      | 1.3.7         | 采用DynamicSql风格生成代码[教程](https://mp.weixin.qq.com/s/6skQR5Nq-LZm0AeWc5-xqg) [进阶使用指南](http://139.224.40.241/archives/dynamicsql) | 已整合 |
 | PageHelper       | MyBatis物理分页插件 | 1.2.10        |                                                              | 已整合 |
 | Redis            | 分布式缓存          | 2.2.8.RELEASE |                                                              | 已整合 |
 | MongoDB          | NoSql数据库         | 2.0.0.RELEASE |                                                              | 已整合 |
@@ -51,6 +51,7 @@ spirngbasics
 | OSS      | 腾讯对象存储       | 5.6.24                               | [官方文档](https://cloud.tencent.com/document/product/436/35215) | 已整合 |
 | Jenkins  | 自动化部署工具     | https://github.com/jenkinsci/jenkins |                                                              | 待整合 |
 | Kibina   | 日志可视化查看工具 | https://github.com/elastic/kibana    |                                                              | 待整合 |
+
 
 
 ### 开发工具
@@ -68,6 +69,17 @@ spirngbasics
 | Navicat Premium | 数据库连接工具      | http://www.formysql.com/xiazai.html                   |
 | Postman         | API接口调试工具     | https://www.postman.com/                              |
 | Typora          | Markdown编辑器      | https://typora.io/                                    |
+
+#### IDEA插件介绍
+
+| 名称              | 说明                                                         |
+| ----------------- | ------------------------------------------------------------ |
+| Codota            | 人工智能代码索引，根据你的代码习惯学习你的写法，或者在调用某些对象方法时推荐大部分选择的。 |
+| Grep Console      | Log颜色管理工具                                              |
+| Rainbow Barackets | 括号颜色插件，同级括号相同颜色（不管是小括号大括号中括号），不同等级括号颜色不同。方便看代码！！ |
+
+
+
 
 ## 使用说明
 

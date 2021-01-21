@@ -1,9 +1,12 @@
 package com.twj.spirngbasics.server.dto;
 
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import io.swagger.annotations.ApiModelProperty;
+import java.util.Date;
 import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.twj.spirngbasics.server.entity.BaseEntity;
+import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotEmpty;
@@ -11,13 +14,44 @@ import javax.validation.constraints.NotEmpty;
 
 /**
  * @作者: Jun
- * @创建时间: 2021-01-19 15:51:40
+ * @创建时间: 2021-01-21 11:49:09
  * @Version 1.0
  * @描述: 字典表 
  */
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SysDictDto {
+
+    @ApiModelProperty(value = "创建人", required = true)
+    @NotEmpty(message = "createdBy不能为空")
+    @Length(min = 0, max = 32, message = "createdBy长度异常,取值范围0~32")
+    private String createdBy;
+
+    @ApiModelProperty(value = "创建时间", required = true)
+    @NotEmpty(message = "createdTime不能为空")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    private Date createdTime;
+
+    @ApiModelProperty(value = "更新人")
+    @Length(min = 0, max = 32, message = "updateBy长度异常,取值范围0~32")
+    private String updateBy;
+
+    @ApiModelProperty(value = "更新时间")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    private Date updateTime;
+
+    @ApiModelProperty(value = "删除", required = true)
+    @NotEmpty(message = "dele不能为空")
+    @Length(min = 0, max = 1, message = "dele长度异常,取值范围0~1")
+    private String dele;
+
+    @ApiModelProperty(value = "备注")
+    @Length(min = 0, max = 512, message = "remake长度异常,取值范围0~512")
+    private String remake;
+
+    @ApiModelProperty(value = "备用1")
+    @Length(min = 0, max = 64, message = "spare1长度异常,取值范围0~64")
+    private String spare1;
 
     @ApiModelProperty(value = "编号", required = true)
     @NotEmpty(message = "id不能为空")
@@ -46,7 +80,6 @@ public class SysDictDto {
 
     @ApiModelProperty(value = "排序（升序）", required = true)
     @NotEmpty(message = "sort不能为空")
-    @Length(min = 0, max = 32, message = "sort长度异常,取值范围0~32")
-    private String sort;
+    private Integer sort;
 
 }

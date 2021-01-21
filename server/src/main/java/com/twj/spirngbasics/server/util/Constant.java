@@ -1,7 +1,7 @@
 package com.twj.spirngbasics.server.util;
 
 
-import com.twj.spirngbasics.server.dto.ResponseDto;
+import com.twj.spirngbasics.server.dto.ResponseCode;
 
 /**
  * @author Airness
@@ -13,7 +13,7 @@ public class Constant {
 
     public static class Http {
 
-        public enum SUCCESS implements ResponseDto.ResponseCode {
+        public enum SUCCESS implements ResponseCode {
             DEFAULT(200, "成功"),
 
             ;
@@ -41,7 +41,7 @@ public class Constant {
          * 业务名_具体错误对象
          * 业务名_类型_错误对象
          */
-        public enum ERROR implements ResponseDto.ResponseCode {
+        public enum ERROR implements ResponseCode {
             DEFAULT(44444, "未知错误"),
 
             //500-1000登录注册相关

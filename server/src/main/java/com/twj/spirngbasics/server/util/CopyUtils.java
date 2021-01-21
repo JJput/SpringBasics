@@ -9,7 +9,7 @@ import java.util.List;
 public class CopyUtils {
 
     public static <T> List<T> copyList(List source, Class<T> clazz) {
-        List<T> target = new ArrayList<>();
+        List<T> target = new ArrayList<T>();
         if (!CollectionUtils.isEmpty(source)){
             if (!CollectionUtils.isEmpty(source)){
                 for (Object c: source) {

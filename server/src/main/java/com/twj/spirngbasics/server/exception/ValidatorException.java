@@ -1,19 +1,19 @@
 package com.twj.spirngbasics.server.exception;
 
 
-import com.twj.spirngbasics.server.dto.ResponseDto;
+import com.twj.spirngbasics.server.dto.ResponseCode;
 
 public class ValidatorException extends RuntimeException implements BaseException {
 
     private int code;
     private String message;
 
-    public ValidatorException(ResponseDto.ResponseCode responseCode) {
+    public ValidatorException(ResponseCode responseCode) {
         this.code = responseCode.getCode();
         this.message = responseCode.getMessage();
     }
 
-    public ValidatorException(ResponseDto.ResponseCode responseCode, String message) {
+    public ValidatorException(ResponseCode responseCode, String message) {
         this.code = responseCode.getCode();
         this.message = message + responseCode.getMessage();
     }

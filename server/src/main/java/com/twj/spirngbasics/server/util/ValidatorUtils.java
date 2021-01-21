@@ -1,7 +1,7 @@
 package com.twj.spirngbasics.server.util;
 
 
-import com.twj.spirngbasics.server.dto.ResponseDto;
+import com.twj.spirngbasics.server.dto.ResponseCode;
 import com.twj.spirngbasics.server.exception.BusinessException;
 import com.twj.spirngbasics.server.exception.ValidatorException;
 import org.springframework.util.StringUtils;
@@ -26,7 +26,7 @@ public class ValidatorUtils {
     /**
      * 空校验（null or ""）
      */
-    public static void require(Object str, ResponseDto.ResponseCode code) {
+    public static void require(Object str, ResponseCode code) {
         if (StringUtils.isEmpty(str)) {
             throw new BusinessException(code);
         }
@@ -35,7 +35,7 @@ public class ValidatorUtils {
     /**
      * 长度校验
      */
-    public static void length(String str, String fieldName,int max) {
+    public static void length(String str, String fieldName, int max) {
         int length = 0;
         if (!StringUtils.isEmpty(str)) {
             length = str.length();
@@ -44,23 +44,24 @@ public class ValidatorUtils {
             throw new ValidatorException(VIOLATION_EXCEPTION, fieldName);
         }
     }
+
     /**
      * 长度校验
      */
-    public static void length(String str, String fieldName,int min,int max) {
+    public static void length(String str, String fieldName, int min, int max) {
         int length = 0;
         if (!StringUtils.isEmpty(str)) {
             length = str.length();
         }
-        if (length > max) {
+        if (length > max || length < min) {
             throw new ValidatorException(VIOLATION_EXCEPTION, fieldName);
         }
     }
+
     /**
      * list去重
-     *
-     * @param list
-     * @return
+     * @param list 操作对象
+     * @return 新的数组
      */
     public static List removeDuplicate(List list) {
         HashSet h = new HashSet(list);

@@ -14,7 +14,7 @@ import javax.validation.constraints.NotEmpty;
 
 /**
  * @作者: Jun
- * @创建时间: 2021-01-19 15:51:40
+ * @创建时间: 2021-01-21 11:49:09
  * @Version 1.0
  * @描述: 字典表 
  */
@@ -57,8 +57,7 @@ public class SysDict extends BaseEntity implements Serializable {
 
     @ApiModelProperty(value = "排序（升序）", required = true)
     @NotEmpty(message = "sort不能为空")
-    @Length(min = 0, max = 32, message = "sort长度异常,取值范围0~32")
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    private String sort;
+    private Integer sort;
 
 }

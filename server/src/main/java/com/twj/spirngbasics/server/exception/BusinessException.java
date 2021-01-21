@@ -1,14 +1,14 @@
 package com.twj.spirngbasics.server.exception;
 
 
-import com.twj.spirngbasics.server.dto.ResponseDto;
+import com.twj.spirngbasics.server.dto.ResponseCode;
 
 public class BusinessException extends RuntimeException implements BaseException{
 
     private int code;
     private String message;
 
-    public BusinessException(ResponseDto.ResponseCode responseCode) {
+    public BusinessException(ResponseCode responseCode) {
         this.code = responseCode.getCode();
         this.message = responseCode.getMessage();
     }

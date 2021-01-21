@@ -33,18 +33,6 @@ public class ResponseDto<T> {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private String longToken;
 
-
-    @Override
-    public String toString() {
-        final StringBuffer sb = new StringBuffer("ResponseDto{");
-        sb.append("success=").append(success);
-        sb.append(", code='").append(code).append('\'');
-        sb.append(", message='").append(message).append('\'');
-        sb.append(", content=").append(content);
-        sb.append('}');
-        return sb.toString();
-    }
-
     public static ResponseDto createBySuccess() {
         return createBySuccess(null, Constant.Http.SUCCESS.DEFAULT);
     }
@@ -56,26 +44,26 @@ public class ResponseDto<T> {
     public static ResponseDto createBySuccess(Object o, ResponseCode response) {
         ResponseDto resourceDto = new ResponseDto();
         resourceDto.setSuccess(true);
-        resourceDto.setCode(response.getCode() + "");
+        resourceDto.setCode(String.valueOf(response.getCode()));
         resourceDto.setContent(o);
         resourceDto.setMessage(response.getMessage());
         return resourceDto;
     }
 
     public static ResponseDto createByFail(ResponseCode response) {
-        return createByFail(null, response.getCode() + "", response.getMessage());
+        return createByFail(null, String.valueOf(response.getCode()), response.getMessage());
     }
 
     public static ResponseDto createByFail(BaseException e) {
-        return createByFail(null, e.getCode() + "", e.getMessage());
+        return createByFail(null, String.valueOf(e.getCode()), e.getMessage());
     }
 
     public static ResponseDto createByFail(String message) {
-        return createByFail(null, Constant.Http.ERROR.DEFAULT.getCode() + "", message);
+        return createByFail(null, String.valueOf(Constant.Http.ERROR.DEFAULT.getCode()), message);
     }
 
     public static ResponseDto createByFail(Object o, ResponseCode response) {
-        return createByFail(o, response.getCode() + "", response.getMessage());
+        return createByFail(o, String.valueOf(response.getCode()), response.getMessage());
     }
 
     public static ResponseDto createByFail(Object o, String code, String message) {
@@ -85,12 +73,6 @@ public class ResponseDto<T> {
         resourceDto.setContent(o);
         resourceDto.setMessage(message);
         return resourceDto;
-    }
-
-    public interface ResponseCode {
-        int getCode();
-
-        String getMessage();
     }
 
 }

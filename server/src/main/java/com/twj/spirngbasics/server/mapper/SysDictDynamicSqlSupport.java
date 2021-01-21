@@ -47,7 +47,7 @@ public final class SysDictDynamicSqlSupport {
     public static final SqlColumn<String> description = sysDict.description;
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public static final SqlColumn<String> sort = sysDict.sort;
+    public static final SqlColumn<Integer> sort = sysDict.sort;
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     public static final class SysDict extends SqlTable {
@@ -75,7 +75,7 @@ public final class SysDictDynamicSqlSupport {
 
         public final SqlColumn<String> description = column("description", JDBCType.VARCHAR);
 
-        public final SqlColumn<String> sort = column("sort", JDBCType.VARCHAR);
+        public final SqlColumn<Integer> sort = column("sort", JDBCType.INTEGER);
 
         public SysDict() {
             super("sys_dict");
