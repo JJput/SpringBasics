@@ -1,4 +1,4 @@
-package com.twj.create.util;
+package com.jjput.create.util;
 
 public class Field {
     private String name; // 字段名：course_id

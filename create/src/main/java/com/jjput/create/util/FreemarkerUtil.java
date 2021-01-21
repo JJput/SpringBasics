@@ -1,4 +1,4 @@
-package com.twj.create.util;
+package com.jjput.create.util;
 
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class FreemarkerUtil {
 
-    static String ftlPath = "create/src/main/java/com/twj/create/ftl/";
+    static String ftlPath = "create/src/main/java/com/jjput/create/ftl/";
 
     static Template temp;
 

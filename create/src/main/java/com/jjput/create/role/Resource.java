@@ -1,4 +1,4 @@
-package com.twj.create.role;
+package com.jjput.create.role;
 
 import java.util.Date;
 
