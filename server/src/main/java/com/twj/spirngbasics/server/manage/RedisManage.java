@@ -1,6 +1,8 @@
 package com.twj.spirngbasics.server.manage;
 
 
+import com.alibaba.fastjson.JSONObject;
+import com.twj.spirngbasics.server.entity.User;
 import com.twj.spirngbasics.server.util.RedisUtils;
 
 import java.util.concurrent.TimeUnit;
@@ -13,17 +15,18 @@ import java.util.concurrent.TimeUnit;
  */
 public class RedisManage {
 
-    //用户信息缓存    48小时后过期
+    //用户信息缓存    30天后过期
     private static final int USER_INFO_TIME = 30;
     private static final TimeUnit USER_INFO_TIME_UNIT = TimeUnit.DAYS;
 
     /**
      * 设置用户token
+     *
      * @param k 键
      * @param v 值
      */
-    public static void setUserToken(String k, String v) {
-        RedisUtils.set(k, v, USER_INFO_TIME, USER_INFO_TIME_UNIT);
+    public static void setUserToken(String k, User v) {
+        RedisUtils.set(k, JSONObject.toJSONString(v), USER_INFO_TIME, USER_INFO_TIME_UNIT);
     }
 
     /**
