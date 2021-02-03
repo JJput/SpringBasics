@@ -109,13 +109,13 @@
         </dependency>
 
         <!-- 打包发布时用 -->
-<!--        <dependency>-->
-<!--            <groupId>com.twj.pets</groupId>-->
-<!--            <artifactId>server</artifactId>-->
-<!--            <version>0.0.1-SNAPSHOT</version>-->
-<!--            <scope>system</scope>-->
-<!--            <systemPath>${project.basedir}/../server/target/server-0.0.1-SNAPSHOT.jar</systemPath>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.twj.pets</groupId>-->
+        <!--            <artifactId>server</artifactId>-->
+        <!--            <version>0.0.1-SNAPSHOT</version>-->
+        <!--            <scope>system</scope>-->
+        <!--            <systemPath>${project.basedir}/../server/target/server-0.0.1-SNAPSHOT.jar</systemPath>-->
+        <!--        </dependency>-->
 
         <!-- 调试时使用 -->
         <dependency>
