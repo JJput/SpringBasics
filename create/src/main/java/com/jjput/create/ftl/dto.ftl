@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 import lombok.Data;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import ${PACKAGE_ENTITY}.BaseEntity;
+import ${PACKAGE_SERVER}.entity.BaseEntity;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.Length;
 

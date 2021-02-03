@@ -54,12 +54,10 @@ public class ServerGenerator {
     public final static String PACKAGE_ENTITY = PACKAGE_BASIS + ".server.entity";
     //service package路径
     public final static String PACKAGE_SERVICE = PACKAGE_BASIS + ".server.service";
-    //工具包 导入路径
-    public final static String PACKAGE_UTILS = PACKAGE_BASIS + ".server.util";
     //mapper 导入路径
     public final static String PACKAGE_MAPPER = PACKAGE_BASIS + ".server.mapper";
-    //异常类 导入路径
-    public final static String PACKAGE_EXCEPTION = PACKAGE_BASIS + ".server.exception";
+    //工具包 导入路径
+    public final static String PACKAGE_SERVER = "com.twj.spirngbasics.server";
 
     /**
      * 数据库配置 将直接读取generatorConfig.xml中的配置
@@ -167,9 +165,8 @@ public class ServerGenerator {
         map.put("PACKAGE_DTO", PACKAGE_DTO);
         map.put("PACKAGE_ENTITY", PACKAGE_ENTITY);
         map.put("PACKAGE_SERVICE", PACKAGE_SERVICE);
-        map.put("PACKAGE_UTILS", PACKAGE_UTILS);
+        map.put("PACKAGE_SERVER", PACKAGE_SERVER);
         map.put("PACKAGE_MAPPER", PACKAGE_MAPPER);
-        map.put("PACKAGE_EXCEPTION", PACKAGE_EXCEPTION);
         map.put("TIME", DateUtil.now());
         map.put("AUTHOR", AUTHOR);
     }

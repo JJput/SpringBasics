@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 </#if>
 </#list>
 import lombok.Data;
-import ${PACKAGE_ENTITY}.BaseEntity;
+import ${PACKAGE_SERVER}.entity.BaseEntity;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.Length;
 import java.io.Serializable;
