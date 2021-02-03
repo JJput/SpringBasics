@@ -105,6 +105,10 @@ public class ${Domain}Service {
      * 删除
      */
     public void delete(String id) {
-        ${domain}Mapper.deleteByPrimaryKey(id);
+        ${Domain} ${domain} = new ${Domain}();
+        ${domain}.setId(id);
+        ${domain}.update();
+        ${domain}.del();
+        ${domain}Mapper.updateByPrimaryKeySelective(${domain});
     }
 }

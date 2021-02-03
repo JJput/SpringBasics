@@ -45,5 +45,5 @@ mvnw
 .DS_Store
 
 #不添加生产环境配置到git
-/business/src/main/resources/application-main.properties
+*main.properties
 
