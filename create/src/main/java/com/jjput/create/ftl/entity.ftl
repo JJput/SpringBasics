@@ -41,8 +41,13 @@ public class ${Domain} extends BaseEntity implements Serializable {
         <#if field.javaType=='Date'>
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
         </#if>
-    <#if field.nullAble == false >
+    <#if field.nullAble == false>
+        <#if  field.javaType=='String'>
     @NotEmpty(message = "${field.nameHump}不能为空")
+        </#if>
+        <#if  field.javaType=='Integer'>
+    @Range(min = 0, max = 99, message = "${field.nameHump}超限")
+        </#if>
     </#if>
     <#if field.javaType=='String'>
     @Length(min = 0, max = ${field.length?c}, message = "${field.nameHump}长度异常,取值范围0~${field.length?c}")
