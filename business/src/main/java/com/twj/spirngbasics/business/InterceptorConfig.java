@@ -13,15 +13,18 @@ public class InterceptorConfig implements WebMvcConfigurer {
     private static final String[] EXCLUDE_PATH = {
             "/test/**",
 
-            //Swagger-ui
+            //Knife4j
             "/doc.html",
+            "/swagger-resources",
             "/swagger-resources/**",
             "/favicon.ico",
             "/webjars/**",
-            "/error",
 
             //字典
             "/sysDict/**",
+
+
+
     };
 
     /**
