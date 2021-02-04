@@ -25,9 +25,9 @@
 
         <!-- 数据库配置-->
         <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
-                        connectionURL="jdbc:mysql://192.168.123.14:3306/test?characterEncoding=UTF8&amp;autoReconnect=true&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=Asia/Shanghai"
-                        userId="admin"
-                        password="123456">
+                        connectionURL="jdbc:mysql://192.168.114.114:9010/test?characterEncoding=UTF8&amp;autoReconnect=true&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=Asia/Shanghai"
+                        userId="root"
+                        password="root">
         </jdbcConnection>
 
         <!-- domain类的位置 -->

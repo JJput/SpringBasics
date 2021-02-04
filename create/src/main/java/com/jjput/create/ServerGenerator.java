@@ -8,6 +8,7 @@ import com.jjput.create.util.FreemarkerUtil;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
+import org.springframework.util.StringUtils;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -29,15 +30,15 @@ public class ServerGenerator {
      * 创建文件前，路径相关配置
      */
     //包名
-    public final static String PATH_PACKAGE = "com/twj/spirngbasics/" + "server";
+    public static String PATH_PACKAGE = "com/twj/spirngbasics/" + "server";
     //entity生成路径
-    public final static String PATH_ENTITY = "server/src/main/java/" + PATH_PACKAGE + "/entity/";
+    public static String PATH_ENTITY = "server/src/main/java/" + PATH_PACKAGE + "/entity/";
     //dto生成路径
-    public final static String PATH_DTO = "server/src/main/java/" + PATH_PACKAGE + "/dto/";
+    public static String PATH_DTO = "server/src/main/java/" + PATH_PACKAGE + "/dto/";
     //service生成路径
-    public final static String PATH_SERVICE = "server/src/main/java/" + PATH_PACKAGE + "/service/";
+    public static String PATH_SERVICE = "server/src/main/java/" + PATH_PACKAGE + "/service/";
     //controller生成路径
-    public final static String PATH_CONTROLLER = "business/src/main/java/com/twj/spirngbasics/business/controller/";
+    public static String PATH_CONTROLLER = "business/src/main/java/com/twj/spirngbasics/business/controller/";
 
     /**
      * 创建文件时，文件内部包路径等参数配置
@@ -66,8 +67,8 @@ public class ServerGenerator {
     public static String mysqlUser;
     public static String mysqlPwd;
 
-    private static boolean generatorController = false;
-    private static boolean generatorService = false;
+    private static boolean generatorController = true;
+    private static boolean generatorService = true;
     private static boolean generatorEntity = true;
     private static boolean generatorDto = true;
 
@@ -101,6 +102,8 @@ public class ServerGenerator {
     private static void createData(Element tableElement) throws Exception {
         String Domain = tableElement.attributeValue("domainObjectName");
         String tableName = tableElement.attributeValue("tableName");
+        System.out.println("开始连接数据库...");
+        System.out.println("URL:" + mysqlUrl);
         String tableNameCn = DbUtil.getTableComment(tableName);
         String domain = Domain.substring(0, 1).toLowerCase() + Domain.substring(1);
         System.out.println("表：" + tableElement.attributeValue("tableName"));
@@ -116,28 +119,57 @@ public class ServerGenerator {
         map.put("typeSet", typeSet);
         setMap(map);
 
+        //获取项目里路径
+        String projectPath = System.getProperty("user.dir");
+        PATH_ENTITY = PATH_ENTITY + Domain + ".java";
+        PATH_DTO = PATH_DTO + Domain + "Dto.java";
+        PATH_SERVICE = PATH_SERVICE + Domain + "Service.java";
+        PATH_CONTROLLER = PATH_CONTROLLER + Domain + "Controller.java";
+
+        Scanner scanner = new Scanner(System.in);
+        //判断要创建的文件是否存在
+        boolean entityFileIsExists = new File(projectPath + "/" + PATH_ENTITY).exists();
+        boolean dtoFileIsExists = new File(projectPath + "/" + PATH_ENTITY).exists();
+        boolean serviceFileIsExists = new File(projectPath + "/" + PATH_ENTITY).exists();
+        boolean controllerFileIsExists = new File(projectPath + "/" + PATH_ENTITY).exists();
+
+        //请求是否覆盖
+        if ((entityFileIsExists && generatorEntity)
+                || (dtoFileIsExists && generatorDto)
+                || (serviceFileIsExists && generatorService)
+                || (controllerFileIsExists && generatorController)) {
+            System.out.println("检测到有文件存在，请问是否覆盖");
+            System.out.print("  y/n:");
+            String res = scanner.nextLine();
+            if (!StringUtils.isEmpty(res)) {
+                if (res.equals("N") || res.equals("n")) {
+                    System.out.println("程序结束中...");
+                    return;
+                }
+            }
+        }
         // 生成entity
         if (generatorEntity) {
             FreemarkerUtil.initConfig("entity.ftl");
-            FreemarkerUtil.generator(PATH_ENTITY + Domain + ".java", map);
+            FreemarkerUtil.generator(PATH_ENTITY, map);
         }
 
         // 生成dto
         if (generatorDto) {
             FreemarkerUtil.initConfig("dto.ftl");
-            FreemarkerUtil.generator(PATH_DTO + Domain + "Dto.java", map);
+            FreemarkerUtil.generator(PATH_DTO, map);
         }
 
         // 生成service
         if (generatorService) {
             FreemarkerUtil.initConfig("service.ftl");
-            FreemarkerUtil.generator(PATH_SERVICE + Domain + "Service.java", map);
+            FreemarkerUtil.generator(PATH_SERVICE, map);
         }
 
         // 生成controller
         if (generatorController) {
             FreemarkerUtil.initConfig("controller.ftl");
-            FreemarkerUtil.generator(PATH_CONTROLLER + Domain + "Controller.java", map);
+            FreemarkerUtil.generator(PATH_CONTROLLER, map);
             addProperties(map);
         }
     }

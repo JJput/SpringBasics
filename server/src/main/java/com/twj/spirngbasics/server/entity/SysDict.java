@@ -1,22 +1,19 @@
 package com.twj.spirngbasics.server.entity;
 
 
-import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Data;
-import com.twj.spirngbasics.server.entity.BaseEntity;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 import org.hibernate.validator.constraints.Length;
-import java.io.Serializable;
 
 import javax.annotation.Generated;
 import javax.validation.constraints.NotEmpty;
+import java.io.Serializable;
 
 /**
  * @作者: Jun
  * @创建时间: 2021-01-21 15:56:06
  * @Version 1.0
- * @描述: 字典表 
+ * @描述: 字典表
  */
 @Data
 public class SysDict extends BaseEntity implements Serializable {
