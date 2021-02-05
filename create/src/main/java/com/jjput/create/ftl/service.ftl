@@ -42,7 +42,7 @@ public class ${Domain}Service {
 
     public ${Domain}Dto findById(String id) {
         ValidatorUtils.require(id, "参数不能为空");
-        return CopyUtils.copy(${domain}Mapper.selectByPrimaryKey(id),${Domain}Dto.class);
+        return CopyUtils.copy(${domain}Mapper.selectByPrimaryKey(id).get(),${Domain}Dto.class);
     }
 
     /**

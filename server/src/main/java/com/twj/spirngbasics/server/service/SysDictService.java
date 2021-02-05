@@ -32,7 +32,7 @@ public class SysDictService {
 
     public SysDictDto findById(String id) {
         ValidatorUtils.require(id, "参数不能为空");
-        return CopyUtils.copy(sysDictMapper.selectByPrimaryKey(id), SysDictDto.class);
+        return CopyUtils.copy(sysDictMapper.selectByPrimaryKey(id).get(), SysDictDto.class);
     }
 
     /**
