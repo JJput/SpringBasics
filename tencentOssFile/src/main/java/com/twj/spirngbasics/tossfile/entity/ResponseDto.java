@@ -3,7 +3,6 @@ package com.twj.spirngbasics.tossfile.entity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-import com.thoughtworks.xstream.core.BaseException;
 import lombok.Data;
 
 

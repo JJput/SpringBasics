@@ -31,7 +31,7 @@ public class SysLogConsumer {
     @RabbitListener(bindings = @QueueBinding(
             value = @Queue(value = RabbitMqConfig.QUETYPE_LOG, durable = "false"),
             exchange = @Exchange(
-                    value = RabbitMqConfig.EXCHANGE_LOG,
+                    value = RabbitMqConfig.EXCHANGE_PROJECT,
                     ignoreDeclarationExceptions = "true",
                     type = ExchangeTypes.TOPIC
             ),

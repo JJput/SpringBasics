@@ -19,18 +19,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>
-
-
-        <!-- 引入log4j2依赖 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-log4j2</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
         </dependency>
@@ -83,7 +71,7 @@
             <artifactId>fastjson</artifactId>
         </dependency>
 
-        <!-- 减化getset等 -->
+        <!-- lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -108,24 +96,22 @@
             <artifactId>hibernate-validator</artifactId>
         </dependency>
 
-        <!-- 打包发布时用 -->
-        <!--        <dependency>-->
-        <!--            <groupId>com.twj.pets</groupId>-->
-        <!--            <artifactId>server</artifactId>-->
-        <!--            <version>0.0.1-SNAPSHOT</version>-->
-        <!--            <scope>system</scope>-->
-        <!--            <systemPath>${project.basedir}/../server/target/server-0.0.1-SNAPSHOT.jar</systemPath>-->
-        <!--        </dependency>-->
-
         <!-- 调试时使用 -->
         <dependency>
             <groupId>com.twj.spirngbasics</groupId>
             <artifactId>server</artifactId>
         </dependency>
 
+        <!-- 打包发布时用 -->
+<!--                <dependency>-->
+        <!--                    <groupId>com.twj.pets</groupId>-->
+        <!--                    <artifactId>server</artifactId>-->
+        <!--                    <version>0.0.1-SNAPSHOT</version>-->
+        <!--                    <scope>system</scope>-->
+        <!--                    <systemPath>${project.basedir}/../server/target/server-0.0.1-SNAPSHOT.jar</systemPath>-->
+        <!--                </dependency>-->
 
     </dependencies>
-
 
     <build>
         <plugins>

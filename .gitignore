@@ -47,3 +47,6 @@ mvnw
 #不添加生产环境配置到git
 *main.properties
 
+#mq
+/phoneMessage/src/main/resources/application-mq.properties
+

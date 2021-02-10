@@ -11,6 +11,11 @@
     <groupId>com.twj.spirngbasics</groupId>
     <artifactId>business</artifactId>
 
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -106,7 +111,7 @@
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
 
-        <!-- 减化getset等 -->
+        <!-- lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -146,36 +151,26 @@
             <artifactId>druid-spring-boot-starter</artifactId>
         </dependency>
 
+
         <!-- 导入腾讯对象存储 -->
         <!--        <dependency>-->
         <!--            <groupId>com.qcloud</groupId>-->
         <!--            <artifactId>cos_api</artifactId>-->
-        <!--            <version>5.6.24</version>-->
         <!--        </dependency>-->
         <!--        <dependency>-->
-        <!--            <groupId>com.twj.tossfile</groupId>-->
+        <!--            <groupId>com.twj.spirngbasics</groupId>-->
         <!--            <artifactId>tencentOssFile</artifactId>-->
         <!--            <version>0.0.1-SNAPSHOT</version>-->
         <!--            <scope>system</scope>-->
         <!--            <systemPath>${project.basedir}/../tencentOssFile/target/tencentOssFile-0.0.1-SNAPSHOT.jar</systemPath>-->
         <!--        </dependency>-->
-        <!-- END -->
-
-        <!-- 打包发布时用 -->
-        <!--        <dependency>-->
-        <!--            <groupId>com.twj.pets</groupId>-->
-        <!--            <artifactId>user</artifactId>-->
-        <!--            <version>0.0.1-SNAPSHOT</version>-->
-        <!--            <scope>system</scope>-->
-        <!--            <systemPath>${project.basedir}/../user/target/user-0.0.1-SNAPSHOT.jar</systemPath>-->
-        <!--        </dependency>-->
+        <!-- 对象存储END -->
 
         <!-- 调试时使用 -->
         <dependency>
             <groupId>com.twj.spirngbasics</groupId>
-            <artifactId>user</artifactId>
+            <artifactId>server</artifactId>
         </dependency>
-
         <!-- 打包发布时用 -->
         <!--        <dependency>-->
         <!--            <groupId>com.twj.pets</groupId>-->
@@ -185,12 +180,31 @@
         <!--            <systemPath>${project.basedir}/../server/target/server-0.0.1-SNAPSHOT.jar</systemPath>-->
         <!--        </dependency>-->
 
+
+        <!-- 导入手机发送短信模块 -->
+        <!--    阿里短信验证码 -->
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-core</artifactId>
+        </dependency>
+        <!--    腾讯短信 -->
+        <dependency>
+            <groupId>com.tencentcloudapi</groupId>
+            <artifactId>tencentcloud-sdk-java</artifactId>
+        </dependency>
         <!-- 调试时使用 -->
         <dependency>
-            <groupId>com.twj.spirngbasics</groupId>
-            <artifactId>server</artifactId>
+            <groupId>com.twj.springbasics</groupId>
+            <artifactId>phoneMessage</artifactId>
         </dependency>
-
+        <!-- 打包发布时用 -->
+        <!--        <dependency>-->
+        <!--            <groupId>com.twj.spirngbasics</groupId>-->
+        <!--            <artifactId>phoneMessage</artifactId>-->
+        <!--            <scope>system</scope>-->
+        <!--            <systemPath>${project.basedir}/../phoneMessage/target/phoneMessage-0.0.1-SNAPSHOT.jar</systemPath>-->
+        <!--        </dependency>-->
+        <!-- 导入手机发送短信模块END -->
 
     </dependencies>
     <build>
@@ -210,21 +224,6 @@
             </plugin>
         </plugins>
         <resources>
-            <resource>
-                <filtering>true</filtering>
-                <directory>${basedir}/src/main/resources</directory>
-                <includes>
-                    <include>**/*.xml</include> <!--这三个我本地配置文件,具体配置根据需求修改-->
-                    <include>**/*.properties</include>
-                </includes>
-            </resource>
-            <resource>
-                <directory>${basedir}/src/main/resources</directory>
-                <excludes>
-                    <exclude>**/*.xml</exclude>
-                    <exclude>**/*.properties</exclude>
-                </excludes>
-            </resource>
             <resource>
                 <directory>${basedir}/../server/target/</directory>
                 <targetPath>BOOT-INF/lib/</targetPath>

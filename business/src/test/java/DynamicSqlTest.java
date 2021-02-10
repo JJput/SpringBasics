@@ -7,10 +7,6 @@ import com.twj.spirngbasics.server.mapper.SysDictMapper;
 import static com.twj.spirngbasics.server.mapper.SysDictDynamicSqlSupport.*;
 import static org.mybatis.dynamic.sql.SqlBuilder.*;
 
-import com.twj.spirngbasics.user.entity.UserResource;
-import com.twj.spirngbasics.user.mapper.UserResourceDynamicSqlSupport;
-import com.twj.spirngbasics.user.mapper.UserResourceMapper;
-import com.twj.spirngbasics.user.mapper.UserRoleResourceDynamicSqlSupport;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -81,24 +77,24 @@ public class DynamicSqlTest {
         List<SysDict> list = sysDictMapper.selectMany(selectStatement);
     }
 
-    @Resource
-    private UserResourceMapper userResourceMapper;
+//    @Resource
+//    private UserResourceMapper userResourceMapper;
 
     /**
      * 子查询
      */
-    @Test
-    public void selectDemo4() {
-        SelectStatementProvider selectStatement = SqlBuilder.select(userResourceMapper.selectList)
-                .from(UserResourceDynamicSqlSupport.userResource)
-                .where(UserResourceDynamicSqlSupport.id, isIn(
-                        select(UserRoleResourceDynamicSqlSupport.resourceId)
-                                .from(UserRoleResourceDynamicSqlSupport.userRoleResource)
-                                .where(UserRoleResourceDynamicSqlSupport.roleId, isEqualTo("1"))))
-                .build()
-                .render(RenderingStrategies.MYBATIS3);
-        List<UserResource> list = userResourceMapper.selectMany(selectStatement);
-    }
+//    @Test
+//    public void selectDemo4() {
+//        SelectStatementProvider selectStatement = SqlBuilder.select(userResourceMapper.selectList)
+//                .from(UserResourceDynamicSqlSupport.userResource)
+//                .where(UserResourceDynamicSqlSupport.id, isIn(
+//                        select(UserRoleResourceDynamicSqlSupport.resourceId)
+//                                .from(UserRoleResourceDynamicSqlSupport.userRoleResource)
+//                                .where(UserRoleResourceDynamicSqlSupport.roleId, isEqualTo("1"))))
+//                .build()
+//                .render(RenderingStrategies.MYBATIS3);
+//        List<UserResource> list = userResourceMapper.selectMany(selectStatement);
+//    }
 
     public void selectDemo5() {
 //        QueryExpressionDSL<SelectModel>.QueryExpressionWhereBuilder builder = SqlBuilder.select(SysDictMapper.selectList)

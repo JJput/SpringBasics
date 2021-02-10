@@ -9,11 +9,13 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.core.env.Environment;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-@SpringBootApplication(scanBasePackages = "com.twj.spirngbasics")
+@SpringBootApplication(scanBasePackages = {
+        "com.twj.spirngbasics",
+})
 @EnableEurekaClient
-@EnableScheduling   //开启定时计划
+@EnableScheduling       //开启定时计划
 @MapperScan("com.twj.spirngbasics")
-@ServletComponentScan // 注意要加上@ServletComponentScan注解，否则Servlet无法生效
+@ServletComponentScan   // 注意要加上@ServletComponentScan注解，否则Servlet无法生效
 @Slf4j
 public class BusinessApplication {
 

@@ -32,7 +32,7 @@ public class UserRoleUserService {
 
     public UserRoleUserDto findById(String id) {
         ValidatorUtils.require(id, "参数不能为空");
-        return CopyUtils.copy(userRoleUserMapper.selectByPrimaryKey(id).get(),UserRoleUserDto.class);
+        return CopyUtils.copy(userRoleUserMapper.selectByPrimaryKey(id),UserRoleUserDto.class);
     }
 
     /**

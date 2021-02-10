@@ -30,17 +30,5 @@ public class PageDto<T> {
     protected List<T> list;
 
     protected T data;
-
-
-    @Override
-    public String toString() {
-        final StringBuffer sb = new StringBuffer("PageDto{");
-        sb.append("page=").append(page);
-        sb.append(", size=").append(size);
-        sb.append(", total=").append(total);
-        sb.append(", list=").append(list);
-
-        sb.append('}');
-        return sb.toString();
-    }
+    
 }
