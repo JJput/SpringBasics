@@ -55,7 +55,7 @@
         </dependency>
 
         <dependency>
-            <groupId>com.twj.pets</groupId>
+            <groupId>com.twj.spirngbasics</groupId>
             <artifactId>server</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>system</scope>

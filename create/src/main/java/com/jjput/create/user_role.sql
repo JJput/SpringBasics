@@ -35,7 +35,7 @@ CREATE TABLE `sys_dict` (
   `label` varchar(128) NOT NULL COMMENT '标签名',
   `type` varchar(128) NOT NULL COMMENT '类型',
   `description` varchar(128) NOT NULL COMMENT '描述',
-  `sort` varchar(32) NOT NULL COMMENT '排序（升序）',
+  `sort` int NOT NULL COMMENT '排序（升序）',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='字典表 ';
 -- ----------------------------

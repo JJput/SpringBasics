@@ -16,10 +16,18 @@
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
 
+
     <dependencies>
+
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions><!-- 去掉springboot默认配置 -->
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- test -->
@@ -41,23 +49,8 @@
             <artifactId>spring-boot-starter-log4j2</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <exclusions><!-- 去掉springboot默认配置 -->
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-logging</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <!-- 集成mybatis -->
+        <!-- MySQL相关 -->
+        <!--    集成mybatis -->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
@@ -68,25 +61,27 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!--    MySQL连接 -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
-        <!-- MyBatis 生成器 -->
+        <!--    MyBatis 生成器 -->
         <dependency>
             <groupId>org.mybatis.generator</groupId>
             <artifactId>mybatis-generator-core</artifactId>
         </dependency>
-        <!-- MyBatis 动态SQL支持 -->
+        <!--    MyBatis 动态SQL支持 -->
         <dependency>
             <groupId>org.mybatis.dynamic-sql</groupId>
             <artifactId>mybatis-dynamic-sql</artifactId>
         </dependency>
-        <!-- mybatis分页插件pagehelper -->
+        <!--    mybatis分页插件pagehelper -->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
         </dependency>
+        <!-- MySQL相关 END-->
 
         <!-- redis -->
         <dependency>
@@ -94,6 +89,7 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
+        <!-- JSON -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
@@ -118,16 +114,17 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- swagger2 & swaggerUI-->
+        <!-- swagger2 -->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
         </dependency>
+        <!-- swaggerUI 已弃用改为knife4j-->
         <!--        <dependency>-->
         <!--            <groupId>io.springfox</groupId>-->
         <!--            <artifactId>springfox-swagger-ui</artifactId>-->
         <!--        </dependency>-->
-        <!-- swagger-bootstrap-ui增强ui  -->
+        <!-- knife4j API接口界面 -->
         <dependency>
             <groupId>com.github.xiaoymin</groupId>
             <artifactId>knife4j-spring-boot-starter</artifactId>
@@ -151,37 +148,42 @@
             <artifactId>druid-spring-boot-starter</artifactId>
         </dependency>
 
+        <!--############-->
+        <!-- 本地模块导入 -->
+        <!--############-->
 
-        <!-- 导入腾讯对象存储 -->
-        <!--        <dependency>-->
-        <!--            <groupId>com.qcloud</groupId>-->
-        <!--            <artifactId>cos_api</artifactId>-->
-        <!--        </dependency>-->
-        <!--        <dependency>-->
-        <!--            <groupId>com.twj.spirngbasics</groupId>-->
-        <!--            <artifactId>tencentOssFile</artifactId>-->
-        <!--            <version>0.0.1-SNAPSHOT</version>-->
-        <!--            <scope>system</scope>-->
-        <!--            <systemPath>${project.basedir}/../tencentOssFile/target/tencentOssFile-0.0.1-SNAPSHOT.jar</systemPath>-->
-        <!--        </dependency>-->
-        <!-- 对象存储END -->
-
-        <!-- 调试时使用 -->
+        <!-- # server模块 # -->
+        <!-- 建议调试时使用 -->
         <dependency>
             <groupId>com.twj.spirngbasics</groupId>
             <artifactId>server</artifactId>
         </dependency>
-        <!-- 打包发布时用 -->
+        <!-- 打包发布时必须改这个$<-快速查找可搜索$符号 -->
         <!--        <dependency>-->
-        <!--            <groupId>com.twj.pets</groupId>-->
+        <!--           <groupId>com.twj.spirngbasics</groupId>-->
         <!--            <artifactId>server</artifactId>-->
         <!--            <version>0.0.1-SNAPSHOT</version>-->
         <!--            <scope>system</scope>-->
         <!--            <systemPath>${project.basedir}/../server/target/server-0.0.1-SNAPSHOT.jar</systemPath>-->
         <!--        </dependency>-->
 
+        <!-- # user模块 # -->
+        <!-- 建议调试时使用 -->
+        <dependency>
+            <groupId>com.twj.spirngbasics</groupId>
+            <artifactId>user</artifactId>
+        </dependency>
+        <!-- 打包发布时必须改这个$<-快速查找可搜索$符号 -->
+        <!--        <dependency>-->
+        <!--            <groupId>com.twj.spirngbasics</groupId>-->
+        <!--            <artifactId>user</artifactId>-->
+        <!--            <version>0.0.1-SNAPSHOT</version>-->
+        <!--            <scope>system</scope>-->
+        <!--            <systemPath>${project.basedir}/../user/target/user-0.0.1-SNAPSHOT.jar</systemPath>-->
+        <!--        </dependency>-->
 
-        <!-- 导入手机发送短信模块 -->
+
+        <!-- # 手机发送短信模块(可选用阿里或腾讯) # -->
         <!--    阿里短信验证码 -->
         <dependency>
             <groupId>com.aliyun</groupId>
@@ -192,12 +194,12 @@
             <groupId>com.tencentcloudapi</groupId>
             <artifactId>tencentcloud-sdk-java</artifactId>
         </dependency>
-        <!-- 调试时使用 -->
+        <!--    建议调试时使用 -->
         <dependency>
             <groupId>com.twj.springbasics</groupId>
             <artifactId>phoneMessage</artifactId>
         </dependency>
-        <!-- 打包发布时用 -->
+        <!--    打包发布时必须改这个$ -->
         <!--        <dependency>-->
         <!--            <groupId>com.twj.spirngbasics</groupId>-->
         <!--            <artifactId>phoneMessage</artifactId>-->
@@ -205,6 +207,25 @@
         <!--            <systemPath>${project.basedir}/../phoneMessage/target/phoneMessage-0.0.1-SNAPSHOT.jar</systemPath>-->
         <!--        </dependency>-->
         <!-- 导入手机发送短信模块END -->
+
+
+        <!-- # 对象存储(可选用阿里或腾讯) # -->
+        <!--        <dependency>-->
+        <!--            <groupId>com.qcloud</groupId>-->
+        <!--            <artifactId>cos_api</artifactId>-->
+        <!--        </dependency>-->
+        <dependency>
+            <groupId>com.twj.springbasics</groupId>
+            <artifactId>tencentOssFile</artifactId>
+        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>com.twj.spirngbasics</groupId>-->
+        <!--            <artifactId>tencentOssFile</artifactId>-->
+        <!--            <version>0.0.1-SNAPSHOT</version>-->
+        <!--            <scope>system</scope>-->
+        <!--            <systemPath>${project.basedir}/../tencentOssFile/target/tencentOssFile-0.0.1-SNAPSHOT.jar</systemPath>-->
+        <!--        </dependency>-->
+        <!-- 对象存储END -->
 
     </dependencies>
     <build>

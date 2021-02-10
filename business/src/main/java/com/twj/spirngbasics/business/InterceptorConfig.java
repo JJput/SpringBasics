@@ -25,6 +25,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
 
 
 
+
     };
 
     /**
@@ -42,11 +43,11 @@ public class InterceptorConfig implements WebMvcConfigurer {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        InterceptorRegistration interceptorRegistration = registry.addInterceptor(new InterceptorBusiness());
-        for (String path : EXCLUDE_PATH) {
-            interceptorRegistration.excludePathPatterns(path);
-        }
-        //设置拦截接口
-        interceptorRegistration.addPathPatterns("/**");
+//        InterceptorRegistration interceptorRegistration = registry.addInterceptor(new InterceptorBusiness());
+//        for (String path : EXCLUDE_PATH) {
+//            interceptorRegistration.excludePathPatterns(path);
+//        }
+//        //设置拦截接口
+//        interceptorRegistration.addPathPatterns("/**");
     }
 }

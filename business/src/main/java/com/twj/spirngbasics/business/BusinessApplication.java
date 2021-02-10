@@ -5,14 +5,12 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.core.env.Environment;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication(scanBasePackages = {
         "com.twj.spirngbasics",
 })
-@EnableEurekaClient
 @EnableScheduling       //开启定时计划
 @MapperScan("com.twj.spirngbasics")
 @ServletComponentScan   // 注意要加上@ServletComponentScan注解，否则Servlet无法生效

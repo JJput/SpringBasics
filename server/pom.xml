@@ -19,38 +19,37 @@
     <dependencies>
 
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-web</artifactId>-->
-<!--        </dependency>-->
 
-        <!-- 集成mybatis -->
+        <!-- MySQL相关 -->
+        <!--    集成mybatis -->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
         </dependency>
+        <!--    MySQL连接 -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
-        <!-- MyBatis 生成器 -->
+        <!--    MyBatis 生成器 -->
         <dependency>
             <groupId>org.mybatis.generator</groupId>
             <artifactId>mybatis-generator-core</artifactId>
         </dependency>
-        <!-- MyBatis 动态SQL支持 -->
+        <!--    MyBatis 动态SQL支持 -->
         <dependency>
             <groupId>org.mybatis.dynamic-sql</groupId>
             <artifactId>mybatis-dynamic-sql</artifactId>
         </dependency>
-        <!-- mybatis分页插件pagehelper -->
+        <!--    mybatis分页插件pagehelper -->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
         </dependency>
+        <!-- MySQL相关 END-->
 
         <!-- redis -->
         <dependency>
@@ -58,6 +57,7 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
+        <!-- JSON -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
@@ -82,21 +82,21 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- swagger2 & swaggerUI-->
+        <!-- swagger2 -->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
         </dependency>
+        <!-- swaggerUI 已弃用改为knife4j-->
         <!--        <dependency>-->
         <!--            <groupId>io.springfox</groupId>-->
         <!--            <artifactId>springfox-swagger-ui</artifactId>-->
         <!--        </dependency>-->
-        <!-- swagger-bootstrap-ui增强ui  -->
+        <!-- knife4j API接口界面 -->
         <dependency>
             <groupId>com.github.xiaoymin</groupId>
             <artifactId>knife4j-spring-boot-starter</artifactId>
         </dependency>
-
 
         <!-- 工具类hutool -->
         <dependency>
