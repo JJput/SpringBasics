@@ -104,12 +104,12 @@ public class ServerGenerator {
         String tableName = tableElement.attributeValue("tableName");
         System.out.println("开始连接数据库...");
         System.out.println("URL:" + mysqlUrl);
-        String tableNameCn = DbUtil.getTableComment(tableName);
+        String tableNameCn = DbUtil.getTableComment(tableName, mysqlUrl, mysqlUser, mysqlPwd);
         String domain = Domain.substring(0, 1).toLowerCase() + Domain.substring(1);
         System.out.println("表：" + tableElement.attributeValue("tableName"));
         System.out.println("Domain：" + tableElement.attributeValue("domainObjectName"));
 
-        List<Field> fieldList = DbUtil.getColumnByTableName(tableName);
+        List<Field> fieldList = DbUtil.getColumnByTableName(tableName, mysqlUrl, mysqlUser, mysqlPwd);
         Set<String> typeSet = getJavaTypes(fieldList);
         Map<String, Object> map = new HashMap<>();
         map.put("Domain", Domain);
