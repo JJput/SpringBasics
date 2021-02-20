@@ -15,7 +15,7 @@ spirngbasics
 ├── eureka -------------- Spring Cloud，根据实际情况采用
 ├── gateway ------------- Spring GateWay，网关模块，用于权限拦截、日志记录等
 ├── server -------------- 复用模块，主要服务于business。存放service、实体对象、工具类等
-├── tencentOssFile ------                                                                                                                                                                                                                              Spring Boot，腾讯对象存储服务，可直接单独运行，也可以作为包添加（pom中添加即可，跟server模块一样）
+├── oss ------                                                                                                                                                                                                                              Spring Boot，腾讯对象存储服务，可直接单独运行，也可以作为包添加（pom中添加即可，跟server模块一样）
 
 ```
 

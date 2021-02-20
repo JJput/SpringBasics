@@ -28,7 +28,7 @@ public class ProjectPathUpdate {
     private static String newPath = "com/twj/" + newProjectName;
     private static String newData = "com.twj." + newProjectName;
     //要修改的module
-    private static String modules[] = {"business", "eureka", "gateway", "server", "tencentOssFile"};
+    private static String modules[] = {"business", "eureka", "gateway", "server", "oss"};
 
     public static void main(String[] args) throws IOException {
         String path = System.getProperty("user.dir");
@@ -51,7 +51,7 @@ public class ProjectPathUpdate {
             fFile(fileItems, sourceProjectName, newProjectName);
         }
         fFile(new File(path + "/create/pom.xml"), sourceProjectName, newProjectName);
-        fFile(new File(path + "/tencentOssFile/pom.xml"), sourceProjectName, newProjectName);
+        fFile(new File(path + "/oss/pom.xml"), sourceProjectName, newProjectName);
         //主pom文件修改
         File fileItems = new File(path + "/pom.xml");
         fFile(fileItems, sourceProjectName, newProjectName);
