@@ -121,17 +121,17 @@ public class ServerGenerator {
 
         //获取项目里路径
         String projectPath = System.getProperty("user.dir");
-        PATH_ENTITY = PATH_ENTITY + Domain + ".java";
-        PATH_DTO = PATH_DTO + Domain + "Dto.java";
-        PATH_SERVICE = PATH_SERVICE + Domain + "Service.java";
-        PATH_CONTROLLER = PATH_CONTROLLER + Domain + "Controller.java";
+        String entitySavePath = PATH_ENTITY + Domain + ".java";
+        String dtoSavePath = PATH_DTO + Domain + "Dto.java";
+        String serviceSavePath = PATH_SERVICE + Domain + "Service.java";
+        String controllerSavePath = PATH_CONTROLLER + Domain + "Controller.java";
 
         Scanner scanner = new Scanner(System.in);
         //判断要创建的文件是否存在
-        boolean entityFileIsExists = new File(projectPath + "/" + PATH_ENTITY).exists();
-        boolean dtoFileIsExists = new File(projectPath + "/" + PATH_ENTITY).exists();
-        boolean serviceFileIsExists = new File(projectPath + "/" + PATH_ENTITY).exists();
-        boolean controllerFileIsExists = new File(projectPath + "/" + PATH_ENTITY).exists();
+        boolean entityFileIsExists = new File(projectPath + "/" + entitySavePath).exists();
+        boolean dtoFileIsExists = new File(projectPath + "/" + dtoSavePath).exists();
+        boolean serviceFileIsExists = new File(projectPath + "/" + serviceSavePath).exists();
+        boolean controllerFileIsExists = new File(projectPath + "/" + controllerSavePath).exists();
 
         //请求是否覆盖
         if ((entityFileIsExists && generatorEntity)
@@ -151,25 +151,25 @@ public class ServerGenerator {
         // 生成entity
         if (generatorEntity) {
             FreemarkerUtil.initConfig("entity.ftl");
-            FreemarkerUtil.generator(PATH_ENTITY, map);
+            FreemarkerUtil.generator(entitySavePath, map);
         }
 
         // 生成dto
         if (generatorDto) {
             FreemarkerUtil.initConfig("dto.ftl");
-            FreemarkerUtil.generator(PATH_DTO, map);
+            FreemarkerUtil.generator(dtoSavePath, map);
         }
 
         // 生成service
         if (generatorService) {
             FreemarkerUtil.initConfig("service.ftl");
-            FreemarkerUtil.generator(PATH_SERVICE, map);
+            FreemarkerUtil.generator(serviceSavePath, map);
         }
 
         // 生成controller
         if (generatorController) {
             FreemarkerUtil.initConfig("controller.ftl");
-            FreemarkerUtil.generator(PATH_CONTROLLER, map);
+            FreemarkerUtil.generator(controllerSavePath, map);
             addProperties(map);
         }
     }
