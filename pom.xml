@@ -8,7 +8,7 @@
         <module>gateway</module>
         <module>eureka</module>
         <module>create</module>
-        <module>tencentOssFile</module>
+        <module>oss</module>
         <module>business</module>
         <module>user</module>
         <module>phoneMessage</module>
@@ -186,14 +186,37 @@
             <!-- 本地module phoneMsg 短信模块 END-->
 
             <!-- 本地module tencentOss 对象存储-->
+            <!--    腾讯 -->
             <dependency>
                 <groupId>com.qcloud</groupId>
                 <artifactId>cos_api</artifactId>
                 <version>5.6.24</version>
             </dependency>
+            <!--    阿里 -->
+            <dependency>
+                <groupId>com.aliyun.oss</groupId>
+                <artifactId>aliyun-sdk-oss</artifactId>
+                <version>3.10.2</version>
+            </dependency>
+            <!--    阿里 Java 9及以上的版本，则需要添加jaxb相关依赖 -->
+            <dependency>
+                <groupId>javax.xml.bind</groupId>
+                <artifactId>jaxb-api</artifactId>
+                <version>2.3.1</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.activation</groupId>
+                <artifactId>activation</artifactId>
+                <version>1.1.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.jaxb</groupId>
+                <artifactId>jaxb-runtime</artifactId>
+                <version>2.3.3</version>
+            </dependency>
             <dependency>
                 <groupId>com.twj.springbasics</groupId>
-                <artifactId>tencentOssFile</artifactId>
+                <artifactId>oss</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <!-- 本地module tencentOss 对象存储 END-->

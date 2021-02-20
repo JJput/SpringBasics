@@ -216,14 +216,14 @@
         <!--        </dependency>-->
         <dependency>
             <groupId>com.twj.springbasics</groupId>
-            <artifactId>tencentOssFile</artifactId>
+            <artifactId>oss</artifactId>
         </dependency>
         <!--        <dependency>-->
         <!--            <groupId>com.twj.spirngbasics</groupId>-->
-        <!--            <artifactId>tencentOssFile</artifactId>-->
+        <!--            <artifactId>oss</artifactId>-->
         <!--            <version>0.0.1-SNAPSHOT</version>-->
         <!--            <scope>system</scope>-->
-        <!--            <systemPath>${project.basedir}/../tencentOssFile/target/tencentOssFile-0.0.1-SNAPSHOT.jar</systemPath>-->
+        <!--            <systemPath>${project.basedir}/../oss/target/oss-0.0.1-SNAPSHOT.jar</systemPath>-->
         <!--        </dependency>-->
         <!-- 对象存储END -->
 
