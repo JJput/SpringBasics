@@ -2,9 +2,10 @@ package com.twj.spirngbasics.oss.tencent.controller;
 
 
 
+
 import com.twj.spirngbasics.oss.tencent.entity.CosKey;
-import com.twj.spirngbasics.oss.tencent.entity.ResponseDto;
 import com.twj.spirngbasics.oss.tencent.service.COSService;
+import com.twj.spirngbasics.server.dto.ResponseDto;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

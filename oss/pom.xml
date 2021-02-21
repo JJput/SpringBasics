@@ -37,6 +37,14 @@
             <artifactId>springfox-swagger2</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.twj.spirngbasics</groupId>
+            <artifactId>server</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/../server/target/server-0.0.1-SNAPSHOT.jar</systemPath>
+        </dependency>
+
         <!-- 腾讯 -->
         <dependency>
             <groupId>com.qcloud</groupId>
