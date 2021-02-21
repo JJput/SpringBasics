@@ -8,6 +8,7 @@ import ${PACKAGE_MAPPER}.${Domain}Mapper;
 import ${PACKAGE_MAPPER}.${Domain}DynamicSqlSupport;
 import ${PACKAGE_SERVER}.util.CopyUtils;
 import ${PACKAGE_SERVER}.util.ValidatorUtils;
+import ${PACKAGE_SERVER}.entity.BaseEntity;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
@@ -52,6 +53,7 @@ public class ${Domain}Service {
         PageHelper.startPage(pageDto.getPage(), pageDto.getSize());
         SelectStatementProvider selectStatement = SqlBuilder.select(${domain}Mapper.selectList)
                 .from(${Domain}DynamicSqlSupport.${domain})
+                .where(${Domain}DynamicSqlSupport.dele, SqlBuilder.isEqualTo(BaseEntity.DELE_USE))
     <#list fieldList as field>
         <#if field.nameHump=='sort'>
                 .orderBy(${Domain}DynamicSqlSupport.sort)
