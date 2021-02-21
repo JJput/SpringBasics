@@ -40,7 +40,10 @@ public class ${Domain}Dto {
         <#if field.javaType=='Date'>
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
         </#if>
-    private ${field.javaType} ${field.nameHump};
+    private <#if field.type == 'bit(1)' ||
+    field.type == 'bit' ||
+    field.type == 'tinyint(1)' ||
+    field.type == 'tinyint'>Boolean<#else>${field.javaType}</#if> ${field.nameHump};
 
     </#list>
 <#--    <#list fieldList as field>-->

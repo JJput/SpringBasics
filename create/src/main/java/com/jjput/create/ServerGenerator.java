@@ -67,8 +67,8 @@ public class ServerGenerator {
     public static String mysqlUser;
     public static String mysqlPwd;
 
-    private static boolean generatorController = true;
-    private static boolean generatorService = true;
+    private static boolean generatorController = false;
+    private static boolean generatorService = false;
     private static boolean generatorEntity = true;
     private static boolean generatorDto = true;
 

@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 import lombok.Data;
 import ${PACKAGE_SERVER}.entity.BaseEntity;
 import io.swagger.annotations.ApiModelProperty;
-import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.*;
 import java.io.Serializable;
 
 import javax.annotation.Generated;
@@ -53,7 +53,10 @@ public class ${Domain} extends BaseEntity implements Serializable {
     @Length(min = 0, max = ${field.length?c}, message = "${field.nameHump}长度异常,取值范围0~${field.length?c}")
     </#if>
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    private ${field.javaType} ${field.nameHump};
+    private <#if field.type == 'bit(1)' ||
+    field.type == 'bit' ||
+    field.type == 'tinyint(1)' ||
+    field.type == 'tinyint'>Boolean<#else>${field.javaType}</#if> ${field.nameHump};
 
     </#if>
     </#list>

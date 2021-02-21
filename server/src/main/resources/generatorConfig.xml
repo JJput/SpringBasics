@@ -43,12 +43,12 @@
                              targetPackage="com.twj.spirngbasics.server.mapper"
                              type="XMLMAPPER"/>
 
-<!--                <table tableName="test" domainObjectName="Test"/>-->
+                <table tableName="test" domainObjectName="Test"/>
 <!--                <table tableName="user_resource" domainObjectName="UserResource"/>-->
 <!--                <table tableName="user_role" domainObjectName="UserRole"/>-->
 <!--                <table tableName="user_role_resource" domainObjectName="UserRoleResource"/>-->
 <!--                <table tableName="user_role_user" domainObjectName="UserRoleUser"/>-->
-                <table tableName="sys_dict" domainObjectName="SysDict"/>
+<!--                <table tableName="sys_dict" domainObjectName="SysDict"/>-->
 
 
     </context>
