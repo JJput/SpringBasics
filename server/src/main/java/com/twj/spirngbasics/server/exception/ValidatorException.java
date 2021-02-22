@@ -3,6 +3,9 @@ package com.twj.spirngbasics.server.exception;
 
 import com.twj.spirngbasics.server.dto.ResponseCode;
 
+/**
+ * 校验异常
+ */
 public class ValidatorException extends RuntimeException implements BaseException {
 
     private int code;
@@ -15,7 +18,7 @@ public class ValidatorException extends RuntimeException implements BaseExceptio
 
     public ValidatorException(ResponseCode responseCode, String message) {
         this.code = responseCode.getCode();
-        this.message = message + responseCode.getMessage();
+        this.message = responseCode.getMessage() + " : " + message;
     }
 
     public ValidatorException(int code, String message) {

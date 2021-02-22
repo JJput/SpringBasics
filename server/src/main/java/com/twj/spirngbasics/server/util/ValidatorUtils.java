@@ -12,6 +12,13 @@ import java.util.List;
 import static com.twj.spirngbasics.server.util.Constant.Http.ERROR.*;
 
 
+/**
+ * 校验工具
+ * 描述:
+ * 1、校验对象是否为空 @require
+ * 2、校验长度是否在范围 @length
+ * 3、校验长度是否过长 @length
+ */
 public class ValidatorUtils {
 
     /**
@@ -60,6 +67,7 @@ public class ValidatorUtils {
 
     /**
      * list去重
+     *
      * @param list 操作对象
      * @return 新的数组
      */
