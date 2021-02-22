@@ -42,7 +42,7 @@ public class ${Domain}Service {
     private ${Domain}Mapper ${domain}Mapper;
 
     public ${Domain}Dto findById(String id) {
-        ValidatorUtils.require(id, "参数不能为空");
+        ValidatorUtils.require(id, "id不能为空");
         return CopyUtils.copy(${domain}Mapper.selectByPrimaryKey(id).get(),${Domain}Dto.class);
     }
 
@@ -109,6 +109,7 @@ public class ${Domain}Service {
      * 删除
      */
     public void delete(String id) {
+        ValidatorUtils.require(id, "id不能为空");
         ${Domain} ${domain} = new ${Domain}();
         ${domain}.setId(id);
         ${domain}.update();
