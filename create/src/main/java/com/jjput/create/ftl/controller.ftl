@@ -33,13 +33,15 @@ public class ${Domain}Controller {
     @Resource
     private ${Domain}Service ${domain}Service;
 
-    @ApiOperation("查找对象")
+    @ApiOperation("查询对象")
+    @ApiOperationSupport(order = 1)
     @GetMapping("/findId")
     public ResponseDto findById(String id) {
         return ResponseDto.createBySuccess(${domain}Service.findById(id));
     }
 
-    @ApiOperation("列表查询")
+    @ApiOperation("查询列表")
+    @ApiOperationSupport(order = 2)
     @PostMapping("/list")
     public ResponseDto list(@RequestBody PageDto pageDto) {
         ${domain}Service.list(pageDto);
@@ -47,6 +49,7 @@ public class ${Domain}Controller {
     }
 
     @ApiOperation("新增")
+    @ApiOperationSupport(order = 3)
     @PostMapping("/insert")
     public ResponseDto create(@RequestBody @Valid ${Domain} ${domain}) {
         ${domain}Service.insert(${domain});
@@ -54,6 +57,7 @@ public class ${Domain}Controller {
     }
 
     @ApiOperation("更新")
+    @ApiOperationSupport(order = 4)
     @PostMapping("/update")
     public ResponseDto update(@RequestBody ${Domain} ${domain}) {
         ${domain}Service.update(${domain});
@@ -61,6 +65,7 @@ public class ${Domain}Controller {
     }
 
     @ApiOperation("删除")
+    @ApiOperationSupport(order = 5)
     @DeleteMapping("/delete/{id}")
     public ResponseDto delete(@PathVariable String id) {
         ${domain}Service.delete(id);

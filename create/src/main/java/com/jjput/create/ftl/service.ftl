@@ -61,8 +61,10 @@ public class ${Domain}Service {
     </#list>
                 .build()
                 .render(RenderingStrategies.MYBATIS3);
-        List<${Domain}Dto> ${domain}DtoList = CopyUtils.copyList(${domain}Mapper.selectMany(selectStatement), ${Domain}Dto.class);
-        pageDto.setTotal(${domain}DtoList.size());
+        List<${Domain}> ${domain}List = ${domain}Mapper.selectMany(selectStatement);
+        PageInfo pageInfo = new PageInfo(${domain}List);
+        pageDto.setTotal(pageInfo.getTotal());
+        List<${Domain}Dto> ${domain}DtoList = CopyUtils.copyList(${domain}List, ${Domain}Dto.class);
         pageDto.setList(${domain}DtoList);
     }
 
