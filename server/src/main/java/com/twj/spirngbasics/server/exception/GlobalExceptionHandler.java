@@ -28,7 +28,7 @@ public class GlobalExceptionHandler {
      * @return
      */
     @ExceptionHandler(ValidatorException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.OK)
     public ResponseDto handleValidatorException(ValidatorException exception) {
         return ResponseDto.createByFail(exception);
     }
@@ -40,7 +40,7 @@ public class GlobalExceptionHandler {
      * @return
      */
     @ExceptionHandler(BusinessException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.OK)
     public ResponseDto handleBusinessException(BusinessException exception) {
         return ResponseDto.createByFail(exception);
     }
@@ -52,7 +52,7 @@ public class GlobalExceptionHandler {
      * @return
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.OK)
     public ResponseDto handleMethodArgumentNotValidException(MethodArgumentNotValidException exception) {
         BindingResult bindingResult = exception.getBindingResult();
         ResponseDto response = ResponseDto.createByFail(new ValidatorException(VIOLATION_EXCEPTION));
@@ -67,7 +67,7 @@ public class GlobalExceptionHandler {
      * @return
      */
     @ExceptionHandler(ConstraintViolationException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.OK)
     public ResponseDto handleConstraintViolationException(ConstraintViolationException exception) {
         StringBuilder errorInfo = new StringBuilder();
         String errorMessage;
@@ -90,7 +90,7 @@ public class GlobalExceptionHandler {
      * @return
      */
     @ExceptionHandler(NoSuchElementException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.OK)
     public ResponseDto handleNoSuchElementException(NoSuchElementException exception) {
         ResponseDto responseDto = ResponseDto.createByFail(OBJECT_NULL);
         responseDto.setMessage(exception.getMessage());
@@ -104,7 +104,7 @@ public class GlobalExceptionHandler {
      * @return
      */
     @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.OK)
     public ResponseDto handleDefaultException(Exception exception) {
         exception.printStackTrace();
         ResponseDto responseDto = ResponseDto.createByFail(DEFAULT);
