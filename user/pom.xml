@@ -18,31 +18,62 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
         <!-- lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+        <!-- swagger2 -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+        </dependency>
+        <!-- MySQL相关 -->
+        <!--    集成mybatis -->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+        </dependency>
+        <!--    MySQL连接 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <!--    MyBatis 生成器 -->
+        <dependency>
+            <groupId>org.mybatis.generator</groupId>
+            <artifactId>mybatis-generator-core</artifactId>
+        </dependency>
+        <!--    MyBatis 动态SQL支持 -->
+        <dependency>
+            <groupId>org.mybatis.dynamic-sql</groupId>
+            <artifactId>mybatis-dynamic-sql</artifactId>
+        </dependency>
+        <!--    mybatis分页插件pagehelper -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+        </dependency>
+        <!-- MySQL相关 END-->
 
-        <!-- 调试时使用 -->
+        <!-- 打包发布时用 -->
         <dependency>
             <groupId>com.twj.spirngbasics</groupId>
             <artifactId>server</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/../server/target/srpingbasics-server-1.0.jar</systemPath>
         </dependency>
-
-        <!-- 打包发布时用 -->
-<!--                <dependency>-->
-        <!--                    <groupId>com.twj.spirngbasics</groupId>-->
-        <!--                    <artifactId>server</artifactId>-->
-        <!--                    <version>0.0.1-SNAPSHOT</version>-->
-        <!--                    <scope>system</scope>-->
-        <!--                    <systemPath>${project.basedir}/../server/target/server-0.0.1-SNAPSHOT.jar</systemPath>-->
-        <!--                </dependency>-->
 
     </dependencies>
 
     <build>
+        <finalName>srpingbasics-user-1.0</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
