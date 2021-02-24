@@ -13,6 +13,8 @@ import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
+
 /**
  * @Author jjput
  * @Date 2021-02-05 10:46:50
@@ -23,6 +25,12 @@ import org.springframework.stereotype.Component;
 public class RabbitMqConsumer {
 
     private static final Logger LOG = LoggerFactory.getLogger(RabbitMqConsumer.class);
+
+    @Resource
+    private AliyunSendSms aliyunSendSms;
+
+    @Resource
+    private TencentSendSms tencentSendSms;
 
     /**
      * 阿里云发送手机验证码短信队列
@@ -41,7 +49,7 @@ public class RabbitMqConsumer {
     public void ListenAliyunTopic(String msg) {
         try {
             String[] data = msg.split(",");
-            AliyunSendSms.sendCode(data[0], data[1], data[2]);
+            aliyunSendSms.sendCode(data[0], data[1], data[2]);
         } catch (ArrayIndexOutOfBoundsException e) {
             LOG.error("PhoneMessage-Aliyun: msg error!");
         }
@@ -65,7 +73,7 @@ public class RabbitMqConsumer {
     public void ListenTencentTopic(String msg) {
         try {
             String[] data = msg.split(",");
-            TencentSendSms.Send(data[0], data[1], data[2]);
+            tencentSendSms.sendChina(data[0], data[1], data[2]);
         } catch (ArrayIndexOutOfBoundsException e) {
             LOG.error("PhoneMessage-Tencent: msg error!");
         }

@@ -10,6 +10,8 @@ import com.tencentcloudapi.sms.v20190711.models.SendSmsResponse;
 import com.tencentcloudapi.sms.v20190711.models.SendStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 
@@ -19,27 +21,31 @@ import java.util.Arrays;
  * @Version 1.0
  * @描述: 腾讯短信发送
  */
+@Component
 public class TencentSendSms {
     private static final Logger LOG = LoggerFactory.getLogger(TencentSendSms.class);
 
     /**
      * 控制台添加应用后生成的实际SdkAppid，示例如1400006666
      */
-    private static final String APP_ID = "";
+    @Value("${tencent.sms.appid}")
+    private String appid = "";
+
     /**
      * 短信签名名称(官方叫内容,就很奇怪了),腾讯云短信控制台-国内短信-签名管理-列:内容
      */
-    private static final String SIGN = "";
-    /**
-     * 短信模板,腾讯云短信控制台-国内短信-正文模板管理-列:ID
-     */
-    private static final String TEMPLATE_ID = "";
+    @Value("${tencent.sms.sign}")
+    private String sign = "";
 
-    private static final String SECRETID = "";
-    private static final String SECRETKEY = "";
+    @Value("${tencent.secret.id}")
+    private String secretId = "";
+
+    @Value("${tencent.secret.key}")
+    private String secretKey = "";
 
     public static void main(String[] args) {
-        SendChina(TEMPLATE_ID, "11122223333", "123456");
+        TencentSendSms tencentSendSms = new TencentSendSms();
+        tencentSendSms.sendChina("TEMPLATE_ID", "11122223333", "123456");
     }
 
     /**
@@ -49,8 +55,8 @@ public class TencentSendSms {
      * @param templateParams 验证码
      * @return true成功
      */
-    public static boolean SendChina(String templateID, String phoneNumbers, String templateParams) {
-        return SendChinaList(templateID, new String[]{phoneNumbers}, new String[]{templateParams});
+    public boolean sendChina(String templateID, String phoneNumbers, String templateParams) {
+        return sendChinaList(templateID, new String[]{phoneNumbers}, new String[]{templateParams});
     }
 
 
@@ -61,11 +67,11 @@ public class TencentSendSms {
      * @param templateParams 内容参数，一般为验证码 列如：123456,888888
      * @return true成功
      */
-    public static boolean SendChinaList(String templateID, String[] phoneNumbers, String[] templateParams) {
+    public boolean sendChinaList(String templateID, String[] phoneNumbers, String[] templateParams) {
         for (int i = 0; i < phoneNumbers.length; i++) {
             phoneNumbers[i] = PhoneCountry.CN + phoneNumbers[i];
         }
-        return Send(templateID, phoneNumbers, templateParams);
+        return send(templateID, phoneNumbers, templateParams);
     }
 
     /**
@@ -75,8 +81,8 @@ public class TencentSendSms {
      * @param templateParams 验证码
      * @return true成功
      */
-    public static boolean Send(String templateID, String phoneNumbers, String templateParams) {
-        return SendList(templateID, new String[]{phoneNumbers}, new String[]{templateParams});
+    public boolean send(String templateID, String phoneNumbers, String templateParams) {
+        return sendList(templateID, new String[]{phoneNumbers}, new String[]{templateParams});
     }
 
 
@@ -87,8 +93,8 @@ public class TencentSendSms {
      * @param templateParams 内容参数，一般为验证码 列如：123456,888888
      * @return true成功
      */
-    public static boolean SendList(String templateID, String[] phoneNumbers, String[] templateParams) {
-        return Send(templateID, phoneNumbers, templateParams);
+    public boolean sendList(String templateID, String[] phoneNumbers, String[] templateParams) {
+        return send(templateID, phoneNumbers, templateParams);
     }
 
 
@@ -99,7 +105,7 @@ public class TencentSendSms {
      * @param templateParams 发送内容参数
      * @return true成功
      */
-    public static boolean Send(String templateID, String[] phoneNumbers, String[] templateParams) {
+    public boolean send(String templateID, String[] phoneNumbers, String[] templateParams) {
         try {
             /* 必要步骤：
              * 实例化一个认证对象，入参需要传入腾讯云账户密钥对secretId，secretKey。
@@ -107,7 +113,7 @@ public class TencentSendSms {
              * 你也可以直接在代码中写死密钥对，但是小心不要将代码复制、上传或者分享给他人，
              * 以免泄露密钥对危及你的财产安全。
              * CAM密匙查询: https://console.cloud.tencent.com/cam/capi*/
-            Credential cred = new Credential(SECRETID, SECRETKEY);
+            Credential cred = new Credential(secretId, secretKey);
 
             // 实例化一个http选项，可选，没有特殊需求可以跳过
             HttpProfile httpProfile = new HttpProfile();
@@ -148,10 +154,10 @@ public class TencentSendSms {
              * sms helper: https://cloud.tencent.com/document/product/382/3773 */
 
             /* 短信应用ID: 短信SdkAppid在 [短信控制台] 添加应用后生成的实际SdkAppid，示例如1400006666 */
-            req.setSmsSdkAppid(APP_ID);
+            req.setSmsSdkAppid(appid);
 
             /* 短信签名内容: 使用 UTF-8 编码，必须填写已审核通过的签名，签名信息可登录 [短信控制台] 查看 */
-            req.setSign(SIGN);
+            req.setSign(sign);
 
             /* 国际/港澳台短信 senderid: 国内短信填空，默认未开通，如需开通请联系 [sms helper] */
 //            String senderid = ;

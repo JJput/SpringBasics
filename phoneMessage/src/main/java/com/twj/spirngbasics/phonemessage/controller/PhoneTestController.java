@@ -24,10 +24,10 @@ public class PhoneTestController {
      * 发送腾讯短信
      */
     @GetMapping("/sendTencent")
-    public String sendTencent() {
+    public String sendTencent(String msg) {
         rabbitProducer.sendMsg(RabbitMqConfig.EXCHANGE_PROJECT,
                 RabbitMqConfig.ROUTINGKEY_PHONE_MSG + RabbitMqConfig.QUETYPE_TENCENT,
-                "12312");
+                msg);
         return "ok";
     }
 
@@ -35,10 +35,10 @@ public class PhoneTestController {
      * 发送阿里短信
      */
     @GetMapping("/sendAliyun")
-    public String sendAliyun() {
+    public String sendAliyun(String msg) {
         rabbitProducer.sendMsg(RabbitMqConfig.EXCHANGE_PROJECT,
                 RabbitMqConfig.ROUTINGKEY_PHONE_MSG + RabbitMqConfig.QUETYPE_ALIYUN,
-                "12312");
+                msg);
         return "ok";
     }
 
