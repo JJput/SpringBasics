@@ -46,18 +46,16 @@ public class UserManage {
     private static User anayJson(Object object) {
         if (object == null) {
             log.info("token is null");
+            throw new BusinessException(Constant.Http.ERROR.TOKEN_IS_NULL);
         }
-        User user = new User();
+        User user;
         try {
-            JSONObject jsonObject = JSON.parseObject(String.valueOf(object));
-            user.setId(jsonObject.getString("id"));
-            /**
-             * TODO 修改要传递user数据
-             */
+            user = JSON.parseObject(object.toString(), User.class);
+            return user;
         } catch (Exception e) {
             throw new BusinessException(Constant.Http.ERROR.TOKEN_ERROR);
         }
-        return user;
+
     }
 
     /**
