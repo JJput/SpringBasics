@@ -8,6 +8,7 @@ import com.jjput.create.util.FreemarkerUtil;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
+import org.mybatis.generator.config.JDBCConnectionConfiguration;
 import org.springframework.util.StringUtils;
 
 import java.io.File;
@@ -22,23 +23,33 @@ import java.util.*;
  */
 public class ServerGenerator {
 
+    private static boolean generatorController = false;
+    private static boolean generatorService = false;
+    private static boolean generatorDto = false;
+    private static boolean generatorEntity = true;
+    private static boolean generatorMapper = true;
+
 
     //generatorConfig.xml位置
-    public final static String GENERATORCONFIGPATH = "server/src/main/resources/generatorConfig.xml";
+    public final static String GENERATORCONFIGPATH = "create/src/main/resources/generatorConfig.xml";
 
     /**
      * 创建文件前，路径相关配置
      */
     //包名
     public static String PATH_PACKAGE = "com/twj/spirngbasics/" + "server";
+    public static String PATH_PROJECT = "server/src/main/java/";
+    //mapper生成路径
+    public static String PATH_MAPPER = PATH_PROJECT + PATH_PACKAGE + "/mapper/";
     //entity生成路径
-    public static String PATH_ENTITY = "server/src/main/java/" + PATH_PACKAGE + "/entity/";
+    public static String PATH_ENTITY = PATH_PROJECT + PATH_PACKAGE + "/entity/";
     //dto生成路径
-    public static String PATH_DTO = "server/src/main/java/" + PATH_PACKAGE + "/dto/";
+    public static String PATH_DTO = PATH_PROJECT + PATH_PACKAGE + "/dto/";
     //service生成路径
-    public static String PATH_SERVICE = "server/src/main/java/" + PATH_PACKAGE + "/service/";
+    public static String PATH_SERVICE = PATH_PROJECT + PATH_PACKAGE + "/service/";
     //controller生成路径
     public static String PATH_CONTROLLER = "business/src/main/java/com/twj/spirngbasics/business/controller/";
+
 
     /**
      * 创建文件时，文件内部包路径等参数配置
@@ -67,10 +78,6 @@ public class ServerGenerator {
     public static String mysqlUser;
     public static String mysqlPwd;
 
-    private static boolean generatorController = false;
-    private static boolean generatorService = false;
-    private static boolean generatorEntity = true;
-    private static boolean generatorDto = true;
 
     public static void main(String[] args) throws Exception {
 
@@ -85,10 +92,10 @@ public class ServerGenerator {
         Element contextElement = rootElement.element("context");
 
         //读取数据库配置
-        Element mysqlElement = contextElement.elementIterator("jdbcConnection").next();
-        mysqlUrl = mysqlElement.attributeValue("connectionURL");
-        mysqlUser = mysqlElement.attributeValue("userId");
-        mysqlPwd = mysqlElement.attributeValue("password");
+        JDBCConnectionConfiguration jdbcConnectionConfiguration = MapperGenerator.initJDBCConfig();
+        mysqlUrl = jdbcConnectionConfiguration.getConnectionURL();
+        mysqlUser = jdbcConnectionConfiguration.getUserId();
+        mysqlPwd = jdbcConnectionConfiguration.getPassword();
         //取第一个“table”的节点
 //     Element  tableElement = contextElement.elementIterator("table").next();
         //取所有节点
@@ -125,6 +132,7 @@ public class ServerGenerator {
         String dtoSavePath = PATH_DTO + Domain + "Dto.java";
         String serviceSavePath = PATH_SERVICE + Domain + "Service.java";
         String controllerSavePath = PATH_CONTROLLER + Domain + "Controller.java";
+        String mapperSavePath = PATH_MAPPER + Domain + "Mapper.java";
 
         Scanner scanner = new Scanner(System.in);
         //判断要创建的文件是否存在
@@ -132,14 +140,16 @@ public class ServerGenerator {
         boolean dtoFileIsExists = new File(projectPath + "/" + dtoSavePath).exists();
         boolean serviceFileIsExists = new File(projectPath + "/" + serviceSavePath).exists();
         boolean controllerFileIsExists = new File(projectPath + "/" + controllerSavePath).exists();
+        boolean mapperFileIsExists = new File(projectPath + "/" + mapperSavePath).exists();
 
         //请求是否覆盖
         if ((entityFileIsExists && generatorEntity)
                 || (dtoFileIsExists && generatorDto)
                 || (serviceFileIsExists && generatorService)
-                || (controllerFileIsExists && generatorController)) {
+                || (controllerFileIsExists && generatorController)
+                || (mapperFileIsExists && generatorMapper)) {
             System.out.println("检测到有文件存在，请问是否覆盖");
-            System.out.print("  y/n:");
+            System.out.print("  Y/N:");
             String res = scanner.nextLine();
             if (!StringUtils.isEmpty(res)) {
                 if (res.equals("N") || res.equals("n")) {
@@ -148,6 +158,12 @@ public class ServerGenerator {
                 }
             }
         }
+
+        //生成mapper
+        if (generatorMapper) {
+            MapperGenerator.mapperGenerator(PATH_PROJECT, PACKAGE_ENTITY, PATH_PROJECT, PACKAGE_MAPPER);
+        }
+
         // 生成entity
         if (generatorEntity) {
             FreemarkerUtil.initConfig("entity.ftl");

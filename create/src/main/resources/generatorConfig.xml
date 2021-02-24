@@ -14,7 +14,7 @@
         <!-- 为模型生成序列化方法-->
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
         <!--覆盖生成XML文件 默认为覆盖-->
-<!--        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>-->
+        <!--        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>-->
         <!-- 生成的实体类添加toString()方法 -->
         <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
 
@@ -25,30 +25,27 @@
 
         <!-- 数据库配置-->
         <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
-                        connectionURL="jdbc:mysql://192.168.114.114:9010/test?characterEncoding=UTF8&amp;autoReconnect=true&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=Asia/Shanghai"
-                        userId="root"
-                        password="root">
+                        connectionURL="无需修改,代码中将动态获取application.properties中的mysql配置"
+                        userId="同上"
+                        password="同上">
         </jdbcConnection>
 
         <!-- domain类的位置 -->
         <javaModelGenerator targetProject="server/src/main/java"
                             targetPackage="com.twj.spirngbasics.server.entity"/>
 
-        <!-- mapper xml的位置 -->
-        <sqlMapGenerator targetProject="server/src/main/resources"
-                         targetPackage="mapper"/>
 
         <!-- mapper类的位置 -->
         <javaClientGenerator targetProject="server/src/main/java"
                              targetPackage="com.twj.spirngbasics.server.mapper"
                              type="XMLMAPPER"/>
 
-                <table tableName="test" domainObjectName="Test"/>
-<!--                <table tableName="user_resource" domainObjectName="UserResource"/>-->
-<!--                <table tableName="user_role" domainObjectName="UserRole"/>-->
-<!--                <table tableName="user_role_resource" domainObjectName="UserRoleResource"/>-->
-<!--                <table tableName="user_role_user" domainObjectName="UserRoleUser"/>-->
-<!--                <table tableName="sys_dict" domainObjectName="SysDict"/>-->
+        <table tableName="test" domainObjectName="Test"/>
+        <!--                <table tableName="user_resource" domainObjectName="UserResource"/>-->
+        <!--                <table tableName="user_role" domainObjectName="UserRole"/>-->
+        <!--                <table tableName="user_role_resource" domainObjectName="UserRoleResource"/>-->
+        <!--                <table tableName="user_role_user" domainObjectName="UserRoleUser"/>-->
+        <!--                <table tableName="sys_dict" domainObjectName="SysDict"/>-->
 
 
     </context>
