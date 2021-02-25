@@ -61,6 +61,12 @@
         </dependency>
         <!-- MySQL相关 END-->
 
+        <!-- 工具类hutool -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+        </dependency>
+
         <!-- 打包发布时用 -->
         <dependency>
             <groupId>com.twj.spirngbasics</groupId>

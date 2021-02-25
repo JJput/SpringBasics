@@ -73,11 +73,11 @@ public class UserManage {
     /**
      * 密码加密
      *
-     * @param token
+     * @param pwd 密码
      * @return
      */
-    public static String pwdEncryption(String token) {
-        String newToken = EncryptUtils.encryptMD5ToString(token + MD5_TOKEN_END);
+    public static String pwdEncryption(String pwd) {
+        String newToken = EncryptUtils.encryptMD5ToString(pwd + MD5_TOKEN_END);
         return newToken;
     }
 

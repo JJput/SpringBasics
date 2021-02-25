@@ -1,8 +1,8 @@
 package com.twj.spirngbasics.server.entity;
 
+import cn.hutool.core.util.IdUtil;
 import com.twj.spirngbasics.server.manage.UserManage;
 import com.twj.spirngbasics.server.util.Constant;
-import com.twj.spirngbasics.server.util.UuidUtils;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -48,7 +48,7 @@ public class BaseEntity {
 
     public void insert(String userId) {
         Date date = new Date();
-        this.id = UuidUtils.getUuid32();
+        this.id = IdUtil.simpleUUID();
         this.createdBy = userId;
         this.createdTime = date;
         this.updateBy = userId;
@@ -58,7 +58,7 @@ public class BaseEntity {
 
     public void insert() {
         Date date = new Date();
-        this.id = UuidUtils.getUuid32();
+        this.id = IdUtil.simpleUUID();
         this.createdBy = UserManage.getUserId();
         this.createdTime = date;
         this.updateBy = UserManage.getUserId();
@@ -68,7 +68,7 @@ public class BaseEntity {
 
     public void insertSystem() {
         Date date = new Date();
-        this.id = UuidUtils.getUuid32();
+        this.id = IdUtil.simpleUUID();
         this.createdBy = Constant.SYSTEM_USER;
         this.createdTime = date;
         this.updateBy = Constant.SYSTEM_USER;

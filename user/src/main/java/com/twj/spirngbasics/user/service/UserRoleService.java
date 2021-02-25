@@ -1,9 +1,9 @@
 package com.twj.spirngbasics.user.service;
 
+import cn.hutool.core.util.IdUtil;
 import com.github.pagehelper.PageHelper;
 import com.twj.spirngbasics.server.dto.PageDto;
 import com.twj.spirngbasics.server.util.CopyUtils;
-import com.twj.spirngbasics.server.util.UuidUtils;
 import com.twj.spirngbasics.server.util.ValidatorUtils;
 import com.twj.spirngbasics.user.dto.UserRoleDto;
 import com.twj.spirngbasics.user.entity.UserRole;
@@ -102,7 +102,7 @@ public class UserRoleService {
         List<UserRoleResource> insertList = new ArrayList<>();
         for (int i = 0; i < resourceIds.size(); i++) {
             UserRoleResource roleResource = new UserRoleResource();
-            roleResource.setId(UuidUtils.getUuid8());
+            roleResource.setId(IdUtil.simpleUUID());
             roleResource.setRoleId(roleId);
             roleResource.setResourceId(resourceIds.get(i));
             insertList.add(roleResource);
@@ -153,7 +153,7 @@ public class UserRoleService {
         // 保存角色用户
         for (int i = 0; i < userIdList.size(); i++) {
             UserRoleUser roleUser = new UserRoleUser();
-            roleUser.setId(UuidUtils.getUuid8());
+            roleUser.setId(IdUtil.simpleUUID());
             roleUser.setRoleId(roleId);
             roleUser.setUserId(userIdList.get(i));
             roleUser.insert();
@@ -172,7 +172,7 @@ public class UserRoleService {
                 .where(UserRoleUserDynamicSqlSupport.roleId, SqlBuilder.isEqualToWhenPresent(roleId))
                 .build()
                 .render(RenderingStrategies.MYBATIS3);
-        List<UserRoleUser> roleUserList= userRoleUserMapper.selectMany(selectStatement);
+        List<UserRoleUser> roleUserList = userRoleUserMapper.selectMany(selectStatement);
 
         List<String> userIdList = new ArrayList<>();
         for (int i = 0, l = roleUserList.size(); i < l; i++) {
