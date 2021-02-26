@@ -32,7 +32,7 @@ public class UserLoginController {
     @ApiOperation("发送登录手机验证码")
     @PostMapping("/sendPhoneCode")
     public ResponseDto sendPhoneCode(@RequestBody UserDto userDto) {
-        userLoginService.sendPhoneCode(userDto.getPhone());
+        userLoginService.sendPhoneCode(userDto.getPhone(), UserLoginService.TEMPLATE_CODE_LOGIN);
         return ResponseDto.createBySuccess();
     }
 

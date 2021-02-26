@@ -44,6 +44,10 @@ import static com.twj.spirngbasics.server.util.Constant.Http.ERROR.*;
 @Slf4j
 public class UserLoginService {
 
+    public static final int TEMPLATE_CODE_LOGIN = 1;
+
+    public static final int TEMPLATE_CODE_CHANGE = 2;
+
     @Resource
     private UserMapper userMapper;
 
@@ -154,7 +158,13 @@ public class UserLoginService {
         return responseDto;
     }
 
-    public void sendPhoneCode(String phone) {
+    /**
+     * 发送手机验证码
+     *
+     * @param phone        手机号
+     * @param templateCode 短信模板
+     */
+    public void sendPhoneCode(String phone, int templateCode) {
         //验证是否是手机号
         if (phone.length() != 11) {
             throw new BusinessException(PHONE_NUMBER_ERROR);
@@ -175,7 +185,11 @@ public class UserLoginService {
 //        String ranCode = "888888";
         String ranCode = RandomUtil.randomNumbers(6);
         StringJoiner stringJoiner = new StringJoiner(",");
-        stringJoiner.add(Constant.AliyunSMS.LOGIN);
+        if (templateCode == TEMPLATE_CODE_LOGIN) {
+            stringJoiner.add(Constant.AliyunSMSTemplateCode.LOGIN);
+        } else if (templateCode == TEMPLATE_CODE_CHANGE) {
+            stringJoiner.add(Constant.AliyunSMSTemplateCode.CHANGE);
+        }
         stringJoiner.add(phone);
         stringJoiner.add(ranCode);
         rabbitProducer.sendMsg(RabbitMqConfig.EXCHANGE_PROJECT,

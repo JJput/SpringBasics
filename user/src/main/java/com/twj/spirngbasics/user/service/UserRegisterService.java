@@ -69,7 +69,7 @@ public class UserRegisterService {
 //        String ranCode = "888888";
         String ranCode = RandomUtil.randomNumbers(6);
         StringJoiner stringJoiner = new StringJoiner(",");
-        stringJoiner.add(Constant.AliyunSMS.LOGIN);
+        stringJoiner.add(Constant.AliyunSMSTemplateCode.REGISTER);
         stringJoiner.add(phone);
         stringJoiner.add(ranCode);
         rabbitProducer.sendMsg(RabbitMqConfig.EXCHANGE_PROJECT,
@@ -144,7 +144,7 @@ public class UserRegisterService {
     }
 
     public void changePwdPhoneCode(String phone) {
-        userLoginService.sendPhoneCode(phone);
+        userLoginService.sendPhoneCode(phone, UserLoginService.TEMPLATE_CODE_CHANGE);
     }
 
     public void changePwd(User user) {

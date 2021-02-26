@@ -121,9 +121,13 @@ public class Constant {
     }
 
 
-    public class AliyunSMS {
+    public class AliyunSMSTemplateCode {
 
         public static final String LOGIN = "";
 
+        public static final String REGISTER = "";
+
+        public static final String CHANGE = "";
+        
     }
 }
