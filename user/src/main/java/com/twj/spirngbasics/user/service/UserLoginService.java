@@ -32,6 +32,8 @@ import javax.annotation.Resource;
 import java.util.List;
 import java.util.StringJoiner;
 
+import static com.twj.spirngbasics.server.util.Constant.AliyunSMSTemplateCode.CHANGE_FLAG;
+import static com.twj.spirngbasics.server.util.Constant.AliyunSMSTemplateCode.LOGIN_FLAG;
 import static com.twj.spirngbasics.server.util.Constant.Http.ERROR.*;
 
 /**
@@ -97,6 +99,8 @@ public class UserLoginService {
         if (!val.equals(code)) {
             throw new BusinessException(PHONE_CODE_ERROR);
         }
+
+        RedisManage.remove(LOGIN_FLAG + phone);
 
         if (user.getDele() == null || user.getDele().equals(BaseEntity.DELE_YES)) {
             throw new BusinessException(LOGIN_USER_DEL);
@@ -195,7 +199,12 @@ public class UserLoginService {
         rabbitProducer.sendMsg(RabbitMqConfig.EXCHANGE_PROJECT,
                 RabbitMqConfig.ROUTINGKEY_PHONE_MSG + RabbitMqConfig.QUETYPE_ALIYUN,
                 stringJoiner.toString());
-        RedisManage.setPhoneCode(phone, ranCode);
+        if (templateCode == TEMPLATE_CODE_LOGIN) {
+            RedisManage.setPhoneCode(LOGIN_FLAG + phone, ranCode);
+        } else if (templateCode == TEMPLATE_CODE_CHANGE) {
+            RedisManage.setPhoneCode(CHANGE_FLAG + phone, ranCode);
+        }
+
     }
 
 }

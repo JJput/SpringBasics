@@ -22,6 +22,7 @@ import javax.annotation.Resource;
 import java.util.List;
 import java.util.StringJoiner;
 
+import static com.twj.spirngbasics.server.util.Constant.AliyunSMSTemplateCode.*;
 import static com.twj.spirngbasics.server.util.Constant.Http.ERROR.*;
 
 /**
@@ -75,7 +76,7 @@ public class UserRegisterService {
         rabbitProducer.sendMsg(RabbitMqConfig.EXCHANGE_PROJECT,
                 RabbitMqConfig.ROUTINGKEY_PHONE_MSG + RabbitMqConfig.QUETYPE_ALIYUN,
                 stringJoiner.toString());
-        RedisManage.setPhoneCode(phone, ranCode);
+        RedisManage.setPhoneCode(REGISTER_FLAG + phone, ranCode);
     }
 
     public User isRegister(String phone) {
@@ -121,6 +122,7 @@ public class UserRegisterService {
             throw new BusinessException(PHONE_CODE_ERROR);
         }
 
+        RedisManage.remove(REGISTER_FLAG + phone);
 
         //加密存储
         user.setPwd(UserManage.pwdEncryption(user.getPwd()));
@@ -159,6 +161,7 @@ public class UserRegisterService {
         if (!code.equals(user.getCode())) {
             throw new BusinessException(PHONE_CODE_ERROR);
         }
+        RedisManage.remove(CHANGE_FLAG + user.getPhone());
         //是否注册
         User user1 = isRegister(user.getPhone());
         if (user1 == null) {

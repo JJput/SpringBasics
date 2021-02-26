@@ -123,11 +123,17 @@ public class Constant {
 
     public class AliyunSMSTemplateCode {
 
+        public static final String LOGIN_FLAG = "login_";
+
         public static final String LOGIN = "";
+
+        public static final String REGISTER_FLAG = "register_";
 
         public static final String REGISTER = "";
 
+        public static final String CHANGE_FLAG = "change_";
+
         public static final String CHANGE = "";
-        
+
     }
 }
