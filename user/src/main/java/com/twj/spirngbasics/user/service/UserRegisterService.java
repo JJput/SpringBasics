@@ -59,7 +59,7 @@ public class UserRegisterService {
             throw new BusinessException(REGISTER_EXISTS);
         }
         //判断手机号是否发送过验证码。
-        String code = RedisManage.getPhoneCode(phone);
+        String code = RedisManage.getPhoneCode(REGISTER_FLAG + phone);
 
         //  时效还未过期，请不要重复发送
         if (!StringUtils.isEmpty(code)) {
@@ -111,7 +111,7 @@ public class UserRegisterService {
             throw new BusinessException(REGISTER_EXISTS);
         }
 
-        String pCode = RedisManage.getPhoneCode(phone);
+        String pCode = RedisManage.getPhoneCode(REGISTER_FLAG + phone);
         //是否发送验证码
         if (StringUtils.isEmpty(pCode)) {
             throw new BusinessException(PHONE_NOT_SEND_CODE);
@@ -154,7 +154,7 @@ public class UserRegisterService {
         ValidatorUtils.require(user.getPwd(), "请填写密码");
         ValidatorUtils.require(user.getCode(), "请填写验证码");
 
-        String code = RedisManage.getPhoneCode(user.getPhone());
+        String code = RedisManage.getPhoneCode(CHANGE_FLAG + user.getPhone());
         if (StringUtils.isEmpty(code)) {
             throw new BusinessException(PHONE_NOT_SEND_CODE);
         }

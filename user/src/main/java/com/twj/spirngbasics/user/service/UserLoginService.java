@@ -83,7 +83,7 @@ public class UserLoginService {
         ValidatorUtils.require(phone, LOGIN_PHONE_IS_NULL);
         ValidatorUtils.require(code, PHONE_CODE_IS_NULL);
 
-        String val = RedisManage.getPhoneCode(phone);
+        String val = RedisManage.getPhoneCode(LOGIN_FLAG + phone);
 
         //验证是否注册过，同时查询用户信息
         User user = userRegisterService.isRegister(phone);
@@ -177,8 +177,13 @@ public class UserLoginService {
         if (userRegisterService.isRegister(phone) == null) {
             throw new BusinessException(LOGIN_NOT_REGISTER);
         }
+        String code = null;
         //判断手机号是否发送过验证码。
-        String code = RedisManage.getPhoneCode(phone);
+        if (templateCode == TEMPLATE_CODE_LOGIN) {
+            code = RedisManage.getPhoneCode(LOGIN_FLAG + phone);
+        } else if (templateCode == TEMPLATE_CODE_CHANGE) {
+            code = RedisManage.getPhoneCode(CHANGE_FLAG + phone);
+        }
 
         //  时效还未过期，请不要重复发送
         if (!StringUtils.isEmpty(code)) {
