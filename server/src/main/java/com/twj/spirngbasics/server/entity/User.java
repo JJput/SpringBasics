@@ -1,185 +1,46 @@
 package com.twj.spirngbasics.server.entity;
 
-public class User extends BaseEntity {
 
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import org.hibernate.validator.constraints.Length;
 
-    private String remake;
+import javax.annotation.Generated;
+import javax.validation.constraints.NotEmpty;
+import java.io.Serializable;
+import java.util.HashSet;
 
-    private String spare1;
+/**
+ * @作者: Jun
+ * @创建时间: 2021-02-24 17:13:25
+ * @Version 1.0
+ * @描述: Users and global privileges
+ */
+@Data
+public class User extends BaseEntity implements Serializable {
 
-    private String spare2;
-
-    private String spare3;
-
-    private String spare4;
-
-    private String spare5;
-
-    private String spare6;
-
-    private String spare7;
-
-    private String spare8;
-
-    private String spare9;
-
-    private String companyId;
-
-    private String phone;
-
-    private String password;
-
-    private String email;
-
+    @ApiModelProperty(value = "名称", required = true)
+    @NotEmpty(message = "name不能为空")
+    @Length(min = 0, max = 60, message = "name长度异常,取值范围0~60")
+    @Generated("org.mybatis.generator.api.MyBatisGenerator")
     private String name;
 
-    private String status;
+    @ApiModelProperty(value = "手机号", required = true)
+    @NotEmpty(message = "phone不能为空")
+    @Length(min = 11, max = 11, message = "请检查手机号")
+    @Generated("org.mybatis.generator.api.MyBatisGenerator")
+    private String phone;
 
-    private String roleId;
+    @ApiModelProperty(value = "密码", required = true)
+    @NotEmpty(message = "pwd不能为空")
+    @Length(min = 0, max = 256, message = "pwd长度异常,取值范围0~256")
+    @Generated("org.mybatis.generator.api.MyBatisGenerator")
+    private String pwd;
 
+    private HashSet requests;
 
-
-    public String getRemake() {
-        return remake;
-    }
-
-    public void setRemake(String remake) {
-        this.remake = remake;
-    }
-
-    public String getSpare1() {
-        return spare1;
-    }
-
-    public void setSpare1(String spare1) {
-        this.spare1 = spare1;
-    }
-
-    public String getSpare2() {
-        return spare2;
-    }
-
-    public void setSpare2(String spare2) {
-        this.spare2 = spare2;
-    }
-
-    public String getSpare3() {
-        return spare3;
-    }
-
-    public void setSpare3(String spare3) {
-        this.spare3 = spare3;
-    }
-
-    public String getSpare4() {
-        return spare4;
-    }
-
-    public void setSpare4(String spare4) {
-        this.spare4 = spare4;
-    }
-
-    public String getSpare5() {
-        return spare5;
-    }
-
-    public void setSpare5(String spare5) {
-        this.spare5 = spare5;
-    }
-
-    public String getSpare6() {
-        return spare6;
-    }
-
-    public void setSpare6(String spare6) {
-        this.spare6 = spare6;
-    }
-
-    public String getSpare7() {
-        return spare7;
-    }
-
-    public void setSpare7(String spare7) {
-        this.spare7 = spare7;
-    }
-
-    public String getSpare8() {
-        return spare8;
-    }
-
-    public void setSpare8(String spare8) {
-        this.spare8 = spare8;
-    }
-
-    public String getSpare9() {
-        return spare9;
-    }
-
-    public void setSpare9(String spare9) {
-        this.spare9 = spare9;
-    }
-
-    public String getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(String companyId) {
-        this.companyId = companyId;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(String roleId) {
-        this.roleId = roleId;
-    }
-
-    public void clear(){
-        this.password=null;
-        this.createdBy=null;
-        this.createdTime=null;
-        this.updateBy=null;
-        this.updateTime=null;
-    }
+    @ApiModelProperty(value = "验证码")
+    @NotEmpty(message = "验证码不能为空")
+    @Length(min = 6, max = 6, message = "请检查验证码")
+    private String code;
 }

@@ -45,8 +45,11 @@ public class Constant {
             DEFAULT(44444, "未知错误"),
 
             //500-1000登录注册相关
-            LOGIN_USER_OR_PWD_ERROR(500,"用户名或密码错误"),
-            LOGIN_NOT_REGISTER(501,"未注册"),
+            LOGIN_USER_OR_PWD_ERROR(500, "用户名或密码错误"),
+
+            LOGIN_NOT_REGISTER(501, "您还未注册"),
+            LOGIN_PHONE_IS_NULL(502, "请输入手机号"),
+            LOGIN_PWD_IS_NULL(503, "请输入密码"),
             REGISTER_FAIL(530, "注册失败"),
             REGISTER_EXISTS(531, "该账户已注册"),
             WECHAT_NO_REGISTER(551, "该微信用户未注册"),
@@ -54,6 +57,8 @@ public class Constant {
             WECHAT_BINDING(553, "已成功绑定微信"),
             WECHAT_OTHER_BINDING(554, "该手机已被其他微信用户绑定"),
             WECHAT_REGISTER_TOKEN_ERROR(556, "非法请求"),
+            LOGIN_USER_DEL(521, "用户已被删除"),
+            LOGIN_USER_DISABLE(522, "用户已被禁用"),
 
 
             TOKEN_NO(900, "token不存在"),
@@ -71,7 +76,7 @@ public class Constant {
             PHONE_SENDED_CODE(1022, "已发送验证码，请勿重复发送！"),
             PHONE_NOT_SEND_CODE(1023, "未发送验证码，请发送验证码后再提交"),
             PHONE_CODE_ERROR(1024, "验证码有误"),
-            PHONE_CODE_IS_NULL(1025,"验证码为空"),
+            PHONE_CODE_IS_NULL(1025, "请填写验证码"),
 
             ACCESS_DENIED(1444, "访问被拒绝"),       //一般是横向越权等
             NOT_YET_OPEN(1445, "暂未开放"),
@@ -81,7 +86,6 @@ public class Constant {
             PAGER_INFO_ERROR(1801, "分页参数错误"),
 
             ;
-
 
 
             private int code;
@@ -117,5 +121,9 @@ public class Constant {
     }
 
 
+    public class AliyunSMS {
 
+        public static final String LOGIN = "";
+
+    }
 }

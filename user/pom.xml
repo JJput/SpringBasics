@@ -67,6 +67,12 @@
             <artifactId>hutool-all</artifactId>
         </dependency>
 
+        <!--rabbitmq-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+        
         <!-- 打包发布时用 -->
         <dependency>
             <groupId>com.twj.spirngbasics</groupId>

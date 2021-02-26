@@ -50,22 +50,22 @@ COMMIT;
 -- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
-CREATE TABLE `user`
-(
-    `id`           varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin  NOT NULL DEFAULT '' COMMENT 'id',
-    `created_by`   varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin  NOT NULL COMMENT '创建人',
-    `created_time` datetime                                               NOT NULL COMMENT '创建时间',
-    `update_by`    varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin           DEFAULT NULL COMMENT '更新人',
-    `update_time`  datetime                                                        DEFAULT NULL COMMENT '更新时间',
-    `dele`         varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin            DEFAULT NULL COMMENT '删除',
-    `name`         varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin  NOT NULL COMMENT '名称',
-    `phone`        varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin  NOT NULL COMMENT '手机号',
-    `pwd`          varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '密码',
-    `top_level_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_bin        NOT NULL COMMENT '0级id',
-    `parent_id`    varchar(32) CHARACTER SET utf8 COLLATE utf8_bin                 DEFAULT NULL COMMENT '父级账号id',
-    `level`        varchar(10) CHARACTER SET utf8 COLLATE utf8_bin        NOT NULL COMMENT '账号级别  0最高级  1.. 2.. 3..依次递减',
-    PRIMARY KEY (`id`) USING BTREE
+CREATE TABLE `user` (
+                        `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '' COMMENT 'id',
+                        `created_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '创建人',
+                        `created_time` datetime NOT NULL COMMENT '创建时间',
+                        `update_by` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '更新人',
+                        `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+                        `dele` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '删除',
+                        `name` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '名称',
+                        `phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '手机号',
+                        `pwd` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '密码',
+                        PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='用户';
+
+
+SET FOREIGN_KEY_CHECKS = 1;
+
 
 -- ----------------------------
 -- Records of user
