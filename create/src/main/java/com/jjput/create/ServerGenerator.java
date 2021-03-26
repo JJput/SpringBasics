@@ -198,7 +198,14 @@ public class ServerGenerator {
     private static void addProperties(Map<String, Object> map) {
         try {
             // 打开一个写文件器，构造函数中的第二个参数true表示以追加形式写文件
-            FileWriter writer = new FileWriter(System.getProperty("user.dir") + "\\business\\src\\main\\resources\\application-request.properties", true);
+            String sourcePath = System.getProperty("user.dir");
+            FileWriter writer;
+            if (sourcePath.substring(0, 1).equals("/")) {  //若是以/开头 就是macos或linux系统路径
+                writer = new FileWriter(System.getProperty("user.dir") + "/business/src/main/resources/application-request.properties", true);
+            } else {   //否则认为是windows路径
+                writer = new FileWriter(System.getProperty("user.dir") + "\\business\\src\\main\\resources\\application-request.properties", true);
+            }
+
             writer.write("\nrequest.path." + map.get("domain") + "=/" + map.get("domain"));
             writer.close();
         } catch (Exception e) {
