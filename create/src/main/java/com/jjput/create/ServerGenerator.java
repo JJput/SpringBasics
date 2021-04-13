@@ -150,11 +150,22 @@ public class ServerGenerator {
                 || (mapperFileIsExists && generatorMapper)) {
             System.out.println("检测到有文件存在，请问是否覆盖");
             System.out.print("  Y/N:");
-            String res = scanner.nextLine();
-            if (!StringUtils.isEmpty(res)) {
-                if (res.equals("N") || res.equals("n")) {
-                    System.out.println("程序结束中...");
-                    return;
+            while (true) {
+                String res = scanner.nextLine();
+                if (!StringUtils.isEmpty(res)) {
+                    if (res.equals("Y") || res.equals("y")) {
+                        System.out.println("覆盖生成中...");
+                        break;
+                    }
+                    else if (res.equals("N") || res.equals("n")) {
+                        System.out.println("程序结束中...");
+                        return;
+                    }
+                    else {
+                        System.out.println("输入有误，请重新输入！");
+                    }
+                } else {
+                    System.out.println("请输入内容！");
                 }
             }
         }
