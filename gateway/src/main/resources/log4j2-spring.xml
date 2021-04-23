@@ -10,8 +10,8 @@
         <!-- %logger{36} 表示 Logger 名字最长36个字符 -->
         <property name="LOG_PATTERN" value="%date{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n" />
         <!-- 生成日志存储在当前项目路径/zlogs/中 .gitignore已将该文件夹排除 //取名zlog是z开头排序最靠后-->
-        <property name="FILE_PATH" value="zlogs/business" />
-        <property name="FILE_NAME" value="Business" />
+        <property name="FILE_PATH" value="zlogs/gateway" />
+        <property name="FILE_NAME" value="GateWay" />
     </Properties>
 
     <appenders>

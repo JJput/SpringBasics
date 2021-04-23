@@ -30,6 +30,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -37,11 +43,11 @@
             <artifactId>fastjson</artifactId>
         </dependency>
 
-<!--        &lt;!&ndash; ActiveMQ &ndash;&gt;
+        <!-- 引入log4j2依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-activemq</artifactId>
-        </dependency>-->
+            <artifactId>spring-boot-starter-log4j2</artifactId>
+        </dependency>
 
         <!-- lombok -->
         <dependency>

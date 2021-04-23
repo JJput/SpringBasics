@@ -1,6 +1,8 @@
 package com.twj.spirngbasics.gateway.util;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -9,10 +11,11 @@ import java.util.concurrent.TimeUnit;
 /**
  * @作者: JJ
  * @创建时间: 2020/7/29 上午11:19
- * @Version 1.0
+ * @Versio.0
  * @描述:
  */
 @Component
+@Slf4j
 public class RedisUtils {
 
     private static RedisTemplate redisTemplate;
@@ -35,5 +38,12 @@ public class RedisUtils {
     }
 
 
-
+    /**
+     * 保持redis连接
+     */
+    @Scheduled(cron = "0 */1 * * * ?")
+    public void KeepAlive() {
+        redisTemplate.opsForValue().set("1", "1", 1, TimeUnit.MINUTES);
+//        log.info("redis keep alive...");
+    }
 }
