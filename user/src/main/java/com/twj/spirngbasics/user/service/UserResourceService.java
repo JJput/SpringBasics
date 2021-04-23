@@ -132,4 +132,18 @@ public class UserResourceService {
         }
         return resourceDtoList;
     }
+
+    /**
+     * 新增
+     */
+    public void insertList(List<UserResource> userResourceList) {
+        List<UserResource> data = new ArrayList<>();
+        for (UserResource userResource : userResourceList) {
+            data.add(userResource);
+            for (UserResource userResource1 : userResource.getChildren()) {
+                data.add(userResource1);
+            }
+        }
+        userResourceMapper.insertMultiple(data);
+    }
 }

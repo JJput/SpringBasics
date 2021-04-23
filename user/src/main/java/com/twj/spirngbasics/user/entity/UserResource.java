@@ -8,6 +8,7 @@ import com.twj.spirngbasics.server.entity.BaseEntity;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.Length;
 import java.io.Serializable;
+import java.util.List;
 
 import javax.annotation.Generated;
 import javax.validation.constraints.NotEmpty;
@@ -42,4 +43,6 @@ public class UserResource extends BaseEntity implements Serializable {
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     private String parent;
 
+    @ApiModelProperty(value = "子级")
+    private List<UserResource> children;
 }
