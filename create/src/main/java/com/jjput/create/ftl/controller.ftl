@@ -33,36 +33,36 @@ public class ${Domain}Controller {
     @Resource
     private ${Domain}Service ${domain}Service;
 
-    @ApiOperation("查询对象")
-    @GetMapping("/findId")
+    @ApiOperation("查看-指定对象详细信息")
+    @GetMapping("/query-findId")
     public ResponseDto findById(String id) {
         return ResponseDto.createBySuccess(${domain}Service.findById(id));
     }
 
-    @ApiOperation("查询列表")
-    @PostMapping("/list")
+    @ApiOperation("查看-列表")
+    @PostMapping("/query-list")
     public ResponseDto list(@RequestBody PageDto pageDto) {
         ${domain}Service.list(pageDto);
         return ResponseDto.createBySuccess(pageDto);
     }
 
-    @ApiOperation("新增")
-    @PostMapping("/insert")
+    @ApiOperation("编辑-新增")
+    @PostMapping("/edit-insert")
     public ResponseDto create(@RequestBody @Valid ${Domain} ${domain}) {
         ${domain}Service.insert(${domain});
         return ResponseDto.createBySuccess(${domain});
     }
 
-    @ApiOperation("更新")
-    @PostMapping("/update")
+    @ApiOperation("编辑-更新")
+    @PostMapping("/edit-update")
     public ResponseDto update(@RequestBody ${Domain} ${domain}) {
         ${domain}Service.update(${domain});
         return ResponseDto.createBySuccess();
     }
 
     @ApiOperation("删除")
-    @DeleteMapping("/delete/{id}")
-    public ResponseDto delete(@PathVariable String id) {
+    @DeleteMapping("/delete")
+    public ResponseDto delete(String id) {
         ${domain}Service.delete(id);
         return ResponseDto.createBySuccess();
     }
