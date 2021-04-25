@@ -43,7 +43,6 @@ public class UserRoleResourceDto {
 
     @ApiModelProperty(value = "创建时间", required = true)
     @NotEmpty(message = "createdTime不能为空")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createdTime;
 
     @ApiModelProperty(value = "更新人")
@@ -51,7 +50,6 @@ public class UserRoleResourceDto {
     private String updateBy;
 
     @ApiModelProperty(value = "更新时间")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date updateTime;
 
     @ApiModelProperty(value = "删除")

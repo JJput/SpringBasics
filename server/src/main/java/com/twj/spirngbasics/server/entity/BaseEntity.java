@@ -1,6 +1,7 @@
 package com.twj.spirngbasics.server.entity;
 
 import cn.hutool.core.util.IdUtil;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.twj.spirngbasics.server.manage.UserManage;
 import com.twj.spirngbasics.server.util.Constant;
 import io.swagger.annotations.ApiModelProperty;

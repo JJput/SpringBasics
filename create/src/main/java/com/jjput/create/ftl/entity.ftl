@@ -4,7 +4,6 @@ package ${PACKAGE_ENTITY};
 <#list typeSet as type>
 <#if type=='Date'>
 import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonFormat;
 </#if>
 <#if type=='BigDecimal'>
 import java.math.BigDecimal;
@@ -39,7 +38,6 @@ public class ${Domain} extends BaseEntity implements Serializable {
     <#else>
     @ApiModelProperty(value = "${field.comment}"<#if field.nullAble == false>, required = true</#if>)
         <#if field.javaType=='Date'>
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
         </#if>
     <#if field.nullAble == false>
         <#if  field.javaType=='String'>

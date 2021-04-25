@@ -10,8 +10,6 @@ import java.math.BigDecimal;
 </#if>
 </#list>
 import lombok.Data;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import ${PACKAGE_SERVER}.entity.BaseEntity;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.Length;
@@ -26,7 +24,6 @@ import javax.validation.constraints.NotEmpty;
  * @描述: ${tableNameCn}
  */
 @Data
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ${Domain}Dto {
 
     <#list fieldList as field>
@@ -37,9 +34,6 @@ public class ${Domain}Dto {
     <#if field.javaType=='String'>
     @Length(min = 0, max = ${field.length?c}, message = "${field.nameHump}长度异常,取值范围0~${field.length?c}")
     </#if>
-        <#if field.javaType=='Date'>
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-        </#if>
     private <#if field.type == 'bit(1)' ||
     field.type == 'bit' ||
     field.type == 'tinyint(1)' ||
