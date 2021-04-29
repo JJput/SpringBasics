@@ -93,10 +93,14 @@ public class BaseEntity {
     public void update() {
         this.updateBy = UserManage.getUserId();
         this.updateTime = new Date();
+        this.createdBy = null;
+        this.createdTime = null;
     }
 
     public void update(String userId) {
         this.updateBy = userId;
         this.updateTime = new Date();
+        this.createdBy = null;
+        this.createdTime = null;
     }
 }
