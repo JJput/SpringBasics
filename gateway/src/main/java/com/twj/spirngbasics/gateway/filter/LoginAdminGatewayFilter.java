@@ -53,18 +53,18 @@ public class LoginAdminGatewayFilter implements GatewayFilter, Ordered {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
 
         String path = exchange.getRequest().getURI().getPath();
-        LOG.info("请求:" + path);
+//        LOG.info("请求:" + path);
         // 不需要拦截
         if (isRelease(path)) {
-            LOG.info("不拦截");
+//            LOG.info("不拦截");
             return chain.filter(exchange);
         }
         //获取header的token参数
         String token = exchange.getRequest().getHeaders().getFirst("token");
-        LOG.info("GateWay token校验 ：{}", token);
+//        LOG.info("GateWay token校验 ：{}", token);
         //没有token说明没登录
         if (token == null || token.isEmpty()) {
-            LOG.info("token为空，请求被拦截");
+            LOG.info("{} token为空，请求被拦截", path);
             exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
             byte[] bytes = "无token".getBytes(StandardCharsets.UTF_8);
             return exchange.getResponse().writeWith(Flux.just(exchange.getResponse().bufferFactory().wrap(bytes)));
@@ -73,7 +73,7 @@ public class LoginAdminGatewayFilter implements GatewayFilter, Ordered {
         if (IS_TEST) {
             if (token.equals(TEST_TOKEN)) {
                 //判断redis是否缓存testtoken
-                Object testtoken = RedisUtils.get(TEST_TOKEN);
+                Object testtoken = RedisUtils.get(token);
                 if (testtoken == null) {
                     RedisUtils.set(TEST_TOKEN, "{\"id\":\"TEST_TOEKN\"}", 10, TimeUnit.MINUTES);
                 }
@@ -86,47 +86,50 @@ public class LoginAdminGatewayFilter implements GatewayFilter, Ordered {
         //token获取对应对象不存在,说明token过期等..
         if (userObject == null) {
 
-            LOG.warn("token无效，请求被拦截");
+            LOG.warn("{} token无效，请求被拦截", path);
             exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
             byte[] bytes = "token无效".getBytes(StandardCharsets.UTF_8);
             return exchange.getResponse().writeWith(Flux.just(exchange.getResponse().bufferFactory().wrap(bytes)));
         } else {
             String strUser = userObject.toString();
-            LOG.info("GateWay登录验证成功");
-            // todo 权限验证
-//            LOG.info("接口权限校验，请求地址：{}", path);
-            boolean exist = false;
+//            LOG.info("GateWay登录验证成功");
             JSONObject jsonUser = JSON.parseObject(strUser);
-
-            //日志记录
-            this.logCreate(jsonUser.getString("id"), path + exchange.getRequest().getURI().getQuery(), false);
-
-            if (!StringUtils.isEmpty(token))
-                return chain.filter(exchange);
-
-            JSONArray requests = jsonUser.getJSONArray("requests");
-
-
-            // 遍历所有【权限请求】，判断当前请求的地址是否在【权限请求】里
-            for (int i = 0, l = requests.size(); i < l; i++) {
-                String request = (String) requests.get(i);
-                if (path.contains(request)) {
-                    exist = true;
-                    break;
+            /*********************
+             ****** 权限校验 *******
+             *********************/
+            try {
+                //获取用户角色id
+                String roleId = jsonUser.getString("roleId");
+                if (roleId == null) {
+                    byte[] bytes = "权限获取失败".getBytes(StandardCharsets.UTF_8);
+                    return exchange.getResponse().writeWith(Flux.just(exchange.getResponse().bufferFactory().wrap(bytes)));
                 }
-            }
-            if (exist) {
-                LOG.info("权限校验通过");
-                this.logCreate(jsonUser.getString("id"), path, false);
-            } else {
-                LOG.warn("权限校验未通过 403");
-                // todo 添加日志
-                this.logCreate(jsonUser.getString("id"), path, true);
-                exchange.getResponse().setStatusCode(HttpStatus.FORBIDDEN);
-                byte[] bytes = "无权限".getBytes(StandardCharsets.UTF_8);
+
+                //最终校验的权限路径需要先处理一下
+                String checkUrl = null;
+                //如果是删除权限需要特殊处理
+                if (path.contains("delete")) {
+                    int end = path.lastIndexOf("delete");
+                    checkUrl = path.substring(0, end + 6);
+                } else {
+                    checkUrl = path.split("-")[0];
+                }
+                //通过redis判断当前用户是否有权限
+                //redis中缓存了所有角色权限hashmap结构,通过用户的角色id,判断是否有权限
+                if (RedisUtils.isEmptyHashKey(roleId, checkUrl)) {
+//                    LOG.info("权限校验通过");
+                    this.logCreate(jsonUser.getString("id"), path, RedisUtils.getHashValue(roleId, checkUrl).toString(), false);
+                } else {
+                    LOG.warn("{} 权限校验未通过 403", path);
+                    this.logCreate(jsonUser.getString("id"), path, true);
+                    exchange.getResponse().setStatusCode(HttpStatus.FORBIDDEN);
+                    byte[] bytes = "无权限".getBytes(StandardCharsets.UTF_8);
+                    return exchange.getResponse().writeWith(Flux.just(exchange.getResponse().bufferFactory().wrap(bytes)));
+                }
+            } catch (Exception e) {
+                byte[] bytes = "权限获取失败".getBytes(StandardCharsets.UTF_8);
                 return exchange.getResponse().writeWith(Flux.just(exchange.getResponse().bufferFactory().wrap(bytes)));
             }
-
             return chain.filter(exchange);
         }
     }
@@ -152,9 +155,14 @@ public class LoginAdminGatewayFilter implements GatewayFilter, Ordered {
     }
 
     public void logCreate(String userId, String path, boolean isIntercept) {
+        logCreate(userId, path, null, isIntercept);
+    }
+
+    public void logCreate(String userId, String path, String pathName, boolean isIntercept) {
         SysLog sysLog = new SysLog();
         sysLog.setUserId(userId);
         sysLog.setUrl(path);
+        sysLog.setPathName(pathName);
         sysLog.setCreateTime(new Date());
         //权限是否拦截
         sysLog.setIntercept(isIntercept);

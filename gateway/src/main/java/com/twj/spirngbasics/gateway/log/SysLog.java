@@ -24,6 +24,11 @@ public class SysLog {
     private String url;
 
     /**
+     * 路径名称
+     */
+    private String pathName;
+
+    /**
      * 是否放行
      */
     private boolean isIntercept;
@@ -32,5 +37,6 @@ public class SysLog {
      * 备注
      */
     private String remake;
+
 
 }
