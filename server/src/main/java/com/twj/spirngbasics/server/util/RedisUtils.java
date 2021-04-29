@@ -141,7 +141,7 @@ public class RedisUtils {
      */
     @Scheduled(cron = "0 */1 * * * ?")
     public void KeepAlive() {
-        set("alive", String.valueOf((Long.parseLong(get("1").toString()) + 1)));
+        set("alive", "1");
 //        log.info("redis keep alive...");
     }
 
