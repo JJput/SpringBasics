@@ -8,6 +8,7 @@ import com.twj.spirngbasics.server.entity.BaseEntity;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.Length;
 import java.io.Serializable;
+import java.util.List;
 
 import javax.annotation.Generated;
 import javax.validation.constraints.NotEmpty;
@@ -39,4 +40,8 @@ public class UserRole extends BaseEntity implements Serializable {
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     private String companyId;
 
+
+    @ApiModelProperty(value = "资源列表")
+    @NotEmpty(message = "请传入权限")
+    private List<String> resourceIds;
 }

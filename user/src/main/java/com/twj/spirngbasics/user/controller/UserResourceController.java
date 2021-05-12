@@ -121,7 +121,6 @@ public class UserResourceController {
 //            for (RequestMethod requestMethod : methodsCondition.getMethods()) {
 //                resultMap.put("requestType", requestMethod.toString());//请求方式：POST/PUT/GET/DELETE
 //            }
-
         }
         userResourceService.insertList(resultList);
         return resultList;

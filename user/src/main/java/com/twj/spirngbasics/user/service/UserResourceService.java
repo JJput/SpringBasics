@@ -1,6 +1,7 @@
 package com.twj.spirngbasics.user.service;
 
 
+import com.twj.spirngbasics.server.util.Constant;
 import com.twj.spirngbasics.server.util.CopyUtils;
 import com.twj.spirngbasics.user.dto.UserResourceDto;
 import com.twj.spirngbasics.user.entity.UserResource;
@@ -39,6 +40,20 @@ public class UserResourceService {
     public void insert(UserResource userResource) {
         userResource.insert();
         userResourceMapper.insert(userResource);
+    }
+
+    /**
+     * 新增
+     */
+    public void insertList(List<UserResource> userResourceList) {
+        List<UserResource> data = new ArrayList<>();
+        for (UserResource userResource : userResourceList) {
+            data.add(userResource);
+            for (UserResource userResource1 : userResource.getChildren()) {
+                data.add(userResource1);
+            }
+        }
+        userResourceMapper.insertMultiple(data);
     }
 
     /**
@@ -100,12 +115,13 @@ public class UserResourceService {
      *
      * @return
      */
-    public List<UserResourceDto> loadTree() {
-        SelectStatementProvider selectStatement = SqlBuilder.select(userResourceMapper.selectList)
+    public List<UserResourceDto> loadTree(boolean isAdmin) {
+        SelectStatementProvider selectStatement = SqlBuilder.select(UserResourceDynamicSqlSupport.id, UserResourceDynamicSqlSupport.parent, UserResourceDynamicSqlSupport.name)
                 .from(UserResourceDynamicSqlSupport.userResource)
-                .orderBy(UserResourceDynamicSqlSupport.id)
+                .orderBy(UserResourceDynamicSqlSupport.request, UserResourceDynamicSqlSupport.page.descending())
                 .build()
                 .render(RenderingStrategies.MYBATIS3);
+
         List<UserResourceDto> resourceDtoList = CopyUtils.copyList(userResourceMapper.selectMany(selectStatement), UserResourceDto.class);
         for (int i = resourceDtoList.size() - 1; i >= 0; i--) {
             // 当前要移动的记录
@@ -133,17 +149,4 @@ public class UserResourceService {
         return resourceDtoList;
     }
 
-    /**
-     * 新增
-     */
-    public void insertList(List<UserResource> userResourceList) {
-        List<UserResource> data = new ArrayList<>();
-        for (UserResource userResource : userResourceList) {
-            data.add(userResource);
-            for (UserResource userResource1 : userResource.getChildren()) {
-                data.add(userResource1);
-            }
-        }
-        userResourceMapper.insertMultiple(data);
-    }
 }

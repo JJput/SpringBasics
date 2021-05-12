@@ -2,8 +2,11 @@ package com.twj.spirngbasics.user.controller;
 
 import com.twj.spirngbasics.server.dto.PageDto;
 import com.twj.spirngbasics.server.dto.ResponseDto;
+import com.twj.spirngbasics.server.manage.RedisManage;
+import com.twj.spirngbasics.user.dto.UserResourceDto;
 import com.twj.spirngbasics.user.dto.UserRoleDto;
 import com.twj.spirngbasics.user.entity.UserRole;
+import com.twj.spirngbasics.user.service.UserResourceService;
 import com.twj.spirngbasics.user.service.UserRoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,15 +29,11 @@ import java.util.List;
 @Slf4j
 public class UserRoleController {
 
-
     @Resource
     private UserRoleService userRoleService;
 
-    @ApiOperation("查找对象")
-    @GetMapping("/findId")
-    public ResponseDto findById(String id) {
-        return ResponseDto.createBySuccess(userRoleService.findById(id));
-    }
+    @Resource
+    private UserResourceService userResourceService;
 
     @ApiOperation("列表查询")
     @PostMapping("/list")
@@ -47,13 +46,29 @@ public class UserRoleController {
     @PostMapping("/insert")
     public ResponseDto create(@RequestBody @Valid UserRole userRole) {
         userRoleService.insert(userRole);
+        RedisManage.setRoleResource(userRole.getId(), userRoleService.getUserResourceList(userRole.getId()));
         return ResponseDto.createBySuccess(userRole);
     }
 
+    @ApiOperation("新增-资源树")
+    @GetMapping("/insert-resource-tree")
+    public ResponseDto loadTree() {
+        List<UserResourceDto> resourceDtoList = userResourceService.loadTree(true);
+        return ResponseDto.createBySuccess(resourceDtoList);
+    }
+
+    @ApiOperation("加载该角色的资源树")
+    @GetMapping("/insert-list-resource")
+    public ResponseDto listResource(String roleId) {
+        List<String> resourceIdList = userRoleService.listResource(roleId);
+        return ResponseDto.createBySuccess(resourceIdList);
+    }
+    
     @ApiOperation("更新")
-    @PostMapping("/update")
-    public ResponseDto update(@RequestBody UserRole userRole) {
+    @PostMapping("/insert-update")
+    public ResponseDto update(@RequestBody @Valid UserRole userRole) {
         userRoleService.update(userRole);
+        RedisManage.setRoleResource(userRole.getId(), userRoleService.getUserResourceList(userRole.getId()));
         return ResponseDto.createBySuccess();
     }
 
@@ -64,17 +79,4 @@ public class UserRoleController {
         return ResponseDto.createBySuccess();
     }
 
-    @ApiOperation("保存资源")
-    @PostMapping("/save-resource")
-    public ResponseDto saveResource(@RequestBody UserRoleDto roleDto) {
-        userRoleService.saveResource(roleDto);
-        return ResponseDto.createBySuccess();
-    }
-
-    @ApiOperation("加载该角色的资源树")
-    @GetMapping("/list-resource/{roleId}")
-    public ResponseDto listResource(@PathVariable String roleId) {
-        List<String> resourceIdList = userRoleService.listResource(roleId);
-        return ResponseDto.createBySuccess(resourceIdList);
-    }
 }

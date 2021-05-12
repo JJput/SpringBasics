@@ -6,6 +6,7 @@ import com.twj.spirngbasics.server.entity.User;
 import com.twj.spirngbasics.server.util.RedisUtils;
 
 import javax.validation.constraints.NotNull;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -81,4 +82,30 @@ public class RedisManage {
         RedisUtils.del(k);
     }
 
+
+    /**
+     * 设置角色权限
+     * @param id
+     * @param map
+     */
+    public static void setRoleResource(String id, Map<String, Object> map) {
+        if (id == null) {
+            return;
+        }
+        if (map.isEmpty()) {
+            return;
+        }
+        RedisUtils.setHash(id, map);
+    }
+
+    /**
+     * 移除角色权限
+     * @param id
+     */
+    public static void delRoleResource(String id) {
+        if (id == null) {
+            return;
+        }
+        RedisUtils.del(id);
+    }
 }

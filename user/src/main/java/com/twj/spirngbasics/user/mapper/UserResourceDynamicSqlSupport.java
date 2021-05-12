@@ -1,10 +1,11 @@
 package com.twj.spirngbasics.user.mapper;
 
-import java.sql.JDBCType;
-import java.util.Date;
-import javax.annotation.Generated;
 import org.mybatis.dynamic.sql.SqlColumn;
 import org.mybatis.dynamic.sql.SqlTable;
+
+import javax.annotation.Generated;
+import java.sql.JDBCType;
+import java.util.Date;
 
 public final class UserResourceDynamicSqlSupport {
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
@@ -50,7 +51,7 @@ public final class UserResourceDynamicSqlSupport {
 
         public final SqlColumn<String> request = column("request", JDBCType.VARCHAR);
 
-        public final SqlColumn<String> parent = column("parent", JDBCType.CHAR);
+        public final SqlColumn<String> parent = column("parent", JDBCType.VARCHAR);
 
         public final SqlColumn<String> createdBy = column("created_by", JDBCType.VARCHAR);
 
