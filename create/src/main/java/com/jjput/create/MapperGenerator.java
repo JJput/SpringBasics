@@ -28,11 +28,8 @@ public class MapperGenerator {
     private static final String MYSQL_PASSWORD_KEY = "spring.datasource.password";
     private static final String MYSQL_DRIVER_KEY = "spring.datasource.driver-class-name";
 
-    public static void main(String[] args) throws Exception {
-        mapperGenerator();
-    }
 
-    public static void mapperGenerator(String entityProject, String entityPackage, String mapperProject, String mapperPackage) throws Exception {
+    public static void mapperGenerator(String entityProject, String entityPackage, String mapperProject, String mapperPackage, String tableName, String domainObjectName) throws Exception {
         //MBG 执行过程中的警告信息
         List<String> warnings = new ArrayList<String>();
         //当生成的代码重复时，覆盖原代码
@@ -47,6 +44,12 @@ public class MapperGenerator {
         //覆盖generatorConfig.xml中的jdbc设置
         Context context = config.getContexts().get(0);
         context.setJdbcConnectionConfiguration(initJDBCConfig());
+        //清空table配置，主动添加当前的table标签
+        context.getTableConfigurations().clear();
+        TableConfiguration tableConfiguration = new TableConfiguration(context);
+        tableConfiguration.setTableName(tableName);
+        tableConfiguration.setDomainObjectName(domainObjectName);
+        context.getTableConfigurations().add(tableConfiguration);
         if (!StringUtils.isEmpty(entityPackage) && !StringUtils.isEmpty(entityProject)) {
             JavaModelGeneratorConfiguration javaModelGeneratorConfiguration = new JavaModelGeneratorConfiguration();
             javaModelGeneratorConfiguration.setTargetPackage(entityPackage);
@@ -70,9 +73,6 @@ public class MapperGenerator {
         }
     }
 
-    public static void mapperGenerator() throws Exception {
-        mapperGenerator(null, null, null, null);
-    }
 
     public static JDBCConnectionConfiguration initJDBCConfig() throws Exception {
         //读取Properties配置

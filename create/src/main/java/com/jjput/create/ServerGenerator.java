@@ -172,7 +172,7 @@ public class ServerGenerator {
 
         //生成mapper
         if (generatorMapper) {
-            MapperGenerator.mapperGenerator(PATH_PROJECT, PACKAGE_ENTITY, PATH_PROJECT, PACKAGE_MAPPER);
+            MapperGenerator.mapperGenerator(PATH_PROJECT, PACKAGE_ENTITY, PATH_PROJECT, PACKAGE_MAPPER, tableName, Domain);
         }
 
         // 生成entity
