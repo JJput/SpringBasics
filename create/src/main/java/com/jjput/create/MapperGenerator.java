@@ -95,6 +95,8 @@ public class MapperGenerator {
         properties.load(bufferedReader);
         //读取并设置jdbc
         JDBCConnectionConfiguration jdbcConnectionConfiguration = new JDBCConnectionConfiguration();
+        //必须配置该项,否则生成mapper时会将其他数据库中同名表的字段一起生成
+        jdbcConnectionConfiguration.addProperty("nullCatalogMeansCurrent", "true");
         jdbcConnectionConfiguration.setConnectionURL(properties.getProperty(MYSQL_URL_KEY));
         jdbcConnectionConfiguration.setUserId(properties.getProperty(MYSQL_USERNAME_KEY));
         jdbcConnectionConfiguration.setPassword(properties.getProperty(MYSQL_PASSWORD_KEY));
