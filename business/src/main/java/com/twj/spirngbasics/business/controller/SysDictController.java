@@ -3,6 +3,7 @@ package com.twj.spirngbasics.business.controller;
 import com.twj.spirngbasics.server.dto.PageDto;
 import com.twj.spirngbasics.server.dto.ResponseDto;
 import com.twj.spirngbasics.server.dto.SysDictDto;
+import com.twj.spirngbasics.server.entity.SysDict;
 import com.twj.spirngbasics.server.service.SysDictService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -38,5 +39,19 @@ public class SysDictController {
     public ResponseDto list(@RequestBody PageDto<SysDictDto> pageDto) {
         sysDictService.list(pageDto);
         return ResponseDto.createBySuccess(pageDto);
+    }
+
+    @ApiOperation("新增")
+    @PostMapping("/insert")
+    public ResponseDto create(@RequestBody @Valid SysDict sysDict) {
+        sysDictService.insert(sysDict);
+        return ResponseDto.createBySuccess(sysDict);
+    }
+
+    @ApiOperation("删除")
+    @DeleteMapping("/delete/{id}")
+    public ResponseDto delete(@PathVariable String id) {
+        sysDictService.delete(id);
+        return ResponseDto.createBySuccess();
     }
 }

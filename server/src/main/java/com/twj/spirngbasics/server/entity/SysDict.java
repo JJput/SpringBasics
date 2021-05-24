@@ -53,7 +53,6 @@ public class SysDict extends BaseEntity implements Serializable {
     private String description;
 
     @ApiModelProperty(value = "排序（升序）", required = true)
-    @NotEmpty(message = "sort不能为空")
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     private Integer sort;
 

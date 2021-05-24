@@ -20,10 +20,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
             "/favicon.ico",
             "/webjars/**",
 
-            //字典
-            "/sysDict/**",
 
-
+            "/user/login/addTestToken",
 
 
     };

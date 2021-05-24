@@ -2,6 +2,7 @@ package com.twj.spirngbasics.user.controller;
 
 import com.twj.spirngbasics.server.dto.ResponseDto;
 import com.twj.spirngbasics.server.entity.User;
+import com.twj.spirngbasics.server.manage.RedisManage;
 import com.twj.spirngbasics.server.manage.UserManage;
 import com.twj.spirngbasics.server.util.CopyUtils;
 import com.twj.spirngbasics.user.dto.UserDto;
@@ -57,4 +58,14 @@ public class UserLoginController {
         );
     }
 
+    @ApiOperation("添加测试Token")
+    @GetMapping("/addTestToken")
+    public ResponseDto addTestToken() {
+        User user = new User();
+        user.setId("testtoken");
+        user.setName("测试账号");
+        user.setPhone("18450078510");
+        RedisManage.setUserToken("123", user);
+        return ResponseDto.createBySuccess();
+    }
 }
