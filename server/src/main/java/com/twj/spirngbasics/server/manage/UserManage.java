@@ -77,8 +77,8 @@ public class UserManage {
      * @return
      */
     public static String pwdEncryption(String pwd) {
-        String newToken = EncryptUtils.encryptMD5ToString(pwd + MD5_TOKEN_END);
-        return newToken;
+        String newPwd = EncryptUtils.encryptMD5ToString(pwd + MD5_TOKEN_END);
+        return newPwd;
     }
 
 }

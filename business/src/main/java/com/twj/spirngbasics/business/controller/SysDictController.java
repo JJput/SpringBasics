@@ -43,7 +43,7 @@ public class SysDictController {
 
     @ApiOperation("新增")
     @PostMapping("/insert")
-    public ResponseDto create(@RequestBody @Valid SysDict sysDict) {
+    public ResponseDto create(@RequestBody SysDict sysDict) {
         sysDictService.insert(sysDict);
         return ResponseDto.createBySuccess(sysDict);
     }

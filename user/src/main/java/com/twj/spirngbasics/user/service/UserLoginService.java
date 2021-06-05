@@ -153,9 +153,7 @@ public class UserLoginService {
         String token = IdUtil.simpleUUID();
         responseDto.setToken(token);
 //        userDto.setRequests(getUserRequestList(userDto.getId()));
-        String newToken = EncryptUtils.encryptMD5ToString(token);
-        System.out.println("token:" + token);
-        System.out.println("newToken:" + newToken);
+        String newToken = UserManage.tokenEncryption(token);
         RedisManage.setUserToken(newToken, user);
         UserDto userDto = CopyUtils.copy(user, UserDto.class);
         responseDto.setContent(userDto);
