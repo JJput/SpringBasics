@@ -9,9 +9,9 @@
         <module>eureka</module>
         <module>create</module>
         <module>oss</module>
-        <module>business</module>
         <module>user</module>
         <module>phoneMessage</module>
+        <module>business</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -99,7 +99,7 @@
 
             <!-- 实体类校验工具 -->
             <dependency>
-                <groupId>org.hibernate</groupId>
+                <groupId>org.hibernate.validator</groupId>
                 <artifactId>hibernate-validator</artifactId>
                 <version>6.0.9.Final</version>
             </dependency>
@@ -185,7 +185,7 @@
             </dependency>
             <!-- 本地module phoneMsg 短信模块 END-->
 
-            <!-- 本地module tencentOss 对象存储-->
+            <!-- 本地module 对象存储-->
             <!--    腾讯 -->
             <dependency>
                 <groupId>com.qcloud</groupId>
@@ -198,7 +198,11 @@
                 <artifactId>aliyun-sdk-oss</artifactId>
                 <version>3.10.2</version>
             </dependency>
-            <!--    阿里 Java 9及以上的版本，则需要添加jaxb相关依赖 -->
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-sts</artifactId>
+                <version>3.0.2</version>
+            </dependency>
             <dependency>
                 <groupId>javax.xml.bind</groupId>
                 <artifactId>jaxb-api</artifactId>
@@ -209,17 +213,18 @@
                 <artifactId>activation</artifactId>
                 <version>1.1.1</version>
             </dependency>
+            <!-- no more than 2.3.3-->
             <dependency>
                 <groupId>org.glassfish.jaxb</groupId>
                 <artifactId>jaxb-runtime</artifactId>
                 <version>2.3.3</version>
             </dependency>
             <dependency>
-                <groupId>com.twj.springbasics</groupId>
+                <groupId>com.twj.spirngbasics</groupId>
                 <artifactId>oss</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
-            <!-- 本地module tencentOss 对象存储 END-->
+            <!-- 本地module 对象存储 END-->
 
 
         </dependencies>

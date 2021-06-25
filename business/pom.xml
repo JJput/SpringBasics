@@ -138,7 +138,7 @@
 
         <!-- 实体类校验工具 -->
         <dependency>
-            <groupId>org.hibernate</groupId>
+            <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
         </dependency>
 
@@ -216,10 +216,12 @@
             <groupId>com.qcloud</groupId>
             <artifactId>cos_api</artifactId>
         </dependency>
+
         <!--    调试时使用 -->
         <dependency>
             <groupId>com.twj.springbasics</groupId>
             <artifactId>oss</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <!--    打包发布时用 -->
         <!--        <dependency>-->

@@ -24,20 +24,10 @@
             <artifactId>freemarker</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-        </dependency>
-
         <!-- 读xml -->
         <dependency>
             <groupId>org.dom4j</groupId>
             <artifactId>dom4j</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.twj.spirngbasics</groupId>
-            <artifactId>server</artifactId>
         </dependency>
 
         <!-- EXCEL Utils-->
@@ -81,6 +71,17 @@
         <dependency>
             <groupId>org.mybatis.dynamic-sql</groupId>
             <artifactId>mybatis-dynamic-sql</artifactId>
+        </dependency>
+
+        <!-- 工具类hutool -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.twj.spirngbasics</groupId>
+            <artifactId>server</artifactId>
         </dependency>
     </dependencies>
 </project>
