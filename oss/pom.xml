@@ -37,14 +37,6 @@
             <artifactId>springfox-swagger2</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.twj.spirngbasics</groupId>
-            <artifactId>server</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/../server/target/srpingbasics-server-1.0.jar</systemPath>
-        </dependency>
-
         <!-- 腾讯 -->
         <dependency>
             <groupId>com.qcloud</groupId>
@@ -61,7 +53,11 @@
             <groupId>com.aliyun.oss</groupId>
             <artifactId>aliyun-sdk-oss</artifactId>
         </dependency>
-        <!--    阿里 Java 9及以上的版本，则需要添加jaxb相关依赖 -->
+        <!-- https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-sts -->
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-sts</artifactId>
+        </dependency>
         <dependency>
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
@@ -70,10 +66,17 @@
             <groupId>javax.activation</groupId>
             <artifactId>activation</artifactId>
         </dependency>
+        <!-- no more than 2.3.3-->
         <dependency>
             <groupId>org.glassfish.jaxb</groupId>
             <artifactId>jaxb-runtime</artifactId>
         </dependency>
+        <!-- 工具类hutool -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

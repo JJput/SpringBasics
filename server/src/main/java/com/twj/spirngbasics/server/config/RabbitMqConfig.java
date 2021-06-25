@@ -44,7 +44,7 @@ public class RabbitMqConfig {
 
     //队列名称 阿里云短信
     public final static String QUETYPE_ALIYUN = "aliyun";
-    //队列名称 阿里云短信
+    //队列名称 腾讯云短信
     public final static String QUETYPE_TENCENT = "tencent";
     //路由关键字，交换机根据这个进行消息发送
     public final static String ROUTINGKEY_PHONE_MSG = "phone.msg.";

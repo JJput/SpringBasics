@@ -67,20 +67,30 @@
             <artifactId>hutool-all</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+        </dependency>
+
         <!--rabbitmq-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
-        
-        <!-- 打包发布时用 -->
+
+        <!-- 调试时用 -->
         <dependency>
             <groupId>com.twj.spirngbasics</groupId>
             <artifactId>server</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/../server/target/srpingbasics-server-1.0.jar</systemPath>
         </dependency>
+        <!-- 打包发布时用 -->
+        <!--        <dependency>-->
+        <!--            <groupId>com.twj.spirngbasics</groupId>-->
+        <!--            <artifactId>server</artifactId>-->
+        <!--            <version>0.0.1-SNAPSHOT</version>-->
+        <!--            <scope>system</scope>-->
+        <!--            <systemPath>${project.basedir}/../server/target/srpingbasics-server-1.0.jar</systemPath>-->
+        <!--        </dependency>-->
 
     </dependencies>
 

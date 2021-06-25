@@ -61,20 +61,6 @@
             <artifactId>fastjson</artifactId>
         </dependency>
 
-        <!-- 调试运行时 -->
-        <!--        <dependency>-->
-        <!--            <groupId>com.twj.spirngbasics</groupId>-->
-        <!--            <artifactId>server</artifactId>-->
-        <!--        </dependency>-->
-        <!-- 打包发布时 -->
-        <dependency>
-            <groupId>com.twj.spirngbasics</groupId>
-            <artifactId>server</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/../server/target/srpingbasics-server-1.0.jar</systemPath>
-        </dependency>
-
     </dependencies>
 
 

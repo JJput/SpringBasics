@@ -3,7 +3,6 @@ package com.twj.spirngbasics.phonemessage.mq;
 
 import com.twj.spirngbasics.phonemessage.msg.AliyunSendSms;
 import com.twj.spirngbasics.phonemessage.msg.TencentSendSms;
-import com.twj.spirngbasics.server.config.RabbitMqConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.ExchangeTypes;

@@ -9,11 +9,13 @@ import com.qcloud.cos.exception.CosServiceException;
 import com.qcloud.cos.exception.MultiObjectDeleteException;
 import com.qcloud.cos.model.*;
 import com.qcloud.cos.region.Region;
-
 import com.twj.spirngbasics.oss.tencent.cloud.CosStsClient;
 import com.twj.spirngbasics.oss.tencent.entity.CosKey;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.util.*;
 
 /**
@@ -23,18 +25,23 @@ import java.util.*;
  * @描述:
  */
 @Service
-public class COSService {
+@Component
+public class TencentCOSService {
 
-    private static final String SECRET_ID = "";
-    private static final String SECRET_KEY = "";
-    private static final String BUCKET_NAME = "";
+    @Value("${tencent.secret.id}")
+    private String secretId;
 
-    private static COSClient cosClient;
+    @Value("${tencent.secret.key}")
+    private String secretKey;
 
-    static {
-        // 1 初始化用户身份信息（secretId, secretKey）。
-        String secretId = SECRET_ID;
-        String secretKey = SECRET_KEY;
+    @Value("${tencent.cos.bucketname}")
+    private String bucketName;
+
+    public String handURL;
+
+    private COSClient cosClient;
+
+    public void initCosClient() {
         COSCredentials cred = new BasicCOSCredentials(secretId, secretKey);
         // 2 设置 bucket 的区域, COS 地域的简称请参照 https://cloud.tencent.com/document/product/436/6224
         // clientConfig 中包含了设置 region, https(默认 http), 超时, 代理等 set 方法, 使用可参见源码或者常见问题 Java SDK 部分。
@@ -42,6 +49,8 @@ public class COSService {
         ClientConfig clientConfig = new ClientConfig(region);
         // 3 生成 cos 客户端。
         cosClient = new COSClient(cred, clientConfig);
+        handURL = "https://"+bucketName+".cos.ap-guangzhou.myqcloud.com/";
+
     }
 
     /**
@@ -50,6 +59,9 @@ public class COSService {
      * @return
      */
     public List<Bucket> getBucketList() {
+        if (cosClient == null) {
+            initCosClient();
+        }
         return cosClient.listBuckets();
     }
 
@@ -59,7 +71,6 @@ public class COSService {
      */
     public List<Map<String, Object>> getRootDirectory(String path) {
         // Bucket的命名格式为 BucketName-APPID ，此处填写的存储桶名称必须为此格式
-        String bucketName = BUCKET_NAME;
         ListObjectsRequest listObjectsRequest = new ListObjectsRequest();
         // 设置bucket名称
         listObjectsRequest.setBucketName(bucketName);
@@ -72,6 +83,9 @@ public class COSService {
         ObjectListing objectListing = null;
 //        do {
         try {
+            if (cosClient == null) {
+                initCosClient();
+            }
             objectListing = cosClient.listObjects(listObjectsRequest);
         } catch (CosServiceException e) {
             e.printStackTrace();
@@ -91,7 +105,7 @@ public class COSService {
             String filePath = cosObjectSummary.getKey();
             // 文件的路径key
             map.put("path", filePath);
-            map.put("url", "https://" + BUCKET_NAME + ".cos.ap-guangzhou.myqcloud.com/"
+            map.put("url", "https://" + bucketName + ".cos.ap-guangzhou.myqcloud.com/"
                     + filePath);
             //获取最后一个.的位置
             int lastIndexOf = filePath.lastIndexOf(".");
@@ -99,7 +113,7 @@ public class COSService {
             String suffix = filePath.substring(lastIndexOf);
             map.put("isImage", isImageFile(suffix));
             map.put("suffix", suffix);
-            map.put("down", "https://" + BUCKET_NAME + ".cos.ap-guangzhou.myqcloud.com/"
+            map.put("down", "https://" + bucketName + ".cos.ap-guangzhou.myqcloud.com/"
                     + filePath);
             data.add(map);
         }
@@ -140,7 +154,7 @@ public class COSService {
     }
 
     public void delObjects(List<String> names) {
-        delObjects(BUCKET_NAME, names);
+        delObjects(bucketName, names);
     }
 
     /**
@@ -159,6 +173,9 @@ public class COSService {
 
         // 批量删除文件
         try {
+            if (cosClient == null) {
+                initCosClient();
+            }
             DeleteObjectsResult deleteObjectsResult = cosClient.deleteObjects(deleteObjectsRequest);
             List<DeleteObjectsResult.DeletedObject> deleteObjectResultArray = deleteObjectsResult.getDeletedObjects();
         } catch (MultiObjectDeleteException mde) { // 如果部分删除成功部分失败, 返回MultiObjectDeleteException
@@ -182,16 +199,15 @@ public class COSService {
      */
     public CosKey createKey(String path, boolean isDown) {
         TreeMap<String, Object> config = new TreeMap<>();
-
         try {
-            config.put("SecretId", SECRET_ID);
-            config.put("SecretKey", SECRET_KEY);
+            config.put("SecretId", secretId);
+            config.put("SecretKey", secretKey);
 
             // 临时密钥有效时长，单位是秒，默认1800秒，最长可设定有效期为7200秒
-            config.put("durationSeconds", 1800);
+            config.put("durationSeconds", 60);
 
             // 换成您的 bucket
-            config.put("bucket", BUCKET_NAME);
+            config.put("bucket", bucketName);
             // 换成 bucket 所在地区
             config.put("region", "ap-guangzhou");
 
@@ -202,9 +218,9 @@ public class COSService {
             // 密钥的权限列表。简单上传、表单上传和分片上传需要以下的权限，其他权限列表请看 https://cloud.tencent.com/document/product/436/31923
             String[] allowActions = new String[]{
                     !isDown ? //简单上传操作
-//                            "name/cos:PutObject",
+                            "name/cos:PutObject"
 //                    //表单上传对象
-                            "name/cos:PostObject"
+//                            "name/cos:PostObject"
 //                    //分块上传：初始化分块操作
 //                    "name/cos:InitiateMultipartUpload",
 //                    //分块上传：List 进行中的分块上传
@@ -233,5 +249,21 @@ public class COSService {
 //            throw new IllegalArgumentException("no valid secret !");
             return null;
         }
+    }
+
+    /**
+     * 对象上传
+     * @param key
+     * @param file
+     * @return
+     */
+    public String putObject(String key,File file)
+    {
+        if (cosClient == null) {
+            initCosClient();
+        }
+        PutObjectResult putObjectResult = cosClient.putObject(bucketName, key, file);
+        String etag = putObjectResult.getETag();  // 获取文件的 etag
+        return etag;
     }
 }

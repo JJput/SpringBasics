@@ -16,6 +16,7 @@ public class CosKey {
     private String expiration;
     private int startTime;
     private int expiredTime;
+    private String path;
 
     @Data
     public static class CredentialsBean {
