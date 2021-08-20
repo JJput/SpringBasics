@@ -1,7 +1,9 @@
 package com.twj.spirngbasics.server.util;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.twj.spirngbasics.server.dto.SysDictDto;
+import com.twj.spirngbasics.server.dto.SysDictMinDto;
 import com.twj.spirngbasics.server.entity.SysDict;
 import com.twj.spirngbasics.server.mapper.SysDictDynamicSqlSupport;
 import com.twj.spirngbasics.server.mapper.SysDictMapper;
@@ -47,7 +49,7 @@ public class DictUtils {
                         .orderBy(SysDictDynamicSqlSupport.sort)
                         .build()
                         .render(RenderingStrategies.MYBATIS3);
-                List<SysDict> sysDictList =sysDictMapper.selectMany(selectStatement);
+                List<SysDict> sysDictList = sysDictMapper.selectMany(selectStatement);
                 for (SysDict sysDict : sysDictList) {
                     if (map.containsKey(sysDict.getType())) {
                         map.get(sysDict.getType()).add(sysDict);
@@ -65,7 +67,7 @@ public class DictUtils {
     }
 
     /**
-     * 根据type返回该类型所有字典数据
+     * 根据type返回该类型所有字典数据，以列表形式
      *
      * @param type 类型
      * @return
@@ -73,6 +75,32 @@ public class DictUtils {
     public static List<SysDictDto> getDictList(String type) {
         return CopyUtils.copyList(map.get(type), SysDictDto.class);
     }
+
+    /**
+     * 根据type返回该类型所有字典数据，以列表形式(仅label和value)
+     *
+     * @param type 类型
+     * @return
+     */
+    public static List<SysDictMinDto> getDictMinList(String type) {
+        return CopyUtils.copyList(map.get(type), SysDictMinDto.class);
+    }
+
+    /**
+     * 根据type返回该类型所有字典数据，以键值对形式(k为value字段,v为label字段)
+     *
+     * @param type 类型
+     * @return
+     */
+    public static JSONObject getDictMinMap(String type) {
+        List<SysDictMinDto> sysDictMinDtoList = CopyUtils.copyList(map.get(type), SysDictMinDto.class);
+        JSONObject jsonObject = new JSONObject();
+        for (SysDictMinDto sysDictMinDto : sysDictMinDtoList) {
+            jsonObject.put(sysDictMinDto.getValue(), sysDictMinDto.getLabel());
+        }
+        return jsonObject;
+    }
+
 
     /**
      * 根据type和value 返回字典数据

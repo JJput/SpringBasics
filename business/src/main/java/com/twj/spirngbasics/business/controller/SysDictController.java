@@ -5,6 +5,7 @@ import com.twj.spirngbasics.server.dto.ResponseDto;
 import com.twj.spirngbasics.server.dto.SysDictDto;
 import com.twj.spirngbasics.server.entity.SysDict;
 import com.twj.spirngbasics.server.service.SysDictService;
+import com.twj.spirngbasics.server.util.DictUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +17,7 @@ import javax.annotation.Resource;
  * @作者: Jun
  * @创建时间: 2021-01-19 15:51:40
  * @Version 1.0
- * @描述: 字典表 
+ * @描述: 字典表
  */
 @RestController
 @RequestMapping("${request.path.sysDict}")
@@ -39,6 +40,12 @@ public class SysDictController {
     public ResponseDto list(@RequestBody PageDto<SysDictDto> pageDto) {
         sysDictService.list(pageDto);
         return ResponseDto.createBySuccess(pageDto);
+    }
+
+    @ApiOperation("列表查询")
+    @GetMapping("/listMap")
+    public ResponseDto listMap(String type) {
+        return ResponseDto.createBySuccess(DictUtils.getDictMinMap(type));
     }
 
     @ApiOperation("新增")
