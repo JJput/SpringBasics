@@ -212,12 +212,23 @@ public class ServerGenerator {
             // 打开一个写文件器，构造函数中的第二个参数true表示以追加形式写文件
             String sourcePath = System.getProperty("user.dir");
             String requestPath = null;
-            if (sourcePath.substring(0, 1).equals("/")) {  //若是以/开头 就是macos或linux系统路径
+            //若是以/开头 就是macos或linux系统路径
+            if (sourcePath.substring(0, 1).equals("/")) {
                 requestPath = System.getProperty("user.dir") + "/" + PATH_RESOURCE + "application-request.properties";
-            } else {   //否则认为是windows路径
+            }
+            //否则认为是windows路径
+            else {
                 requestPath = System.getProperty("user.dir") + "/" + PATH_RESOURCE.replace("/", "\\") + "application-request.properties";
             }
-            PropertiesUtil.WriteProperties(requestPath, "request.path." + map.get("domain"), "/" + map.get("domain"));
+            String value = PropertiesUtil.GetValueByKey(requestPath, "request.path." + map.get("domain"));
+            if (StringUtils.isEmpty(value)) {
+                PropertiesUtil.WriteProperties(requestPath, "request.path." + map.get("domain"), "/" + map.get("domain"));
+            } else {
+                System.out.println("application-request.peoperties 中" +
+                        "\nrequest.path." + map.get("domain") +
+                        "\n路径已存在：" + value);
+            }
+
         } catch (Exception e) {
             System.out.println("application-request.peoperties 添加出现错误");
             System.out.println(e);
