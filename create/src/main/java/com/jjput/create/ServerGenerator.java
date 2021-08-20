@@ -5,6 +5,7 @@ import cn.hutool.core.date.DateUtil;
 import com.jjput.create.util.DbUtil;
 import com.jjput.create.util.Field;
 import com.jjput.create.util.FreemarkerUtil;
+import com.jjput.create.util.PropertiesUtil;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
@@ -23,9 +24,9 @@ import java.util.*;
  */
 public class ServerGenerator {
 
-    private static boolean generatorController = false;
-    private static boolean generatorService = false;
-    private static boolean generatorDto = false;
+    private static boolean generatorController = true;
+    private static boolean generatorService = true;
+    private static boolean generatorDto = true;
     private static boolean generatorEntity = true;
     private static boolean generatorMapper = true;
 
@@ -49,6 +50,8 @@ public class ServerGenerator {
     public static String PATH_SERVICE = PATH_PROJECT + PATH_PACKAGE + "/service/";
     //controller生成路径
     public static String PATH_CONTROLLER = "business/src/main/java/com/twj/spirngbasics/business/controller/";
+    //resources资源路径
+    public static String PATH_RESOURCE = "business/src/main/resources/";
 
 
     /**
@@ -156,12 +159,10 @@ public class ServerGenerator {
                     if (res.equals("Y") || res.equals("y")) {
                         System.out.println("覆盖生成中...");
                         break;
-                    }
-                    else if (res.equals("N") || res.equals("n")) {
+                    } else if (res.equals("N") || res.equals("n")) {
                         System.out.println("程序结束中...");
                         return;
-                    }
-                    else {
+                    } else {
                         System.out.println("输入有误，请重新输入！");
                     }
                 } else {
@@ -210,15 +211,13 @@ public class ServerGenerator {
         try {
             // 打开一个写文件器，构造函数中的第二个参数true表示以追加形式写文件
             String sourcePath = System.getProperty("user.dir");
-            FileWriter writer;
+            String requestPath = null;
             if (sourcePath.substring(0, 1).equals("/")) {  //若是以/开头 就是macos或linux系统路径
-                writer = new FileWriter(System.getProperty("user.dir") + "/business/src/main/resources/application-request.properties", true);
+                requestPath = System.getProperty("user.dir") + "/" + PATH_RESOURCE + "application-request.properties";
             } else {   //否则认为是windows路径
-                writer = new FileWriter(System.getProperty("user.dir") + "\\business\\src\\main\\resources\\application-request.properties", true);
+                requestPath = System.getProperty("user.dir") + "/" + PATH_RESOURCE.replace("/", "\\") + "application-request.properties";
             }
-
-            writer.write("\nrequest.path." + map.get("domain") + "=/" + map.get("domain"));
-            writer.close();
+            PropertiesUtil.WriteProperties(requestPath, "request.path." + map.get("domain"), "/" + map.get("domain"));
         } catch (Exception e) {
             System.out.println("application-request.peoperties 添加出现错误");
             System.out.println(e);
