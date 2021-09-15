@@ -1,6 +1,7 @@
 package com.twj.spirngbasics.server.exception;
 
 import com.twj.spirngbasics.server.dto.ResponseDto;
+import io.sentry.Sentry;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -92,6 +93,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(NoSuchElementException.class)
     @ResponseStatus(HttpStatus.OK)
     public ResponseDto handleNoSuchElementException(NoSuchElementException exception) {
+        Sentry.captureException(exception);
         ResponseDto responseDto = ResponseDto.createByFail(OBJECT_NULL);
         responseDto.setMessage(exception.getMessage());
         return responseDto;
@@ -106,6 +108,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.OK)
     public ResponseDto handleDefaultException(Exception exception) {
+        Sentry.captureException(exception);
+        //为了方便调试，打印异常报错信息
         exception.printStackTrace();
         ResponseDto responseDto = ResponseDto.createByFail(DEFAULT);
         responseDto.setMessage(exception.getMessage());

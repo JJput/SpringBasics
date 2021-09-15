@@ -151,6 +151,20 @@
                 <version>2.1.3.RELEASE</version>
             </dependency>
 
+            <!-- 配置信息加密-->
+            <dependency>
+                <groupId>com.github.ulisesbocchio</groupId>
+                <artifactId>jasypt-spring-boot-starter</artifactId>
+                <version>3.0.4</version>
+            </dependency>
+
+            <!-- 异常信息收集-->
+            <dependency>
+                <groupId>io.sentry</groupId>
+                <artifactId>sentry-spring-boot-starter</artifactId>
+                <version>5.0.1</version>
+            </dependency>
+
             <!-- 本地module server 基本服务模块-->
             <dependency>
                 <groupId>com.twj.spirngbasics</groupId>

@@ -119,11 +119,6 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
         </dependency>
-        <!-- swaggerUI 已弃用改为knife4j-->
-        <!--        <dependency>-->
-        <!--            <groupId>io.springfox</groupId>-->
-        <!--            <artifactId>springfox-swagger-ui</artifactId>-->
-        <!--        </dependency>-->
         <!-- knife4j API接口界面 -->
         <dependency>
             <groupId>com.github.xiaoymin</groupId>
@@ -148,90 +143,72 @@
             <artifactId>druid-spring-boot-starter</artifactId>
         </dependency>
 
+        <!-- 配置信息加密-->
+        <dependency>
+            <groupId>com.github.ulisesbocchio</groupId>
+            <artifactId>jasypt-spring-boot-starter</artifactId>
+        </dependency>
+
+        <!-- 异常信息收集-->
+        <dependency>
+            <groupId>io.sentry</groupId>
+            <artifactId>sentry-spring-boot-starter</artifactId>
+        </dependency>
+
         <!--#######################################-->
         <!--############## 本地模块导入 #############-->
         <!--#######################################-->
 
         <!-- # server模块 # -->
-        <!-- 调试时使用,打包发布时注释即可 -->
         <dependency>
             <groupId>com.twj.spirngbasics</groupId>
             <artifactId>server</artifactId>
         </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>com.twj.spirngbasics</groupId>-->
-        <!--            <artifactId>server</artifactId>-->
-        <!--            <version>0.0.1-SNAPSHOT</version>-->
-        <!--            <scope>system</scope>-->
-        <!--            <systemPath>${project.basedir}/../server/target/srpingbasics-server-1.0.jar</systemPath>-->
-        <!--        </dependency>-->
-        <!-- # server模块END # -->
 
         <!-- # user模块 # -->
-        <!-- 调试时使用 -->
         <dependency>
             <groupId>com.twj.spirngbasics</groupId>
             <artifactId>user</artifactId>
         </dependency>
-        <!-- 打包发布时用 -->
-        <!--        <dependency>-->
-        <!--            <groupId>com.twj.spirngbasics</groupId>-->
-        <!--            <artifactId>user</artifactId>-->
-        <!--            <version>0.0.1-SNAPSHOT</version>-->
-        <!--            <scope>system</scope>-->
-        <!--            <systemPath>${project.basedir}/../user/target/srpingbasics-user-1.0.jar</systemPath>-->
-        <!--        </dependency>-->
-        <!-- 导入user模块END -->
-
 
         <!-- # 手机发送短信模块(可选用阿里或腾讯) # -->
-        <!--    阿里短信验证码 -->
-        <dependency>
-            <groupId>com.aliyun</groupId>
-            <artifactId>aliyun-java-sdk-core</artifactId>
-        </dependency>
-        <!--    腾讯短信 -->
-        <dependency>
-            <groupId>com.tencentcloudapi</groupId>
-            <artifactId>tencentcloud-sdk-java</artifactId>
-        </dependency>
-        <!--    调试时使用 -->
         <dependency>
             <groupId>com.twj.springbasics</groupId>
             <artifactId>phoneMessage</artifactId>
         </dependency>
-        <!--    打包发布时用 -->
-        <!--        <dependency>-->
-        <!--            <groupId>com.twj.spirngbasics</groupId>-->
-        <!--            <artifactId>phoneMessage</artifactId>-->
-        <!--            <version>0.0.1-SNAPSHOT</version>-->
-        <!--            <scope>system</scope>-->
-        <!--            <systemPath>${project.basedir}/../phoneMessage/target/srpingbasics-phonemessage-1.0.jar</systemPath>-->
-        <!--        </dependency>-->
-        <!-- 导入手机发送短信模块END -->
-
-
-        <!-- # 对象存储(可选用阿里或腾讯) # -->
+        <!--    依赖服务-阿里短信 -->
         <dependency>
-            <groupId>com.qcloud</groupId>
-            <artifactId>cos_api</artifactId>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-core</artifactId>
+        </dependency>
+        <!--    依赖服务-腾讯短信 -->
+        <dependency>
+            <groupId>com.tencentcloudapi</groupId>
+            <artifactId>tencentcloud-sdk-java</artifactId>
         </dependency>
 
-        <!--    调试时使用 -->
+        <!-- # 对象存储(可选用阿里或腾讯) # -->
         <dependency>
             <groupId>com.twj.springbasics</groupId>
             <artifactId>oss</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-        <!--    打包发布时用 -->
-        <!--        <dependency>-->
-        <!--            <groupId>com.twj.spirngbasics</groupId>-->
-        <!--            <artifactId>oss</artifactId>-->
-        <!--            <version>0.0.1-SNAPSHOT</version>-->
-        <!--            <scope>system</scope>-->
-        <!--            <systemPath>${project.basedir}/../oss/target/srpingbasics-oss-1.0.jar</systemPath>-->
-        <!--        </dependency>-->
-        <!-- 对象存储END -->
+        <!--    依赖服务-阿里 -->
+        <dependency>
+            <groupId>com.aliyun.oss</groupId>
+            <artifactId>aliyun-sdk-oss</artifactId>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-sts -->
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-sts</artifactId>
+        </dependency>
+        <!--    依赖服务-腾讯 -->
+        <dependency>
+            <groupId>com.qcloud</groupId>
+            <artifactId>cos_api</artifactId>
+        </dependency>
+
 
     </dependencies>
     <build>
@@ -250,16 +227,19 @@
                 </configuration>
             </plugin>
         </plugins>
+        <!--    打包配置    -->
         <resources>
+            <!--  打包时，指定导入resources中哪些文件  -->
             <resource>
                 <filtering>true</filtering>
                 <directory>${basedir}/src/main/resources</directory>
                 <includes>
-                    <include>*.xml</include> <!--这三个我本地配置文件,具体配置根据需求修改-->
+                    <include>*.xml</include>
                     <include>*.properties</include>
                     <include>*.txt</include>
                 </includes>
             </resource>
+            <!--  打包时，导入server生成的jar  必选-->
             <resource>
                 <directory>${basedir}/../server/target/</directory>
                 <targetPath>BOOT-INF/lib/</targetPath>
@@ -267,6 +247,7 @@
                     <include>*.jar</include>
                 </includes>
             </resource>
+            <!--  打包时，导入user生成的jar  可选-->
             <resource>
                 <directory>${basedir}/../user/target/</directory>
                 <targetPath>BOOT-INF/lib/</targetPath>
@@ -274,6 +255,7 @@
                     <include>*.jar</include>
                 </includes>
             </resource>
+            <!--  打包时，导入phoneMessage生成的jar  可选-->
             <resource>
                 <directory>${basedir}/../phoneMessage/target/</directory>
                 <targetPath>BOOT-INF/lib/</targetPath>
@@ -281,6 +263,7 @@
                     <include>*.jar</include>
                 </includes>
             </resource>
+            <!--  打包时，导入oss生成的jar  可选-->
             <resource>
                 <directory>${basedir}/../oss/target/</directory>
                 <targetPath>BOOT-INF/lib/</targetPath>

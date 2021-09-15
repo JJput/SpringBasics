@@ -49,7 +49,7 @@ public class TencentCOSService {
         ClientConfig clientConfig = new ClientConfig(region);
         // 3 生成 cos 客户端。
         cosClient = new COSClient(cred, clientConfig);
-        handURL = "https://"+bucketName+".cos.ap-guangzhou.myqcloud.com/";
+        handURL = "https://" + bucketName + ".cos.ap-guangzhou.myqcloud.com/";
 
     }
 
@@ -111,7 +111,6 @@ public class TencentCOSService {
             int lastIndexOf = filePath.lastIndexOf(".");
             //获取文件的后缀名
             String suffix = filePath.substring(lastIndexOf);
-            map.put("isImage", isImageFile(suffix));
             map.put("suffix", suffix);
             map.put("down", "https://" + bucketName + ".cos.ap-guangzhou.myqcloud.com/"
                     + filePath);
@@ -122,35 +121,6 @@ public class TencentCOSService {
 //            listObjectsRequest.setMarker(nextMarker);
 //        } while (objectListing.isTruncated());
 
-    }
-
-    private boolean isImageFile(String suffix) {
-        switch (suffix) {
-            case ".jpg":
-                return true;
-            case ".JPG":
-                return true;
-            case ".jpeg":
-                return true;
-            case ".JPEG":
-                return true;
-            case ".png":
-                return true;
-            case ".PNG":
-                return true;
-            case ".bmp":
-                return true;
-            case ".BMP":
-                return true;
-            case ".gif":
-                return true;
-            case ".GIF":
-                return true;
-            case ".heic":
-                return true;
-            default:
-                return false;
-        }
     }
 
     public void delObjects(List<String> names) {
@@ -216,11 +186,13 @@ public class TencentCOSService {
             config.put("allowPrefix", path);
 
             // 密钥的权限列表。简单上传、表单上传和分片上传需要以下的权限，其他权限列表请看 https://cloud.tencent.com/document/product/436/31923
-            String[] allowActions = new String[]{
+            String[] allowActions =
                     !isDown ? //简单上传操作
-                            "name/cos:PutObject"
+                            new String[]{
+                                    "name/cos:PutObject",
 //                    //表单上传对象
-//                            "name/cos:PostObject"
+                                    "name/cos:PostObject"
+                            }
 //                    //分块上传：初始化分块操作
 //                    "name/cos:InitiateMultipartUpload",
 //                    //分块上传：List 进行中的分块上传
@@ -234,8 +206,10 @@ public class TencentCOSService {
 //                    //取消分块上传操作
 //                    "name/cos:AbortMultipartUpload",
                             //下载
-                            : "name/cos:GetObject"
-            };
+                            :
+                            new String[]{
+                                    "name/cos:GetObject"
+                            };
             config.put("allowActions", allowActions);
 
             CosKey credential = com.alibaba.fastjson.JSONObject.parseObject(
@@ -244,21 +218,23 @@ public class TencentCOSService {
             //成功返回临时密钥信息，如下打印密钥信息
 //            System.out.println(credential);
             return credential;
-        } catch (Exception e) {
+        } catch (
+                Exception e) {
             //失败抛出异常
 //            throw new IllegalArgumentException("no valid secret !");
             return null;
         }
+
     }
 
     /**
      * 对象上传
+     *
      * @param key
      * @param file
      * @return
      */
-    public String putObject(String key,File file)
-    {
+    public String putObject(String key, File file) {
         if (cosClient == null) {
             initCosClient();
         }

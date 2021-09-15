@@ -45,7 +45,7 @@ mvnw
 .DS_Store
 
 #不添加生产环境配置到git
-*main.properties
+#*main.properties
 
 #mq
 /phoneMessage/src/main/resources/application-mq.properties
